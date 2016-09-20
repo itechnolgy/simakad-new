@@ -1,0 +1,74 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- INSERT YOUR CSS PLUGIN HERE -->
+<head th:fragment="cssPlugins" th:remove="tag">
+</head>
+
+<!-- INSERT YOUR JS PLUGIN HERE -->
+<body th:fragment="jsPlugins" th:remove="tag">
+<script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"
+        th:src="@{assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
+</body>
+
+<!-- INSERT YOUR JS PAGE HERE -->
+<body th:fragment="jsPage" th:remove="tag">
+<script src="../../assets/admin/pages/scripts/auth.js" type="text/javascript"
+        th:src="@{assets/admin/pages/scripts/auth.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        AuthPage.login();
+    });
+</script>
+</body>
+
+<!-- INSERT YOUR LAYOUT HERE -->
+<body th:fragment="mainLayout" th:remove="tag">
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center margin-bottom-20">
+        <img src="" th:src="@{'http://placehold.it/80x80'}" alt="logo" />
+        <h4 class="uppercase">Sekolah Tinggi Teologi Jakarta</h4>
+        <h4>Portal</h4>
+    </div>
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject bold uppercase"> Login</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form id="login-form" class="form" method="post" action="" th:action="@{'/'}">
+                <div class="form-body">
+                    <!-- /* TODO: display-hide will be appear when error message is not exist */ -->
+                    <div th:class="|alert alert-danger display-hide|">
+                        <button class="close" data-close="alert"></button>
+                        <span>This is error message.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="visible-ie8 visible-ie9">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Username" id="username" name="username" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="visible-ie8 visible-ie9">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" class="form-control" placeholder="Password" id="password" name="password" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn blue pull-right">Login <i class="icon-arrow-right"></i></button>
+                    <div>
+                        <a href="" th:href="@{/forgot}">Forgot Password</a> | <a href="" th:href="@{/register}">Registration</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center margin-top-20">
+        2016 &copy; STT Jakarta
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile project(':Dao')
+
+    compile("org.springframework:spring-webmvc:$libSpringFrameworkVersion")
+    compile("org.springframework:spring-web:$libSpringFrameworkVersion")
+    compile("org.springframework.security:spring-security-core:$libSpringSecurityVersion")
+    compile("org.springframework.security:spring-security-web:$libSpringSecurityVersion")
+    compile("org.springframework.security:spring-security-config:$libSpringSecurityVersion")
+    compile("org.springframework.data:spring-data-jpa:$libSpringDataJpa")
+    compile("ch.qos.logback:logback-classic:${libLogbackVersion}")
+    compile "org.hibernate:hibernate-validator:$libHibernateValidatorVersion"
+    compile('org.springframework.hateoas:spring-hateoas:0.17.0.RELEASE')
+    compile('com.fasterxml.jackson.core:jackson-databind:2.3.3')
+    compile('org.eclipse.persistence:org.eclipse.persistence.jpa:2.5.2')
+    compile('org.postgresql:postgresql:9.3-1102-jdbc41')
+    compile('org.apache.commons:commons-dbcp2:2.0')
+    compile('javax.servlet:jstl:1.2')
+
+
+    // Thymeleaf extension
+    compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.7'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE'
+
+
+    providedCompile "javax:javaee-api:7.0"
+}
+
+war {
+    archiveName 'simakad.war'
+}

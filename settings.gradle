@@ -1,0 +1,6 @@
+rootProject.name = 'Simakad'
+
+include 'CMS'
+
+include 'Dao'
+

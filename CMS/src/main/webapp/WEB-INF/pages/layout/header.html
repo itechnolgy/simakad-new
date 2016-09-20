@@ -1,0 +1,74 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="/" th:href="@{/}">
+                <img src="../../assets/admin/layout/img/logo-light.png" alt="logo" class="logo-default"
+                     th:src="@{assets/admin/layout/img/logo-light.png}"/>
+            </a>
+            <div class="menu-toggler sidebar-toggler hide"></div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN PAGE TOP -->
+        <div class="page-top">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<span class="username username-hide-on-mobile">
+						Nick </span>
+                            <img alt="" class="img-circle" src="../../assets/admin/layout/img/avatar9.jpg"
+                                 th:src="@{assets/admin/layout/img/avatar9.jpg}"/>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a href="">
+                                    <i class="icon-user"></i> My Profile </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="icon-calendar"></i> My Calendar </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
+								3 </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
+								7 </span>
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="icon-lock"></i> Lock Screen </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="icon-key"></i> Log Out </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END PAGE TOP -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+</html>
