@@ -12,7 +12,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile project(':Dao')
-
+    compile project(':Service')
     compile("org.springframework:spring-webmvc:$libSpringFrameworkVersion")
     compile("org.springframework:spring-web:$libSpringFrameworkVersion")
     compile("org.springframework.security:spring-security-core:$libSpringSecurityVersion")

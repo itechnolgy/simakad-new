@@ -17,6 +17,7 @@ public class ServletConfig implements WebApplicationInitializer {
     public void onStartup(ServletContext sc) throws ServletException {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.scan("com.simakad.cms");
+        context.scan("com.simakad.service");
 
         sc.addListener(new ContextLoaderListener(context));
 

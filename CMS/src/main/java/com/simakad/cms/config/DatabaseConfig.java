@@ -1,5 +1,6 @@
 package com.simakad.cms.config;
 
+import com.simakad.dao.repo.NewStudentDao;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,10 +23,10 @@ import java.util.Properties;
  */
 @Configuration
 @EnableWebMvc
-@EnableJpaRepositories(basePackages = "com.simakad.dao")
+@EnableJpaRepositories(basePackageClasses = NewStudentDao.class)
 @PropertySource("classpath:/application-dev.properties")
 public class DatabaseConfig {
-    private static final String ENTITY_PACKAGE_SCAN = "com.simakad.dao.repo";
+    private static final String ENTITY_PACKAGE_SCAN = "com.simakad.dao";
     protected static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
     protected static final String PROPERTY_NAME_DATABASE_PASSWORD = "db.password";
     protected static final String PROPERTY_NAME_DATABASE_URL = "db.url";
@@ -54,14 +55,15 @@ public class DatabaseConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        Properties jpaProperties = new Properties();
+        jpaProperties.put("eclipselink.jdbc.native-sql", "true");
+        jpaProperties.put("eclipselink.weaving", "static");
+
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource());
         entityManagerFactory.setPackagesToScan(ENTITY_PACKAGE_SCAN);
         entityManagerFactory.setJpaVendorAdapter(eclipseLinkVendorAdapater());
-
-        Properties jpaProperties = new Properties();
-        jpaProperties.put("eclipselink.jdbc.native-sql", "true");
-        jpaProperties.put("eclipselink.weaving", "static");
+        entityManagerFactory.setPersistenceUnitName("simakadPU");
         entityManagerFactory.setJpaProperties(jpaProperties);
 
         return entityManagerFactory;
