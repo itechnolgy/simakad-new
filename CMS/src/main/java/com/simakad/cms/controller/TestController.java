@@ -30,10 +30,10 @@ public class TestController {
         return "layout/auth/master";
     }
 //
-    @RequestMapping(value = "")
-    public String index(Model model) {
-        return "layout/default/master";
-    }
+//    @RequestMapping(value = "")
+//    public String index(Model model) {
+//        return "layout/default/master";
+//    }
 //
 ////    @RequestMapping(value = "login")
 ////    public String login(Model model) {
