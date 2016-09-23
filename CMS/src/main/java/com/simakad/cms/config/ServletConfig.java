@@ -24,5 +24,6 @@ public class ServletConfig implements WebApplicationInitializer {
         ServletRegistration.Dynamic registration = sc.addServlet("dispatcher", new DispatcherServlet(context));
         registration.setLoadOnStartup(1);
         registration.addMapping("/");
+
     }
 }

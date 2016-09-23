@@ -52,7 +52,7 @@
 			message      : 'Your session is about to expire.',
 			keepAliveUrl : '/keep-alive',
 			redirUrl     : '/timed-out',
-			logoutUrl    : '/log-out',
+			logoutUrl    : '/logout',
 			warnAfter    : 900000, // 15 minutes
 			redirAfter   : 1200000 // 20 minutes
 		};

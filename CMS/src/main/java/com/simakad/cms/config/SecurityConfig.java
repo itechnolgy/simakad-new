@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -28,22 +29,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    @Autowired
 //    UserDetailsService userDetailsService;
 
+    @Autowired
+    AuthenticationSuccessHandler successHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                    .antMatchers("/").authenticated()
+                    .antMatchers("/**").authenticated()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/forgot").permitAll()
                     .antMatchers("/register").permitAll()
-                .antMatchers("/test").hasRole("ADMIN")
+                    .antMatchers("/test").hasRole("ADMIN")
 
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/test")
-                .failureUrl("/forgot")
+                    .loginPage("/login")
+                    .successHandler(successHandler)
+//                    .defaultSuccessUrl("/test")
+                    .failureUrl("/login?error")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login")
+                    .invalidateHttpSession(true)
                     .permitAll();
     }
 
