@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
-//    @Autowired
-//    UserDetailsService userDetailsService;
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @Autowired
     AuthenticationSuccessHandler successHandler;
@@ -67,14 +67,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 //        auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "select username,password, enabled from users where username=?")
-                .authoritiesByUsernameQuery(
-                        "select username, role from user_roles where username=?");
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .usersByUsernameQuery(
+//                        "select username,password, enabled from users where username=?")
+//                .authoritiesByUsernameQuery(
+//                        "select username, role from user_roles where username=?");
     }
 
     @Bean

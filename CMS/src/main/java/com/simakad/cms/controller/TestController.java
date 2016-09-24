@@ -1,9 +1,11 @@
 package com.simakad.cms.controller;
 
+import com.simakad.cms.model.MyUserDetails;
 import com.simakad.dao.entity.NewStudent;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,9 @@ This is just for example !
 public class TestController {
     @RequestMapping(value = "/test")
     public String cetak(Model model, Authentication authentication) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.print("Kovan data =" + authentication.getName());
+        MyUserDetails user =(MyUserDetails) authentication.getPrincipal();
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.print("Kovan data =" + user.getUsername() + "/" + user.getRole() + "/" + user.getPassword());
         return "layout/default/master";
     }
 
