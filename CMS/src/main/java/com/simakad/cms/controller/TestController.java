@@ -41,9 +41,9 @@ public class TestController {
         return "layout/auth/master";
     }
 
-    @RequestMapping(value = "register")
-    public String register(Model model) {
-        model.addAttribute("view", "auth/register");
-        return "layout/auth/master";
-    }
+//    @RequestMapping(value = "register")
+//    public String register(Model model) {
+//        model.addAttribute("view", "auth/register");
+//        return "layout/auth/master";
+//    }
 }
