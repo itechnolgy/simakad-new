@@ -11,8 +11,7 @@ public class StudentRegistration {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
-    @SequenceGenerator(name = "seq_student_registration", sequenceName = "seq_student_registration", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_student_registration")
+
     private String id;
 
     @Basic(optional = false)

@@ -46,7 +46,7 @@
                     <!-- /* TODO: display-hide will be appear when error message is not exist */ -->
                     <div th:class="|alert alert-danger display-hide|">
                         <button class="close" data-close="alert"></button>
-                        <span>This is error message.</span>
+                        <span th:text="${error}">This is error message.</span>
                     </div>
                     <h4>Identity</h4>
                     <hr class="register-divider" />

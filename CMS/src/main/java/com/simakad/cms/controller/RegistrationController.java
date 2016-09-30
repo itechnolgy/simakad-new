@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.Objects;
 
 /**
@@ -24,11 +25,12 @@ public class RegistrationController {
     @RequestMapping(method = RequestMethod.GET)
     public String studentRegistration(Model model) {
         model.addAttribute("view", "auth/register");
+        model.addAttribute("registration", new StudentRegistration());
         return "layout/auth/master";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String doStudentRegistration(@RequestBody StudentRegistrationRequest studentRegistrationRequest, Model model) {
+    public String doStudentRegistration(@Valid StudentRegistrationRequest studentRegistrationRequest, Model model) {
         StudentRegistration studentRegistration = studentRegistrationService.register(studentRegistrationRequest);
         if(Objects.isNull(studentRegistration)) {
             model.addAttribute("error", "This identity or email has been registered!");
