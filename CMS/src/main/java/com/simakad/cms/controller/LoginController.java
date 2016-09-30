@@ -21,7 +21,10 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String login(Model model) {
-        model.addAttribute("view", "auth/login");
-        return "layout/auth/master";
+        //model.addAttribute("view", "auth/login");
+        //return "layout/auth/master";
+        model.addAttribute("view", "newStudent/schedule");
+        model.addAttribute("title", "Schedule");
+        return "layout/default/master";
     }
 }
