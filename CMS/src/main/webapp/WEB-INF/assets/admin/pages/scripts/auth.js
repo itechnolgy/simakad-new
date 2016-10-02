@@ -127,6 +127,53 @@ var AuthPage = function() {
         });
     };
 
+    var initChangePasswordValidation = function() {
+        $.validator.addMethod('notEqualTo', function(value, element, param) {
+            var target = $(param);
+            return target.val() !== value;
+        }, 'This field must be not same with other field.');
+    };
+
+    var handleChangePassword = function() {
+        $("#change-password-form").validate({
+            errorElement: 'span',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            rules: {
+                old_password: {
+                    required: true
+                },
+                new_password: {
+                    required: true,
+                    minlength: 8,
+                    notEqualTo: 'input[name="old_password"]'
+                },
+                confirm_new_password: {
+                    required: true,
+                    equalTo: 'input[name="new_password"]'
+                }
+            },
+            messages : {
+                confirm_new_password: {
+                    equalTo: 'This field must be same with New Password field.'
+                },
+                new_password: {
+                    notEqualTo: 'New Password cannot be same with Old Password.'
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success: function(label) {
+                label.closest('.form-group').removeClass('has-error');
+                label.remove();
+            }
+        });
+    };
+
     return {
         login: function() {
             handleLogin();
@@ -137,6 +184,10 @@ var AuthPage = function() {
         register: function() {
             initDatePicker();
             handleRegister();
+        },
+        changePassword: function() {
+            initChangePasswordValidation();
+            handleChangePassword();
         }
     };
 
