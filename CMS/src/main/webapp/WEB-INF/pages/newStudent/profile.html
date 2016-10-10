@@ -32,7 +32,7 @@
     <div class="portlet-body form">
         <form id="profile-form" class="form form-horizontal" method="post" action="" th:action="@{'/'}">
             <div class="form-body">
-                <div th:class="|alert alert-danger|" th:classappend="${error} ? '' : 'display-hide'">
+                <div th:class="|alert alert-danger|" th:if="${error} != null">
                     <button class="close" data-close="alert"></button>
                     <span th:text="${error}">This is error message.</span>
                 </div>
