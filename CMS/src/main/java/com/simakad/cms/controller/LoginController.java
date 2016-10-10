@@ -21,10 +21,10 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String login(Model model) {
-//        model.addAttribute("view", "auth/login");
-//        return "layout/auth/master";
-        model.addAttribute("view", "auth/changePassword");
-        model.addAttribute("title", "Change Password");
-        return "layout/default/master";
+        model.addAttribute("view", "auth/login");
+        return "layout/auth/master";
+//        model.addAttribute("view", "auth/changePassword");
+//        model.addAttribute("title", "Change Password");
+//        return "layout/default/master";
     }
 }

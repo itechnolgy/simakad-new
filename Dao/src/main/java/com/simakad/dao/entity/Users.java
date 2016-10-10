@@ -21,6 +21,9 @@ public class Users {
     @Column(name = "roles")
     private String roles;
 
+    @Column(name = "user_profile_id")
+    private Long userProfileId;
+
     public String getUsername() {
         return username;
     }
@@ -43,5 +46,13 @@ public class Users {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public Long getUserProfileId() {
+        return userProfileId;
+    }
+
+    public void setUserProfileId(Long userProfileId) {
+        this.userProfileId = userProfileId;
     }
 }

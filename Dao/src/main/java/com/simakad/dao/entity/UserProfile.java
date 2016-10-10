@@ -1,17 +1,18 @@
 package com.simakad.dao.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by HighDream on 9/25/2016.
  */
 @Entity
-@Table(name = "student_registration")
-public class StudentRegistration {
+@Table(name = "users_profile")
+public class UserProfile {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
-
+    @GeneratedValue
     private String id;
 
     @Basic(optional = false)
@@ -26,6 +27,10 @@ public class StudentRegistration {
     @Column(name = "gender")
     private String gender;
 
+    @Column(name = "date_birth")
+    @Temporal(TemporalType.DATE)
+    private Date birthDate;
+
     @Basic(optional = false)
     @Column(name = "address")
     private String address;
@@ -39,12 +44,26 @@ public class StudentRegistration {
     private String province;
 
     @Basic(optional = false)
-    @Column(name = "identitiy_card_number")
+    @Column(name = "identity_card_number")
     private String identityCardNumber;
 
     @Basic(optional = false)
-    @Column(name = "identitiy_card_number_type")
+    @Column(name = "identity_card_number_type")
     private String identityCardNumberType;
+
+    @Basic(optional = false)
+    @Column(name = "phone")
+    private String phone;
+
+
+    @Column(name = "creation_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
+
+    @Column(name = "last_update_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
+
 
     public String getId() {
         return id;
@@ -116,5 +135,37 @@ public class StudentRegistration {
 
     public void setIdentityCardNumberType(String identityCardNumberType) {
         this.identityCardNumberType = identityCardNumberType;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 }
