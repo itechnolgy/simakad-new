@@ -1,16 +1,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
 <!-- INSERT YOUR CSS PLUGIN HERE -->
 <head th:fragment="cssPlugins" th:remove="tag">
-    <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css"
-          th:href="@{assets/global/plugins/bootstrap-datepicker/css/datepicker3.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"
+          th:href="@{assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css}"/>
 </head>
 
 <!-- INSERT YOUR JS PLUGIN HERE -->
 <body th:fragment="jsPlugins" th:remove="tag">
-<script type="text/javascript" src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"
-        th:src="@{assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-<script type="text/javascript" src="../../assets/global/plugins/bootstrap-daterangepicker/moment.min.js"
-        th:src="@{assets/global/plugins/bootstrap-daterangepicker/moment.min.js}"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"
+        th:src="@{assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script type="text/javascript" src="../../assets/global/plugins/moment.min.js"
+        th:src="@{assets/global/plugins/moment.min.js}"></script>
 <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"
         th:src="@{assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
 </body>
@@ -43,13 +43,11 @@
         <div class="portlet-body">
             <form id="register-form" class="form form-horizontal" method="post" action="" th:action="@{'/'}">
                 <div class="form-body">
-                    <!-- /* TODO: display-hide will be appear when error message is not exist */ -->
-                    <div th:class="|alert alert-danger display-hide|">
+                    <div th:class="|alert alert-danger|" th:classappend="${error} ? '' : 'display-hide'">
                         <button class="close" data-close="alert"></button>
                         <span th:text="${error}">This is error message.</span>
                     </div>
-                    <h4>Identity</h4>
-                    <hr class="register-divider" />
+                    <h4 class="block">Identity</h4>
                     <div class="form-group">
                         <label class="control-label col-md-3">Full Name</label>
                         <div class="col-md-9">
@@ -82,8 +80,7 @@
                                    readonly="readonly"/>
                         </div>
                     </div>
-                    <h4 class="margin-top-20">Contact</h4>
-                    <hr class="register-divider" />
+                    <h4 class="margin-top-20 block">Contact</h4>
                     <div class="form-group">
                         <label class="control-label col-md-3">Address</label>
                         <div class="col-md-9">
