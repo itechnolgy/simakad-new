@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 public class LoginServiceImpl implements LoginService {
     final String prefixNewStudent = "PMB";
 
+//    @Autowired
+//    StudentDao studentDao;
+//
+//    @Autowired
+//    NewStudentDao newStudentDao;
+
     @Override
     public void login(String username, String password) {
         if(isNewStudent(username)) {
