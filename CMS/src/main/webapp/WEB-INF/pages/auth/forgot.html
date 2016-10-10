@@ -38,8 +38,7 @@
             <p>Enter your e-mail address below to reset your password.</p>
             <form id="forgot-form" class="form" method="post" action="" th:action="@{'/'}">
                 <div class="form-body">
-                    <!-- /* TODO: display-hide will be appear when error message is not exist */ -->
-                    <div th:class="|alert alert-danger display-hide|">
+                    <div th:class="|alert alert-danger|" th:if="${error} != null">
                         <button class="close" data-close="alert"></button>
                         <span>This is error message.</span>
                     </div>

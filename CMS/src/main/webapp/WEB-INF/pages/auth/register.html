@@ -41,68 +41,68 @@
             </div>
         </div>
         <div class="portlet-body">
-            <form id="register-form" class="form form-horizontal" method="post" action="" th:action="@{'/'}">
+            <form id="register-form" class="form form-horizontal" method="post" th:action="@{'/'}">
                 <div class="form-body">
-                    <div th:class="|alert alert-danger|" th:classappend="${error} ? '' : 'display-hide'">
+                    <div th:class="|alert alert-danger|" th:if="${error} != null">
                         <button class="close" data-close="alert"></button>
-                        <span th:text="${error}">This is error message.</span>
+                        <span th:text="${error}">this is error message.</span>
                     </div>
-                    <h4 class="block">Identity</h4>
+                    <h4 class="block">identity</h4>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Full Name</label>
+                        <label class="control-label col-md-3">full name</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" placeholder="Full Name" name="fullname"/>
+                            <input type="text" class="form-control" placeholder="full name" name="fullname"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Identity Number</label>
+                        <label class="control-label col-md-3">identity number</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" placeholder="Identity Number" name="identity"/>
+                            <input type="text" class="form-control" placeholder="identity number" name="identity"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Gender</label>
+                        <label class="control-label col-md-3">gender</label>
                         <div class="col-md-9">
                             <div class="radio-list">
                                 <label class="radio-inline">
-                                    <input type="radio" class="form-control" name="gender" value="Male"/> Male
+                                    <input type="radio" class="form-control" name="gender" value="male"/> male
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" class="form-control" name="gender" value="Female"/> Female
+                                    <input type="radio" class="form-control" name="gender" value="female"/> female
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Date of Birth</label>
+                        <label class="control-label col-md-3">date of birth</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control date-picker" name="dob" placeholder="Date of Birth"
+                            <input type="text" class="form-control date-picker" name="dob" placeholder="date of birth"
                                    readonly="readonly"/>
                         </div>
                     </div>
-                    <h4 class="margin-top-20 block">Contact</h4>
+                    <h4 class="margin-top-20 block">contact</h4>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Address</label>
+                        <label class="control-label col-md-3">address</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="address" placeholder="Address"/>
+                            <input type="text" class="form-control" name="address" placeholder="address"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Phone Number</label>
+                        <label class="control-label col-md-3">phone number</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="phone" placeholder="Phone Number"/>
+                            <input type="text" class="form-control" name="phone" placeholder="phone number"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Email</label>
+                        <label class="control-label col-md-3">email</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="email" placeholder="Email"/>
+                            <input type="text" class="form-control" name="email" placeholder="email"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Repeat Email</label>
+                        <label class="control-label col-md-3">repeat email</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="email_confirmation" placeholder="Repeat Email"/>
+                            <input type="text" class="form-control" name="email_confirmation" placeholder="repeat email"/>
                         </div>
                     </div>
                 </div>

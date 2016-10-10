@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- INSERT YOUR CSS PLUGIN HERE -->
+<head th:fragment="cssPlugins" th:remove="tag">
+
+</head>
+
+<!-- INSERT YOUR JS PLUGIN HERE -->
+<body th:fragment="jsPlugins" th:remove="tag">
+
+</body>
+
+<!-- INSERT YOUR JS PAGE HERE -->
+<body th:fragment="jsPage" th:remove="tag">
+
+</body>
+
+<!-- INSERT YOUR LAYOUT HERE -->
+<body th:fragment="mainLayout" th:remove="tag">
+<div class="portlet light">
+    <div class="portlet-body">
+        <div class="portlet light bg-inverse">
+            <div class="portlet-body form">
+                <h4 class="block">Upload File</h4>
+                <form id="upload-form" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                <div class="form-body">
+                    <div th:class="|alert alert-danger|" th:if="${error} != null">
+                        <button class="close" data-close="alert"></button>
+                        <span th:text="${error}">This is error message.</span>
+                    </div>
+                    <div th:class="|alert alert-success|" th:if="${success} != null">
+                        <button class="close" data-close="alert"></button>
+                        <span th:text="${success}">This is error message.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Type</label>
+                        <div class="col-md-9">
+                            <select class="form-control" name="type">
+                                <option value="">-- Please Select --</option>
+                                <option value="1">Registration Payment</option>
+                                <option value="2">Ijazah dan Rapor</option>
+                                <option value="3">Identitas (KK, KTP, Akta Kelahiran)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">File</label>
+                        <div class="col-md-9">
+                            <input type="file" class="form-control" placeholder="File" name="file"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn blue pull-right">Submit <i class="icon-arrow-right"></i></button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
