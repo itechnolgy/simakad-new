@@ -36,19 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/").authenticated()
-                    .antMatchers("/**").authenticated()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/forgot").permitAll()
                     .antMatchers("/register").permitAll()
                     .antMatchers("/test").hasRole("ADMIN")
-
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
                     .successHandler(successHandler)
-//                    .defaultSuccessUrl("/test")
                     .failureUrl("/login?error")
                     .permitAll()
                     .and()
@@ -82,6 +78,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }
-
 
 }
