@@ -45,9 +45,9 @@
                 <div class="form-body">
                     <div th:class="|alert alert-danger|" th:if="${error} != null">
                         <button class="close" data-close="alert"></button>
-                        <span th:text="${error}">this is error message.</span>
+                        <span th:text="${error}">This is error message.</span>
                     </div>
-                    <h4 class="block">identity</h4>
+                    <h4 class="block">Identity</h4>
                     <div class="form-group">
                         <label class="control-label col-md-3">Full Name</label>
                         <div class="col-md-9">
@@ -78,6 +78,26 @@
                         <div class="col-md-9">
                             <input type="text" class="form-control date-picker" name="dob" placeholder="Date of Birth"
                                    readonly="readonly"/>
+                        </div>
+                    </div>
+                    <h4 class="margin-top-20 block">Study Program</h4>'
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Study Program</label>
+                        <div class="col-md-9">
+                            <div class="radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" class="form-control" name="study_program" value="1"/> Strata 1 (S1)
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="form-control" name="study_program" value="2"/> Strata 1 (S1) Matriculation
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="form-control" name="study_program" value="3"/> Strata 2 (S2)
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" class="form-control" name="study_program" value="4"/> Strata 3 (S3)
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <h4 class="margin-top-20 block">Contact</h4>
