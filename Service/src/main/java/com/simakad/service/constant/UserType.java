@@ -1,9 +1,9 @@
 package com.simakad.service.constant;
 
 /**
- * Created by SRIN on 10/7/2016.
+ * Created by SRIN on 10/11/2016.
  */
-public enum UsersProfileType {
+public enum UserType {
     STUDENT ("STUDENT"),
     NEW_STUDENT ("NEW_STUDENT"),
     TEACHER ("TEACHER"),
@@ -12,7 +12,7 @@ public enum UsersProfileType {
 
     private String text;
 
-    private UsersProfileType(String s) {
+    private UserType(String s) {
         text = s;
     }
 

@@ -2,10 +2,16 @@ package com.simakad.service;
 
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.NewStudent;
+import com.simakad.dao.entity.Student;
 import com.simakad.dao.entity.UserProfile;
+import com.simakad.dao.entity.Users;
+import com.simakad.dao.repo.NewStudentDao;
 import com.simakad.dao.repo.UserProfileDao;
+import com.simakad.service.constant.StudentStatusType;
+import com.simakad.service.constant.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -16,25 +22,30 @@ import java.util.Objects;
  */
 @Component
 public class StudentRegistrationServiceImpl implements StudentRegistrationService {
-    private final String registrationIdSeq = "registration_id_seq";
+    private final String registrationIdSeq = "seq_student_registration";
     private final String prefixRegistration = "PMB";
 
     @Autowired
     UserProfileService userProfileService;
 
     @Autowired
+    UserService userService;
 
+    @Autowired
+    NewStudentDao newStudentDao;
 
     @Autowired
     EntityManager entityManager;
 
+
     @Override
+    @Transactional
     public NewStudent register(StudentRegistrationRequest studentRegistrationRequest) {
         if(!isRegistered(studentRegistrationRequest)) {
             UserProfile studentRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(studentRegistrationRequest));
-//            studentRegistrationProfile.setId(createRegistrationNumber());
-            userProfileDao.save(studentRegistrationProfile);
-            return studentRegistrationProfile;
+            NewStudent newStudent = createNewStudent(studentRegistrationRequest.getDegreeId());
+            Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId());
+            return newStudent;
         }
         return null;
 
@@ -46,16 +57,13 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
         else return true;
     }
 
-    private UserProfile createStudent(StudentRegistrationRequest studentRegistrationRequest) {
-        UserProfile student = new UserProfile();
-        student.setName(studentRegistrationRequest.getName());
-        student.setEmail(studentRegistrationRequest.getEmail());
-        student.setAddress(studentRegistrationRequest.getAddress());
-        student.setGender(studentRegistrationRequest.getGender());
-        student.setIdentityCardNumber(studentRegistrationRequest.getIdentityCardNumber());
-        student.setIdentityCardNumberType(studentRegistrationRequest.getIdentityCardNumberType());
-
-        return student;
+    private NewStudent createNewStudent(Long degreeId) {
+        NewStudent newStudent = new NewStudent();
+        newStudent.setId(createRegistrationNumber());
+        newStudent.setDegreeId(degreeId);
+        newStudent.setStatus(StudentStatusType.ACTIVE.toString());
+        newStudent = newStudentDao.save(newStudent);
+        return  newStudent;
     }
 
     private UserProfile convertToUserProfile(StudentRegistrationRequest request) {
@@ -67,6 +75,16 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
         profile.setGender(request.getGender());
         profile.setIdentityCardNumber(request.getIdentityCardNumber());
         profile.setIdentityCardNumberType(request.getIdentityCardNumberType());
+        return profile;
     }
 
+    private String createRegistrationNumber() {
+        String regNumber = prefixRegistration + getIncrementId();
+        return regNumber;
+    }
+
+    private Long getIncrementId() {
+        Query q = entityManager.createNativeQuery("select nextval('"+ registrationIdSeq +"')");
+        return (Long) q.getSingleResult();
+    }
 }

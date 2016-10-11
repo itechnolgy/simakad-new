@@ -1,6 +1,7 @@
 package com.simakad.cms.controller;
 
 import com.simakad.dao.dto.StudentRegistrationRequest;
+import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.UserProfile;
 import com.simakad.service.StudentRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,14 @@ public class RegistrationController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String doStudentRegistration(@Valid StudentRegistrationRequest studentRegistrationRequest, Model model) {
-        StudentR studentRegistration = studentRegistrationService.register(studentRegistrationRequest);
+        NewStudent studentRegistration = studentRegistrationService.register(studentRegistrationRequest);
         if(Objects.isNull(studentRegistration)) {
             model.addAttribute("error", "This identity or email has been registered!");
             return "layout/auth/master";
         }
-
-        model.addAttribute("student", studentRegistration);
-        return "layout/auth/master";
+        model.addAttribute("view", "auth/login");
+        return "redirect:/login?success";
+//        model.addAttribute("student", studentRegistration);
+//        return "layout/auth/master";
     }
 }

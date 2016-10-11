@@ -12,8 +12,9 @@ public class UserProfile {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
-    @GeneratedValue
-    private String id;
+    @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", initialValue = 1000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+    private Long id;
 
     @Basic(optional = false)
     @Column(name = "name")
@@ -48,7 +49,7 @@ public class UserProfile {
     private String identityCardNumber;
 
     @Basic(optional = false)
-    @Column(name = "identity_card_number_type")
+    @Column(name = "identity_card_type")
     private String identityCardNumberType;
 
     @Basic(optional = false)
@@ -65,11 +66,11 @@ public class UserProfile {
     private Date lastUpdateTime;
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

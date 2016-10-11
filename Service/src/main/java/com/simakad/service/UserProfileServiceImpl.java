@@ -3,19 +3,22 @@ package com.simakad.service;
 import com.simakad.dao.entity.UserProfile;
 import com.simakad.dao.repo.UserProfileDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 /**
  * Created by SRIN on 10/10/2016.
  */
+@Component
 public class UserProfileServiceImpl implements UserProfileService {
     @Autowired
     UserProfileDao userProfileDao;
 
     @Override
     public UserProfile createUserProfile(UserProfile userProfile) {
-
+        userProfile = userProfileDao.save(userProfile);
+        return userProfile;
     }
 
     @Override

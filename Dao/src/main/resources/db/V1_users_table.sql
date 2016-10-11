@@ -1,17 +1,19 @@
+drop table users;
+
 create table users (
 	username text,
 	password text,
 	roles text,
-	user_profile_id bigint
+	user_profile_id bigint,
+	constraint pk_users PRIMARY KEY (username)
 );
--- password : samsung123
-insert into users values('kovan','$2a$10$rBAHxDp0/W6nAB5rNwN1SuA9fXLEd8ZqKaTCXUaf/LWIDxiQihn3a','ROLE_ADMIN');
 
+drop table users_profile;
 
 CREATE TABLE users_profile
 (
-  id text NOT NULL DEFAULT ((('PMB-'::text || date_part('year'::text, now())) || '-'::text) || nextval('seq_student_registration'::regclass)),
-  student_name text,
+  id bigint,
+  name text,
   gender text,
   email text,
   place_birth text NOT NULL,
@@ -24,8 +26,28 @@ CREATE TABLE users_profile
   phone text,
   creation_time timestamp without time zone DEFAULT now(),
   last_update_time timestamp without time zone DEFAULT now(),
-  CONSTRAINT pk_student_registration PRIMARY KEY (id)
+  CONSTRAINT pk_users_profile PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
+
+CREATE SEQUENCE user_id_seq
+  INCREMENT 1
+  MINVALUE 1000
+  MAXVALUE 9223372036854775807
+  START 1000
+  CACHE 1000;
+
+drop table student_registration cascade;
+
+create table student_registration (
+	id text NOT NULL DEFAULT ((('PMB-'::text || date_part('year'::text, now())) || '-'::text) || nextval('seq_student_registration'::regclass)),
+	status text,
+	degree_id bigint,
+	constraint pk_student_registration primary key (id)
+);
+
+
+
+ 
