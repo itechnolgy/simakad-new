@@ -1,10 +1,17 @@
 package com.simakad.service;
 
 import com.simakad.dao.dto.StudentRegistrationRequest;
-import com.simakad.dao.entity.StudentRegistration;
-import com.simakad.dao.repo.StudentRegistrationDao;
+import com.simakad.dao.entity.NewStudent;
+import com.simakad.dao.entity.Student;
+import com.simakad.dao.entity.UserProfile;
+import com.simakad.dao.entity.Users;
+import com.simakad.dao.repo.NewStudentDao;
+import com.simakad.dao.repo.UserProfileDao;
+import com.simakad.service.constant.StudentStatusType;
+import com.simakad.service.constant.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,45 +22,60 @@ import java.util.Objects;
  */
 @Component
 public class StudentRegistrationServiceImpl implements StudentRegistrationService {
-    private final String registrationIdSeq = "registration_id_seq";
+    private final String registrationIdSeq = "seq_student_registration";
     private final String prefixRegistration = "PMB";
 
     @Autowired
-    StudentRegistrationDao studentRegistrationDao;
+    UserProfileService userProfileService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    NewStudentDao newStudentDao;
 
     @Autowired
     EntityManager entityManager;
 
+
     @Override
-    public StudentRegistration register(StudentRegistrationRequest studentRegistrationRequest) {
+    @Transactional
+    public NewStudent register(StudentRegistrationRequest studentRegistrationRequest) {
         if(!isRegistered(studentRegistrationRequest)) {
-            StudentRegistration studentRegistration = createStudent(studentRegistrationRequest);
-            studentRegistration.setId(createRegistrationNumber());
-            studentRegistrationDao.save(studentRegistration);
-            return studentRegistration;
+            UserProfile studentRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(studentRegistrationRequest));
+            NewStudent newStudent = createNewStudent(studentRegistrationRequest.getDegreeId());
+            Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId());
+            return newStudent;
         }
         return null;
+
     }
 
     private boolean isRegistered(StudentRegistrationRequest studentRegistrationRequest){
-        StudentRegistration student = studentRegistrationDao.findByEmail(studentRegistrationRequest.getEmail());
-        if(Objects.isNull(student)) {
-            student = studentRegistrationDao.findByIdentityCardNumber(studentRegistrationRequest.getIdentityCardNumber());
-            if(Objects.isNull(student)) return false;
-        }
-        return true;
+        UserProfile profile = userProfileService.isUserProfileExist(studentRegistrationRequest.getEmail(), studentRegistrationRequest.getIdentityCardNumber());
+        if(Objects.isNull(profile)) return false;
+        else return true;
     }
 
-    private StudentRegistration createStudent(StudentRegistrationRequest studentRegistrationRequest) {
-        StudentRegistration student = new StudentRegistration();
-        student.setName(studentRegistrationRequest.getName());
-        student.setEmail(studentRegistrationRequest.getEmail());
-        student.setAddress(studentRegistrationRequest.getAddress());
-        student.setGender(studentRegistrationRequest.getGender());
-        student.setIdentityCardNumber(studentRegistrationRequest.getIdentityCardNumber());
-        student.setIdentityCardNumberType(studentRegistrationRequest.getIdentityCardNumberType());
+    private NewStudent createNewStudent(Long degreeId) {
+        NewStudent newStudent = new NewStudent();
+        newStudent.setId(createRegistrationNumber());
+        newStudent.setDegreeId(degreeId);
+        newStudent.setStatus(StudentStatusType.ACTIVE.toString());
+        newStudent = newStudentDao.save(newStudent);
+        return  newStudent;
+    }
 
-        return student;
+    private UserProfile convertToUserProfile(StudentRegistrationRequest request) {
+        UserProfile profile = new UserProfile();
+        profile.setName(request.getName());
+        profile.setAddress(request.getAddress());
+        profile.setEmail(request.getEmail());
+        profile.setAddress(request.getAddress());
+        profile.setGender(request.getGender());
+        profile.setIdentityCardNumber(request.getIdentityCardNumber());
+        profile.setIdentityCardNumberType(request.getIdentityCardNumberType());
+        return profile;
     }
 
     private String createRegistrationNumber() {
