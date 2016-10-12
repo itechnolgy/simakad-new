@@ -215,15 +215,19 @@ alter table exam_registration_result owner to sttj;
 
 
 -- table payment registration list
+create sequence seq_payment_registration_list
+start 10001
+increment 1;
+
 create table if not exists payment_registration_list (
-	id integer not null,
+	id integer not null default nextval('seq_payment_registration_list'),
 	payment_name text not null,
 	payment_year text,
 	study_program_id bigint not null,
 	amount numeric not null default 0,
 	active_status boolean default false,
-	creation_time timestamp without time zone default now(),
-	last_update_time timestamp without time zone default now(),
+	creation_time timestamp without time zone not null default now(),
+	last_update_time timestamp without time zone not null default now(),
 	constraint pk_payment_registration_list primary key (id),
 	constraint fk_payment_registration_list foreign key (study_program_id) references study_program(id)
 );
