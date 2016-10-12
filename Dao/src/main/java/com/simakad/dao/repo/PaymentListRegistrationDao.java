@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface PaymentListRegistrationDao extends JpaRepository<PaymentListRegistration, String> {
     List<PaymentListRegistration> findByPaymentYear(String year);
-    void save(List<PaymentListRegistration> paymentList, String year);
-    void save(PaymentListRegistration paymentItem, String year);
+//    void save(List<PaymentListRegistration> paymentList, String year);
+//    void save(PaymentListRegistration paymentItem, String year);
 }
