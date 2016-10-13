@@ -6,8 +6,8 @@ import javax.persistence.Table;
 /**
  * Created by SRIN on 10/13/2016.
  */
-@Entity
-@Table(name = "academic_calendar")
-public class AcademicCalendar {
-
-}
+//@Entity
+//@Table(name = "academic_calendar")
+//public class AcademicCalendar {
+//
+//}
