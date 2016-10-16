@@ -1,4 +1,4 @@
-package com.simakad.cms.controller;
+package com.simakad.cms.controller.registration;
 
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.NewStudent;
@@ -18,7 +18,7 @@ import java.util.Objects;
  * Created by HighDream on 9/25/2016.
  */
 @Controller
-@RequestMapping(value = "/register")
+@RequestMapping(value = "/pmb/register")
 public class RegistrationController {
     @Autowired
     StudentRegistrationService studentRegistrationService;

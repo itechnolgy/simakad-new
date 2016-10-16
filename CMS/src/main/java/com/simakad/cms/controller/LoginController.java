@@ -21,7 +21,7 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String login(Model model) {
-        model.addAttribute("view", "academic/period/new");
+        model.addAttribute("view", "newStudent/upload");
         return "layout/default";
 //        model.addAttribute("view", "auth/changePassword");
 //        model.addAttribute("title", "Change Password");
