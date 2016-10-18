@@ -16,7 +16,7 @@ public class PaymentRegistrationListServiceImpl extends PaymentRegistrationListS
     PaymentListRegistrationDao paymentListRegistrationDao;
 
     List<PaymentListRegistration> getPaymentList(String year) {
-        return paymentListRegistrationDao.findByPaymentYear(year);
+        return paymentListRegistrationDao.findByYear(year);
     }
 
 

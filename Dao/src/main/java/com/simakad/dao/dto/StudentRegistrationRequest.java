@@ -12,7 +12,6 @@ public class StudentRegistrationRequest {
     String address;
     String city;
     String province;
-    Long degreeId;
 
     public String getName() {
         return name;
@@ -76,13 +75,5 @@ public class StudentRegistrationRequest {
 
     public void setProvince(String province) {
         this.province = province;
-    }
-
-    public Long getDegreeId() {
-        return degreeId;
-    }
-
-    public void setDegreeId(Long degreeId) {
-        this.degreeId = degreeId;
     }
 }
