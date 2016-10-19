@@ -19,7 +19,12 @@
 <body th:fragment="jsPage" th:remove="tag">
 <script src="../../assets/pages/scripts/auth.js" type="text/javascript"
         th:src="@{assets/pages/scripts/auth.js}"></script>
-<script th:inline="javascript">
+<script th:inline="javascript" th:if="${param.study_program} == null">
+    $(document).ready(function() {
+        AuthPage.preRegister();
+    });
+</script>
+<script th:inline="javascript" th:unless="${param.study_program} == null">
     $(document).ready(function() {
         AuthPage.register();
     });
@@ -41,13 +46,41 @@
             </div>
         </div>
         <div class="portlet-body">
-            <form id="register-form" class="form form-horizontal" method="post" th:action="@{'/'}">
+            <form id="study-program-form" class="form form-horizontal" method="get" th:action="@{''}" th:if="${param.study_program} == null">
+                <div class="form-body">
+                    <h4 class="margin-top-20 block">Study Program</h4>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <select class="form-control" name="study_program" id="study-program">
+                                <option value="">-- Please Select --</option>
+                                <option value="1">Strata 1 (S1)</option>
+                                <option value="2">Strata 2 (S2)</option>
+                                <option value="3">Strata 3 (S3)</option>
+                                <option value="4">Strata 1 (S1) Matriculation</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form id="register-form" class="form form-horizontal" method="post" th:action="@{''}" th:unless="${param.study_program} == null">
                 <div class="form-body">
                     <div th:class="|alert alert-danger|" th:if="${error} != null">
                         <button class="close" data-close="alert"></button>
                         <span th:text="${error}">This is error message.</span>
                     </div>
-                    <h4 class="block">Identity</h4>
+                    <h4 class="block">Study Program</h4>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="hidden" name="study_program" th:value="@{param.study_program}"/>
+                            <th:block th:switch="${param.study_program}">
+                                <p class="form-control-static" th:case="1">Strata 1 (S1)</p>
+                                <p class="form-control-static" th:case="2">Strata 2 (S2)</p>
+                                <p class="form-control-static" th:case="3">Strata 3 (S3)</p>
+                                <p class="form-control-static" th:case="4">Strata 1 (S1) Matriculation</p>
+                            </th:block>
+                        </div>
+                    </div>
+                    <h4 class="margin-top-20 block">Identity</h4>
                     <div class="form-group">
                         <label class="control-label col-md-3">Full Name</label>
                         <div class="col-md-9">
@@ -63,12 +96,14 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Gender</label>
                         <div class="col-md-9">
-                            <div class="radio-list">
-                                <label class="radio-inline">
+                            <div class="mt-radio-inline">
+                                <label class="mt-radio">
                                     <input type="radio" class="form-control" name="gender" value="male"/> Male
+                                    <span></span>
                                 </label>
-                                <label class="radio-inline">
+                                <label class="mt-radio">
                                     <input type="radio" class="form-control" name="gender" value="female"/> Female
+                                    <span></span>
                                 </label>
                             </div>
                         </div>
@@ -78,26 +113,6 @@
                         <div class="col-md-9">
                             <input type="text" class="form-control date-picker" name="dob" placeholder="Date of Birth"
                                    readonly="readonly"/>
-                        </div>
-                    </div>
-                    <h4 class="margin-top-20 block">Study Program</h4>'
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Study Program</label>
-                        <div class="col-md-9">
-                            <div class="radio-list">
-                                <label class="radio-inline">
-                                    <input type="radio" class="form-control" name="study_program" value="1"/> Strata 1 (S1)
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" class="form-control" name="study_program" value="2"/> Strata 1 (S1) Matriculation
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" class="form-control" name="study_program" value="3"/> Strata 2 (S2)
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" class="form-control" name="study_program" value="4"/> Strata 3 (S3)
-                                </label>
-                            </div>
                         </div>
                     </div>
                     <h4 class="margin-top-20 block">Contact</h4>

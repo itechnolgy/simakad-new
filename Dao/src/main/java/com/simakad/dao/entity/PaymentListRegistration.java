@@ -1,7 +1,6 @@
 package com.simakad.dao.entity;
 
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.Id;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;

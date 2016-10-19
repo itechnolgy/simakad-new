@@ -17,7 +17,7 @@ import java.util.Objects;
  * Created by HighDream on 9/25/2016.
  */
 @Controller
-@RequestMapping(value = "/pmb/register")
+@RequestMapping(value = "/register")
 public class RegistrationController {
     @Autowired
     StudentRegistrationService studentRegistrationService;
@@ -26,7 +26,7 @@ public class RegistrationController {
     public String studentRegistration(Model model) {
         model.addAttribute("view", "auth/register");
         model.addAttribute("registration", new StudentRegistration());
-        return "layout/auth/master";
+        return "layout/auth";
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -34,10 +34,10 @@ public class RegistrationController {
         StudentRegistration studentRegistration = studentRegistrationService.register(studentRegistrationRequest);
         if(Objects.isNull(studentRegistration)) {
             model.addAttribute("error", "This identity or email has been registered!");
-            return "layout/auth/master";
+            return "layout/auth";
         }
 
         model.addAttribute("student", studentRegistration);
-        return "layout/auth/master";
+        return "layout/auth";
     }
 }
