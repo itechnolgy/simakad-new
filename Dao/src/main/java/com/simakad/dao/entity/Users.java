@@ -1,9 +1,8 @@
 package com.simakad.dao.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.simakad.dao.constant.UserType;
+
+import javax.persistence.*;
 
 /**
  * Created by SRIN on 9/21/2016.
@@ -19,7 +18,8 @@ public class Users {
     private String passoword;
 
     @Column(name = "roles")
-    private String roles;
+    @Enumerated(EnumType.STRING)
+    private UserType roles;
 
     @Column(name = "user_profile_id")
     private Long userProfileId;
@@ -40,11 +40,11 @@ public class Users {
         this.passoword = passoword;
     }
 
-    public String getRoles() {
+    public UserType getRoles() {
         return roles;
     }
 
-    public void setRoles(String roles) {
+    public void setRoles(UserType roles) {
         this.roles = roles;
     }
 

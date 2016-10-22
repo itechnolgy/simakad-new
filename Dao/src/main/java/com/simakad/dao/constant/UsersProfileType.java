@@ -1,4 +1,4 @@
-package com.simakad.service.constant;
+package com.simakad.dao.constant;
 
 /**
  * Created by SRIN on 10/7/2016.

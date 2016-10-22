@@ -1,9 +1,8 @@
 package com.simakad.service;
 
+import com.simakad.dao.constant.UserType;
 import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.UserDao;
-import com.simakad.service.constant.UserType;
-import com.simakad.service.constant.UsersProfileType;
 import com.simakad.service.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ public class UserServiceImpl implements UserService{
     public Users createUserLogin(String username, UserType userType, Long userProfileId) {
         Users users = new Users();
         users.setUsername(username);
-        users.setRoles(userType.toString());
+        users.setRoles(userType);
         users.setUserProfileId(userProfileId);
 
         String pass = generatePassword();

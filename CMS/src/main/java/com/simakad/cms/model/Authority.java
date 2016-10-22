@@ -18,7 +18,7 @@ public class Authority implements GrantedAuthority {
     }
 
     public Authority(Users users) {
-        roleName = users.getRoles();
+        roleName = users.getRoles().toString();
     }
 
     /**

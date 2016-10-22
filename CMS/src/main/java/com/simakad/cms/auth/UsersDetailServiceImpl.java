@@ -31,7 +31,7 @@ public class UsersDetailServiceImpl implements UserDetailsService {
         Users user = userDao.findOne(username);
         if(user==null) {throw new UsernameNotFoundException("No such user: " + username);}
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(user.getRoles()));
+        authorities.add(new SimpleGrantedAuthority(user.getRoles().toString()));
         return buildUserForAuth(user, authorities);
     }
 

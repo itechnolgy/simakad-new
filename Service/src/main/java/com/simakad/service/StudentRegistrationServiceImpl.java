@@ -1,5 +1,7 @@
 package com.simakad.service;
 
+import com.simakad.dao.constant.StudentStatusType;
+import com.simakad.dao.constant.UserType;
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.Student;
@@ -7,8 +9,6 @@ import com.simakad.dao.entity.UserProfile;
 import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.NewStudentDao;
 import com.simakad.dao.repo.UserProfileDao;
-import com.simakad.service.constant.StudentStatusType;
-import com.simakad.service.constant.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +29,9 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
     UserProfileService userProfileService;
 
     @Autowired
+    RegistrationPaymentService registrationPaymentService;
+
+    @Autowired
     UserService userService;
 
     @Autowired
@@ -45,6 +48,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
             UserProfile studentRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(studentRegistrationRequest));
             NewStudent newStudent = createNewStudent(studentRegistrationRequest.getDegreeId());
             Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId());
+            registrationPaymentService.createRegistrationPaymentData(newStudent);
             return newStudent;
         }
         return null;

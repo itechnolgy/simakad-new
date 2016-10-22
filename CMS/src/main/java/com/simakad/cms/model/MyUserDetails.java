@@ -22,7 +22,7 @@ public class MyUserDetails implements UserDetails {
     public MyUserDetails(Users user, List<GrantedAuthority> authorityList) {
         this.username = user.getUsername();
         this.password = user.getPassoword();
-        this.role = user.getRoles();
+        this.role = user.getRoles().toString();
         this.authorities = Arrays.asList(new Authority(user));
         this.active = true;
     }
