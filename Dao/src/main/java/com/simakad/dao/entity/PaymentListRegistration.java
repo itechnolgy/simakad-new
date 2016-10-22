@@ -1,13 +1,17 @@
 package com.simakad.dao.entity;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Currency;
 
 /**
  * Created by vikraa on 10/11/16.
  */
 @Entity
-@Table(name = "payment_registration_list")
+@Table(name = "payment_registratio_list")
 public class PaymentListRegistration {
     @Id
     @Basic(optional = false)

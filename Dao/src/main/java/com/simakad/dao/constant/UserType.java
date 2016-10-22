@@ -8,7 +8,8 @@ public enum UserType {
     NEW_STUDENT ("NEW_STUDENT"),
     TEACHER ("TEACHER"),
     FINANCE ("FINANCE"),
-    ACADEMIC ("ACADEMIC");
+    ACADEMIC ("ACADEMIC"),
+    ROLE_ADMIN ("ROLE_ADMIN");
 
     private String text;
 

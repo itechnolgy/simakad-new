@@ -15,7 +15,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
@@ -26,7 +25,6 @@ import java.util.Properties;
  */
 @Configuration
 @EnableWebMvc
-@EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = NewStudentDao.class)
 public class DatabaseConfig {
     private static final String ENTITY_PACKAGE_SCAN = "com.simakad.dao";

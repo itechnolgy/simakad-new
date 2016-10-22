@@ -1,8 +1,8 @@
-package com.simakad.cms.controller;
+package com.simakad.cms.controller.registration;
 
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.NewStudent;
-import com.simakad.dao.entity.UserProfile;
+import com.simakad.dao.entity.StudentRegistration;
 import com.simakad.service.StudentRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class RegistrationController {
     @RequestMapping(method = RequestMethod.GET)
     public String studentRegistration(Model model) {
         model.addAttribute("view", "auth/register");
-        model.addAttribute("registration", new UserProfile());
+        model.addAttribute("registration", new StudentRegistration());
         return "layout/auth";
     }
 
@@ -37,9 +37,8 @@ public class RegistrationController {
             model.addAttribute("error", "This identity or email has been registered!");
             return "layout/auth";
         }
-        model.addAttribute("view", "auth/login");
-        return "redirect:/login?success";
-//        model.addAttribute("student", studentRegistration);
-//        return "layout/auth/master";
+
+        model.addAttribute("student", studentRegistration);
+        return "layout/auth";
     }
 }

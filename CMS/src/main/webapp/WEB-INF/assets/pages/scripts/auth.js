@@ -174,6 +174,12 @@ var AuthPage = function() {
         });
     };
 
+    var handlePreRegister = function() {
+        $("#study-program").on('change', function() {
+            $("#study-program-form").submit();
+        });
+    };
+
     return {
         login: function() {
             handleLogin();
@@ -188,6 +194,9 @@ var AuthPage = function() {
         changePassword: function() {
             initChangePasswordValidation();
             handleChangePassword();
+        },
+        preRegister: function() {
+            handlePreRegister();
         }
     };
 
