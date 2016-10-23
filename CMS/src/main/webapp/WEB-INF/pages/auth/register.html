@@ -2,29 +2,24 @@
 <!-- INSERT YOUR CSS PLUGIN HERE -->
 <head th:fragment="cssPlugins" th:remove="tag">
     <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"
-          th:href="@{assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css}"/>
+          th:href="@{/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css}"/>
 </head>
 
 <!-- INSERT YOUR JS PLUGIN HERE -->
 <body th:fragment="jsPlugins" th:remove="tag">
 <script type="text/javascript" src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"
-        th:src="@{assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+        th:src="@{/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
 <script type="text/javascript" src="../../assets/global/plugins/moment.min.js"
-        th:src="@{assets/global/plugins/moment.min.js}"></script>
+        th:src="@{/assets/global/plugins/moment.min.js}"></script>
 <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"
-        th:src="@{assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
+        th:src="@{/assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
 </body>
 
 <!-- INSERT YOUR JS PAGE HERE -->
 <body th:fragment="jsPage" th:remove="tag">
 <script src="../../assets/pages/scripts/auth.js" type="text/javascript"
-        th:src="@{assets/pages/scripts/auth.js}"></script>
-<script th:inline="javascript" th:if="${param.study_program} == null">
-    $(document).ready(function() {
-        AuthPage.preRegister();
-    });
-</script>
-<script th:inline="javascript" th:unless="${param.study_program} == null">
+        th:src="@{/assets/pages/scripts/auth.js}"></script>
+<script th:inline="javascript">
     $(document).ready(function() {
         AuthPage.register();
     });
@@ -46,23 +41,8 @@
             </div>
         </div>
         <div class="portlet-body">
-            <form id="study-program-form" class="form form-horizontal" method="get" th:action="@{''}" th:if="${param.study_program} == null">
-                <div class="form-body">
-                    <h4 class="margin-top-20 block">Study Program</h4>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <select class="form-control" name="study_program" id="study-program">
-                                <option value="">-- Please Select --</option>
-                                <option value="1">Strata 1 (S1)</option>
-                                <option value="2">Strata 2 (S2)</option>
-                                <option value="3">Strata 3 (S3)</option>
-                                <option value="4">Strata 1 (S1) Matriculation</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <form id="register-form" class="form form-horizontal" method="post" th:action="@{''}" th:unless="${param.study_program} == null">
+            <form id="register-form" class="form form-horizontal" method="post" th:action="@{''}"
+                  th:object="${registration}">
                 <div class="form-body">
                     <div th:class="|alert alert-danger|" th:if="${error} != null">
                         <button class="close" data-close="alert"></button>
@@ -71,78 +51,95 @@
                     <h4 class="block">Study Program</h4>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-9">
-                            <input type="hidden" name="study_program" th:value="${param.study_program[0]}"/>
-                            <th:block th:switch="${param.study_program[0]}">
-                                <p class="form-control-static" th:case="1">Strata 1 (S1)</p>
-                                <p class="form-control-static" th:case="2">Strata 2 (S2)</p>
-                                <p class="form-control-static" th:case="3">Strata 3 (S3)</p>
-                                <p class="form-control-static" th:case="4">Strata 1 (S1) Matriculation</p>
-                            </th:block>
-                        </div>
-                    </div>
-                    <h4 class="margin-top-20 block">Identity</h4>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Full Name</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" placeholder="Full Name" name="fullname"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Identity Number</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" placeholder="Identity Number" name="identity"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Gender</label>
-                        <div class="col-md-9">
-                            <div class="mt-radio-inline">
-                                <label class="mt-radio">
-                                    <input type="radio" class="form-control" name="gender" value="male"/> Male
-                                    <span></span>
-                                </label>
-                                <label class="mt-radio">
-                                    <input type="radio" class="form-control" name="gender" value="female"/> Female
-                                    <span></span>
-                                </label>
+                            <select class="form-control" name="degreeId" id="study-program" th:field="*{degreeId}">
+                                <option value="">-- Please Select --</option>
+                                <option value="1">Strata 1 (S1)</option>
+                                <option value="2">Strata 2 (S2)</option>
+                                <option value="3">Strata 3 (S3)</option>
+                                <option value="4">Strata 1 (S1) Matriculation</option>
+                            </select>
+                            <div id="selected-study-program">
+                                <p class="form-control-static margin-right-10"></p>
+                                <a href="javascript:void(0);" class="btn btn-default" id="change-study-program">Change</a>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Date of Birth</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control date-picker" name="dob" placeholder="Date of Birth"
-                                   readonly="readonly"/>
+                    <div id="registration-closed">
+                        <div class="alert alert-info">
+                            <span>Sorry, Registration for <span id="study-program-text"></span> is closed.</span>
                         </div>
                     </div>
-                    <h4 class="margin-top-20 block">Contact</h4>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Address</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="address" placeholder="Address"/>
+                    <div id="registration-data">
+                        <h4 class="margin-top-20 block">Identity</h4>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Full Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="Full Name" name="name"
+                                       th:field="*{name}"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Phone Number</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="phone" placeholder="Phone Number"/>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Identity Number</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="Identity Number"
+                                       name="identityCardNumber" th:field="*{identityCardNumber}"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Email</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="email" placeholder="Email"/>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Gender</label>
+                            <div class="col-md-9">
+                                <div class="mt-radio-inline">
+                                    <label class="mt-radio">
+                                        <input type="radio" class="form-control" name="gender" value="male"
+                                               th:field="*{gender}"/> Male
+                                        <span></span>
+                                    </label>
+                                    <label class="mt-radio">
+                                        <input type="radio" class="form-control" name="gender" value="female"
+                                               th:field="*{gender}"/> Female
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Repeat Email</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="email_confirmation" placeholder="Repeat Email"/>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Date of Birth</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control date-picker" name="dob" placeholder="Date of Birth"
+                                       readonly="readonly"/>
+                            </div>
+                        </div>
+                        <h4 class="margin-top-20 block">Contact</h4>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Address</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="address" placeholder="Address"
+                                       th:field="*{address}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Phone Number</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="phone" placeholder="Phone Number"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="email" placeholder="Email"
+                                       th:field="*{email}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Repeat Email</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="email_confirmation" placeholder="Repeat Email"/>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn blue pull-right">Submit <i class="icon-arrow-right"></i></button>
+                    <button type="submit" class="btn blue pull-right" id="btn-submit">Submit <i class="icon-arrow-right"></i></button>
                     <div>
                         <a href="" th:href="@{/login}">Back to Login</a>
                     </div>

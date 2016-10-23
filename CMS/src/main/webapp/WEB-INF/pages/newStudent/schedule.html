@@ -15,31 +15,36 @@
 <body th:fragment="mainLayout" th:remove="tag">
 <div class="portlet light">
 <div class="portlet-body">
-    <div th:remove="tag" th:if="${schedule} == null">
-        <p>There is no schedule.</p>
+    <div class="note note-info">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit diam id libero semper condimentum.
+        Proin non diam est. Donec libero magna, tempus ut est sed, commodo hendrerit tellus. Class aptent taciti
+        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris vel lorem a nisl mattis
+        dapibus vitae in justo.
     </div>
-    <div th:remove="tag" th:unless="${schedule} == null">
-        <table class="table table-hover table-bordered" width="70%">
-            <thead>
-            <tr>
-                <th width="20%">No Identity</th>
-                <th width="20%">Name</th>
-                <th width="20%">Room</th>
-                <th width="20%">Date</th>
-                <th width="20%">Time</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1601268986</td>
-                <td>Cornelius Alvin Prilly</td>
-                <td>410</td>
-                <td>10 December 2017</td>
-                <td>12:00</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th width="20%">#</th>
+            <th width="20%">Type</th>
+            <th width="20%">Date</th>
+            <th width="20%">Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1.</td>
+            <td>Psikotest</td>
+            <td>10 December 2017</td>
+            <td>12:00</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>Wawancara</td>
+            <td>10 December 2017</td>
+            <td>12:00</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </div>
 </body>

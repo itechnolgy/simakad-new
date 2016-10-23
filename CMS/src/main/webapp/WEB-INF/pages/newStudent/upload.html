@@ -1,17 +1,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
 <!-- INSERT YOUR CSS PLUGIN HERE -->
 <head th:fragment="cssPlugins" th:remove="tag">
-
 </head>
 
 <!-- INSERT YOUR JS PLUGIN HERE -->
 <body th:fragment="jsPlugins" th:remove="tag">
-
+<script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"
+        th:src="@{/assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
+<script type="text/javascript" src="../../assets/global/plugins/moment.min.js"
+        th:src="@{/assets/global/plugins/moment.min.js}"></script>
 </body>
 
 <!-- INSERT YOUR JS PAGE HERE -->
 <body th:fragment="jsPage" th:remove="tag">
-
+<script src="../../assets/pages/scripts/newStudent.js" type="text/javascript"
+        th:src="@{/assets/pages/scripts/newStudent.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        NewStudentPage.upload();
+    });
+</script>
 </body>
 
 <!-- INSERT YOUR LAYOUT HERE -->
@@ -29,28 +37,38 @@
                     </div>
                     <div th:class="|alert alert-success|" th:if="${success} != null">
                         <button class="close" data-close="alert"></button>
-                        <span th:text="${success}">This is error message.</span>
+                        <span th:text="${success}">Success to Upload.</span>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Type</label>
                         <div class="col-md-9">
-                            <select class="form-control" name="type">
+                            <select class="form-control" name="type" id="type-upload">
                                 <option value="">-- Please Select --</option>
-                                <option value="1">Registration Payment</option>
-                                <option value="2">Ijazah dan Rapor</option>
-                                <option value="3">Identitas (KK, KTP, Akta Kelahiran)</option>
+                                <option value="pym">Payment</option>
+                                <option value="doc">Document</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">File</label>
-                        <div class="col-md-9">
-                            <input type="file" class="form-control" placeholder="File" name="file"/>
+                    <div id="upload-data">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Document Type</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="document" id="document-upload">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">File</label>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" placeholder="File" name="file"/>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn blue pull-right">Submit <i class="icon-arrow-right"></i></button>
+                    <button type="submit" class="btn blue pull-right" id="btn-submit">
+                        Submit <i class="icon-arrow-right"></i>
+                    </button>
                 </div>
             </form>
             </div>
@@ -63,28 +81,12 @@
                     <th>#</th>
                     <th>Type</th>
                     <th>File</th>
+                    <th>Upload At</th>
                     <th>Status</th>
+                    <th>Reason</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1.</td>
-                    <td>Registration Payment</td>
-                    <td><i class="fa fa-download"></i> Download</td>
-                    <td><span class="label label-info">Pending.</span></td>
-                </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>Ijazah dan Rapor</td>
-                    <td><i class="fa fa-download"></i> Download</td>
-                    <td><span class="label label-danger">Rejected.</span></td>
-                </tr>
-                <tr>
-                    <td>3.</td>
-                    <td>Identitas</td>
-                    <td><i class="fa fa-download"></i> Download</td>
-                    <td><span class="label label-success">Validated.</span></td>
-                </tr>
+                <tbody id="upload-table">
                 </tbody>
             </table>
         </div>

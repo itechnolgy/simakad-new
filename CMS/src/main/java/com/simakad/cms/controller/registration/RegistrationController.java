@@ -1,17 +1,21 @@
 package com.simakad.cms.controller.registration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.StudentRegistration;
 import com.simakad.service.StudentRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -26,7 +30,7 @@ public class RegistrationController {
     @RequestMapping(method = RequestMethod.GET)
     public String studentRegistration(Model model) {
         model.addAttribute("view", "auth/register");
-        model.addAttribute("registration", new StudentRegistration());
+        model.addAttribute("registration", new StudentRegistrationRequest());
         return "layout/auth";
     }
 
@@ -35,10 +39,29 @@ public class RegistrationController {
         NewStudent studentRegistration = studentRegistrationService.register(studentRegistrationRequest);
         if(Objects.isNull(studentRegistration)) {
             model.addAttribute("error", "This identity or email has been registered!");
+            model.addAttribute("registration", studentRegistrationRequest);
+            model.addAttribute("view", "auth/register");
             return "layout/auth";
         }
 
         model.addAttribute("student", studentRegistration);
-        return "layout/auth";
+        return "redirect:/login?success";
+    }
+
+    @RequestMapping(value = "/{strataId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String isRegistrationOpen(@PathVariable(value = "strataId") int strataId) {
+        Map<String, Object> responseObject = new HashMap<>();
+        String response = "";
+
+        responseObject.put("status", (strataId == 1));
+
+        try {
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            response = ow.writeValueAsString(responseObject);
+        } catch (IOException e) {
+            response = "{\"status\": \"error\"}";
+        }
+
+        return response;
     }
 }

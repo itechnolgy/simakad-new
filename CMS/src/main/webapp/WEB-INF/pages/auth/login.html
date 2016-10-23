@@ -6,12 +6,13 @@
 <!-- INSERT YOUR JS PLUGIN HERE -->
 <body th:fragment="jsPlugins" th:remove="tag">
 <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"
-        th:src="@{assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
+        th:src="@{/assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
 </body>
 
 <!-- INSERT YOUR JS PAGE HERE -->
 <body th:fragment="jsPage" th:remove="tag">
-<script src="../../assets/pages/scripts/auth.js" type="text/javascript" th:src="@{assets/pages/scripts/auth.js}"></script>
+<script src="../../assets/pages/scripts/auth.js" type="text/javascript"
+        th:src="@{/assets/pages/scripts/auth.js}"></script>
 <script th:inline="javascript">
     $(document).ready(function() {
         AuthPage.login();
@@ -34,7 +35,7 @@
             </div>
         </div>
         <div class="portlet-body">
-            <form id="login-form" class="form" method="post" action="" th:action="@{'/login'}">
+            <form id="login-form" class="form" method="post" action="" th:action="@{''}">
                 <div class="form-body">
                     <div th:class="|alert alert-danger|" th:if="${param.error} != null">
                         <button class="close" data-close="alert"></button>

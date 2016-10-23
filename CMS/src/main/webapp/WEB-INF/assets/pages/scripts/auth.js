@@ -74,11 +74,10 @@ var AuthPage = function() {
             errorClass: 'help-block',
             focusInvalid: false,
             rules: {
-                fullname: {
-                    required: true,
-                    maxlength: 255
+                name: {
+                    required: true
                 },
-                identity: {
+                identityCardNumber: {
                     required: true
                 },
                 gender: {
@@ -174,9 +173,72 @@ var AuthPage = function() {
         });
     };
 
-    var handlePreRegister = function() {
+    var initRegistrationView = function() {
+        $("#study-program").show();
+        $("#selected-study-program").hide();
+        $("#registration-data").hide();
+        $("#registration-closed").hide();
+        $("#btn-submit").hide();
+    };
+
+    var handleAjaxStudyProgram = function (studyProgram) {
+        if(studyProgram != "") {
+            $.ajax({
+                url: '/register/' + studyProgram,
+                dataType: 'json',
+                method: 'GET',
+                beforeSend: function() {
+                    App.blockUI({animate: true});
+                    initRegistrationView();
+                },
+                error: function() {
+                    App.unblockUI();
+                },
+                success: function(data) {
+                    var selectedStudyProgram = $("#selected-study-program");
+                    var studyProgramObj = $("#study-program");
+
+                    App.unblockUI();
+                    studyProgramObj.hide();
+
+                    selectedStudyProgram.find("p").html(studyProgramObj.find("option:selected").text());
+                    $("#study-program-text").html(studyProgramObj.find("option:selected").text());
+
+                    selectedStudyProgram.show();
+
+                    if(data.status == true) {
+                        $("#registration-data").show();
+                        $("#btn-submit").show();
+                    } else {
+                        $("#registration-closed").show();
+                    }
+                }
+            });
+        } else {
+            initRegistrationView();
+        }
+    };
+
+
+    var initStudyProgram = function () {
+        var studyProgram = $("#study-program").val();
+
+        handleAjaxStudyProgram(studyProgram);
+    };
+
+    var handleChangeStudyProgram = function() {
         $("#study-program").on('change', function() {
-            $("#study-program-form").submit();
+            var the = $(this);
+            var studyProgram = the.val();
+
+            handleAjaxStudyProgram(studyProgram);
+        });
+    };
+
+    var handleButtonChangeStudyProgram = function() {
+        $("#change-study-program").on('click', function() {
+            initRegistrationView();
+            $("#study-program").val("");
         });
     };
 
@@ -188,15 +250,16 @@ var AuthPage = function() {
             handleForgotPassword();
         },
         register: function() {
+            initStudyProgram();
+            handleChangeStudyProgram();
+            handleButtonChangeStudyProgram();
+
             initDatePicker();
             handleRegister();
         },
         changePassword: function() {
             initChangePasswordValidation();
             handleChangePassword();
-        },
-        preRegister: function() {
-            handlePreRegister();
         }
     };
 
