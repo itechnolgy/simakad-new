@@ -1,6 +1,6 @@
 package com.simakad.service;
 
-import com.sun.xml.internal.org.jvnet.mimepull.MIMEMessage;
+//import com.sun.xml.internal.org.jvnet.mimepull.MIMEMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
