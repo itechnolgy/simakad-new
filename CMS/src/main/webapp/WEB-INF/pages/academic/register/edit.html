@@ -1,0 +1,79 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- INSERT YOUR CSS PLUGIN HERE -->
+<head th:fragment="cssPlugins" th:remove="tag">
+    <link rel="stylesheet" type="text/css" href="../../../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"
+          th:href="@{/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css}"/>
+</head>
+
+<!-- INSERT YOUR JS PLUGIN HERE -->
+<body th:fragment="jsPlugins" th:remove="tag">
+<script type="text/javascript" src="../../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"
+        th:src="@{/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script src="../../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"
+        th:src="@{/assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
+</body>
+
+<!-- INSERT YOUR JS PAGE HERE -->
+<body th:fragment="jsPage" th:remove="tag">
+<script src="../../../assets/pages/scripts/academic.js" type="text/javascript"
+        th:src="@{/assets/pages/scripts/academic.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        AcademicPage.editRegistration();
+    });
+</script>
+</body>
+
+<!-- INSERT YOUR LAYOUT HERE -->
+<body th:fragment="mainLayout" th:remove="tag">
+<div class="portlet light">
+    <div class="portlet-body form">
+        <form id="edit-reg-form" class="form form-horizontal" method="post" action="" th:action="@{''}">
+            <div class="form-body">
+                <div th:class="|alert alert-danger|" th:if="${error} != null">
+                    <button class="close" data-close="alert"></button>
+                    <span th:text="${error}">This is error message.</span>
+                </div>
+                <input type="hidden" name="degreeId" value="1"/>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Period</label>
+                    <div class="col-md-9">
+                        <select name="period" class="form-control">
+                            <option value="2017">2017</option>
+                            <option value="2017">2018</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Type</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="" name="type" value="Registration"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Start Date</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control date-picker" placeholder="Start Date" name="startAt"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">End Date</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control date-picker" placeholder="End Date" name="endAt"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <a th:href="@{''}" class="btn default">Back</a>
+                    <button type="submit" class="btn blue">Update <i class="icon-arrow-right"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
