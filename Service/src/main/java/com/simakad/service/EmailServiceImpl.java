@@ -40,7 +40,7 @@ public class EmailServiceImpl implements EmailService {
         try {
             MimeMessage msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(email));
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress("kovanchandra@gmail.com"));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             msg.setSubject(messageSubjectTemplate(emailType));
             msg.setText(messageBodyTemplate(emailType, messageObject));
 
