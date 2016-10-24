@@ -1,6 +1,7 @@
 package com.simakad.service;
 
-import com.sun.xml.internal.org.jvnet.mimepull.MIMEMessage;
+import com.simakad.dao.constant.EmailType;
+import com.simakad.dao.entity.Users;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
@@ -14,11 +15,11 @@ public class EmailServiceImpl implements EmailService {
     private Session session;
     private Properties props;
     private String email = "exxecusion@gmail.com";
-    private String password = "passty";
+    private String password = "passtykontel";
 
     public EmailServiceImpl () {
         props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "localhost");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class",
                 "javax.net.ssl.SSLSocketFactory");
@@ -35,20 +36,49 @@ public class EmailServiceImpl implements EmailService {
 
 
     @Override
-    public void sendMessage(String recepient, String message) {
+    public void sendMessage(EmailType emailType, String recepient, Object messageObject) {
         try {
             MimeMessage msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(email));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress("kovanchandra@gmail.com"));
-            msg.setSubject("Ping");
-            msg.setText("Hello, this is example of sending email  ");
+            msg.setSubject(messageSubjectTemplate(emailType));
+            msg.setText(messageBodyTemplate(emailType, messageObject));
 
             Transport.send(msg);
         } catch (Exception e) {
-
+            System.out.print("Error when send message. Ex =" + e.getMessage());
         }
 
     }
 
+    private String messageSubjectTemplate(EmailType emailType) {
+        String subject = "";
+        switch (emailType) {
+            case REGISTRATION :
+                subject = "STTJ - Username & Password Portal Mahasiswa Baru ";
+                break;
+        }
 
+        return subject;
+    }
+
+    private String messageBodyTemplate(EmailType emailType, Object messageObject) {
+        StringBuilder builder = new StringBuilder();
+        switch (emailType) {
+            case REGISTRATION :
+                Users users = (Users) messageObject;
+                builder.append("Terima kasih telah melakukan pendaftaran mahasiswa baru STTJ \n");
+                builder.append("Berikut username dan password untuk melakukan login ke portal mahasiswa baru STTJ \n");
+                builder.append("Username    :   " + users.getUsername() + " \n");
+                builder.append("Password    :   " + users.getDecryptPass() + " \n");
+                break;
+        }
+
+        return builder.toString();
+    }
+
+//    public static class RegistrationMessageModel {
+//        public String username;
+//        public String password;
+//    }
 }

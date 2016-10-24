@@ -24,6 +24,9 @@ public class Users {
     @Column(name = "user_profile_id")
     private Long userProfileId;
 
+    @Transient
+    private String decryptPass;
+
     public String getUsername() {
         return username;
     }
@@ -54,5 +57,13 @@ public class Users {
 
     public void setUserProfileId(Long userProfileId) {
         this.userProfileId = userProfileId;
+    }
+
+    public String getDecryptPass() {
+        return decryptPass;
+    }
+
+    public void setDecryptPass(String decryptPass) {
+        this.decryptPass = decryptPass;
     }
 }

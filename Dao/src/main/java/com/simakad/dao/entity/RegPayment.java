@@ -32,6 +32,7 @@ public class RegPayment {
 
     @Basic(optional = false)
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private VerificationType status;
 
     @Basic(optional = false)

@@ -5,7 +5,7 @@ package com.simakad.dao.constant;
  */
 public enum UserType {
     STUDENT ("STUDENT"),
-    NEW_STUDENT ("NEW_STUDENT"),
+    NEW_STUDENT ("ROLE_NEW_STUDENT"),
     TEACHER ("TEACHER"),
     FINANCE ("FINANCE"),
     ACADEMIC ("ACADEMIC"),

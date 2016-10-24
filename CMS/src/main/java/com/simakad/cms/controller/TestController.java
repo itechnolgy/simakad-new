@@ -25,14 +25,13 @@ This is just for example !
  */
 //@RestController
 @Controller
-@Secured({"ROLE_USER"})
 public class TestController {
     @RequestMapping(value = "/test")
     public String cetak(Model model, Authentication authentication) {
         MyUserDetails user =(MyUserDetails) authentication.getPrincipal();
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.print("Kovan data =" + user.getUsername() + "/" + user.getRole() + "/" + user.getPassword());
-        return "layout/default/master";
+        return "layout/default";
     }
 
     @RequestMapping(value = "forgot")

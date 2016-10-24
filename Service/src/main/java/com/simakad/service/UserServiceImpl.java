@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
         String encryptedPass = CommonUtil.passwordEncoder(pass);
         users.setPassoword(encryptedPass);
         users = userDao.save(users);
-
+        users.setDecryptPass(pass);
         return users;
     }
 

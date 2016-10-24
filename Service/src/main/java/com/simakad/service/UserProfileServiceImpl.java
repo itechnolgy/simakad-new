@@ -5,6 +5,7 @@ import com.simakad.dao.repo.UserProfileDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,6 +18,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile createUserProfile(UserProfile userProfile) {
+        userProfile.setCreationTime(new Date());
         userProfile = userProfileDao.save(userProfile);
         return userProfile;
     }

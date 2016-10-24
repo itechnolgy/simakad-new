@@ -1,5 +1,6 @@
 package com.simakad.service;
 
+import com.simakad.dao.constant.RegStaticFileType;
 import com.simakad.dao.constant.VerificationType;
 import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.RegPayment;
@@ -20,6 +21,7 @@ public class RegistrationPaymentServiceImpl implements RegistrationPaymentServic
     public void createRegistrationPaymentData(NewStudent student) {
         RegPayment payment = new RegPayment();
         payment.setNewStudent(student);
+        payment.setType(RegStaticFileType.BIAYA_PENDAFTARAN);
         payment.setStatus(VerificationType.PENDING);
         regPaymentDao.save(payment);
     }
