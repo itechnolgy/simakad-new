@@ -4,6 +4,7 @@ import com.simakad.dao.dto.RegExamScheduleDto;
 import com.simakad.dao.entity.RegExamSchedule;
 import com.simakad.dao.repo.RegExamScheduleDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by vikra on 10/25/16.
  */
+@Component
 public class RegExamScheduleServiceImpl implements RegExamScheduleService {
 
     @Autowired
