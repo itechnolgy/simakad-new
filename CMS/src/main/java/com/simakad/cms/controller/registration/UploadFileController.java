@@ -40,6 +40,13 @@ public class UploadFileController {
         return "layout/default";
     }
 
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public String result(Model model) {
+        model.addAttribute("title", "Result");
+        model.addAttribute("view", "newStudent/result");
+        return "layout/default";
+    }
+
     @RequestMapping(value = "/{type}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String getDocumentFromType(@PathVariable(value = "type") String type) {
         Map<String, Object> responseObject = new HashMap<>();

@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- INSERT YOUR CSS PLUGIN HERE -->
+<head th:fragment="cssPlugins" th:remove="tag">
+</head>
+
+<!-- INSERT YOUR JS PLUGIN HERE -->
+<body th:fragment="jsPlugins" th:remove="tag">
+</body>
+
+<!-- INSERT YOUR JS PAGE HERE -->
+<body th:fragment="jsPage" th:remove="tag">
+</body>
+
+<!-- INSERT YOUR LAYOUT HERE -->
+<body th:fragment="mainLayout" th:remove="tag">
+<div class="portlet light">
+    <div class="portlet-body">
+        <div class="portlet light bg-inverse">
+            <div class="portlet-body form">
+                <h4 class="block">Period</h4>
+                <form id="upload-form" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Strata</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="degreeId">
+                                    <option value="1">Strata 1 (S1)</option>
+                                    <option value="2">Strata 2 (S2)</option>
+                                    <option value="3">Strata 3 (S3)</option>
+                                    <option value="4">Strata 1 (S1) Matriculation</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn blue pull-right">Submit <i class="icon-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:if="${period} != null">
+            <h4 class="block">Registration Calendar</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Period</th>
+                    <th>Type</th>
+                    <th>Start At</th>
+                    <th>End At</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
