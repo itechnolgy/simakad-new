@@ -1,0 +1,130 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- INSERT YOUR CSS PLUGIN HERE -->
+<head th:fragment="cssPlugins" th:remove="tag">
+</head>
+
+<!-- INSERT YOUR JS PLUGIN HERE -->
+<body th:fragment="jsPlugins" th:remove="tag">
+</body>
+
+<!-- INSERT YOUR JS PAGE HERE -->
+<body th:fragment="jsPage" th:remove="tag">
+<script src="../../../assets/pages/scripts/accountant.js" type="text/javascript"
+        th:src="@{/assets/pages/scripts/accountant.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        AccountantPage.registerValidation();
+    });
+</script>
+</body>
+
+<!-- INSERT YOUR LAYOUT HERE -->
+<body th:fragment="mainLayout" th:remove="tag">
+<div class="portlet light">
+    <div class="portlet-body">
+        <h4 class="block">Registration Calendar</h4>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Strata</th>
+                <th>Type</th>
+                <th>File</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>PMB-100001</td>
+                <td>Cornelius Alvin Prilly</td>
+                <td>Strata 1 (S1)</td>
+                <td>Registrasi</td>
+                <td><a href="" class="btn btn-xs blue"><i class="fa fa-download"></i> Download</a></td>
+                <td>Pending</td>
+                <td>-</td>
+                <td>
+                    <button type="button" class="btn btn-xs btn-info btn-accept" th:attr="data-id=${data}">Accept</button>
+                    <button type="button" class="btn btn-xs btn-danger btn-reject" th:attr="data-id=${data}">Reject</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="accept-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Accept Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="portlet-body form">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <input type="hidden" name="id" id="accept-id" value=""/>
+                                <input type="hidden" name="statusId" value="2"/>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Amount</label>
+                                    <div class="col-md-9">
+                                        <input type="number" class="form-control" name="amount" placeholder="Amount" min="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn green">Submit <i class="icon-arrow-right"></i></button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="reject-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Accept Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="portlet-body form">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <input type="hidden" name="id" id="reject-id" value=""/>
+                                <input type="hidden" name="statusId" value="3"/>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Amount</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="reason" placeholder="Reason"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn green">Submit <i class="icon-arrow-right"></i></button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+</body>
+</html>
