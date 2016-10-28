@@ -36,17 +36,17 @@
         </div>
         <div class="portlet-body">
             <p>Enter your e-mail address below to reset your password.</p>
-            <form id="forgot-form" class="form" method="post" action="" th:action="@{'/'}">
+            <form id="forgot-form" class="form" method="post" action="" th:action="@{'/forgot'}" th:object="${forgot}">
                 <div class="form-body">
                     <div th:class="|alert alert-danger|" th:if="${error} != null">
                         <button class="close" data-close="alert"></button>
-                        <span>This is error message.</span>
+                        <span th:text="${error}">This is error message.</span>
                     </div>
                     <div class="form-group">
                         <label for="email" class="visible-ie8 visible-ie9">Username</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input type="text" class="form-control" placeholder="Email" id="email" name="email" />
+                            <input type="text" class="form-control" placeholder="Email" id="email" name="email" th:field="*{email}"/>
                         </div>
                     </div>
                 </div>

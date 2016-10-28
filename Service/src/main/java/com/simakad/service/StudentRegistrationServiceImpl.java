@@ -51,7 +51,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
         if(!isRegistered(studentRegistrationRequest)) {
             UserProfile studentRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(studentRegistrationRequest));
             NewStudent newStudent = createNewStudent(studentRegistrationRequest.getDegreeId());
-            Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId());
+            Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId(), studentRegistrationProfile.getEmail());
             registrationPaymentService.createRegistrationPaymentData(newStudent);
             emailService.sendMessage(EmailType.REGISTRATION, studentRegistrationProfile.getEmail(), login);
             return newStudent;

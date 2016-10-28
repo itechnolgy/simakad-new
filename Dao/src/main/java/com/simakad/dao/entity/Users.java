@@ -27,6 +27,9 @@ public class Users {
     @Transient
     private String decryptPass;
 
+    @Column(name = "email")
+    private String email;
+
     public String getUsername() {
         return username;
     }
@@ -65,5 +68,13 @@ public class Users {
 
     public void setDecryptPass(String decryptPass) {
         this.decryptPass = decryptPass;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

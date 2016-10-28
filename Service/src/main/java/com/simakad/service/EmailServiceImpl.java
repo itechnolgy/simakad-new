@@ -19,7 +19,8 @@ public class EmailServiceImpl implements EmailService {
 
     public EmailServiceImpl () {
         props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
+//        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "localhost");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class",
                 "javax.net.ssl.SSLSocketFactory");
@@ -57,6 +58,9 @@ public class EmailServiceImpl implements EmailService {
             case REGISTRATION :
                 subject = "STTJ - Username & Password Portal Mahasiswa Baru ";
                 break;
+            case FORGOT_PASSWORD:
+                subject = "STTJ - Reset Password ";
+                break;
         }
 
         return subject;
@@ -71,6 +75,13 @@ public class EmailServiceImpl implements EmailService {
                 builder.append("Berikut username dan password untuk melakukan login ke portal mahasiswa baru STTJ \n");
                 builder.append("Username    :   " + users.getUsername() + " \n");
                 builder.append("Password    :   " + users.getDecryptPass() + " \n");
+                break;
+            case FORGOT_PASSWORD:
+                Users usersForgot = (Users) messageObject;
+                builder.append("Reset Password \n");
+                builder.append("Berikut password baru anda \n");
+                builder.append("Username    :   " + usersForgot.getUsername() + " \n");
+                builder.append("Password    :   " + usersForgot.getDecryptPass() + " \n");
                 break;
         }
 

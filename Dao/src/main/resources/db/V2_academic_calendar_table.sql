@@ -105,3 +105,6 @@ CREATE SEQUENCE reg_document_id_seq
   MAXVALUE 9223372036854775807
   START 1
   CACHE 1;
+
+alter table users
+  add column email text;

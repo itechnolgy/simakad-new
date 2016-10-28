@@ -5,8 +5,10 @@ import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.UserDao;
 import com.simakad.service.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -18,11 +20,12 @@ public class UserServiceImpl implements UserService{
     UserDao userDao;
 
     @Override
-    public Users createUserLogin(String username, UserType userType, Long userProfileId) {
+    public Users createUserLogin(String username, UserType userType, Long userProfileId, String email) {
         Users users = new Users();
         users.setUsername(username);
         users.setRoles(userType);
         users.setUserProfileId(userProfileId);
+        users.setEmail(email);
 
         String pass = generatePassword();
         String encryptedPass = CommonUtil.passwordEncoder(pass);
@@ -31,6 +34,27 @@ public class UserServiceImpl implements UserService{
         users.setDecryptPass(pass);
         return users;
     }
+
+    @Override
+    public Users forgotPassword(String email) {
+        Users user = userDao.findByEmail(email);
+        if(!Objects.isNull(user)) {
+            String pass = generatePassword();
+            String encryptedPass = CommonUtil.passwordEncoder(pass);
+            user.setPassoword(encryptedPass);
+            user = userDao.save(user);
+            user.setDecryptPass(pass);
+        }
+        return user;
+    }
+
+//    private Users isUsersExist(String email) {
+//        Users user = userDao.findByEmail(email);
+//        if(Objects.isNull(user))
+//            return false;
+//        else
+//            return true;
+//    }
 
     private String generatePassword() {
         String random = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
