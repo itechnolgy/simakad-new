@@ -1,6 +1,8 @@
 package com.simakad.dao.entity;
 
 import com.simakad.dao.constant.RegStaticFileType;
+import com.simakad.dao.repo.NewStudentDao;
+import org.springframework.context.ApplicationContext;
 
 import javax.persistence.*;
 
@@ -10,6 +12,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "reg_static_file")
 public class RegStaticFile {
+
+    @Transient
+    NewStudentDao newStudentDao;
+
     @Id
     @Basic(optional = false)
     @Column(name = "id")
@@ -17,8 +23,15 @@ public class RegStaticFile {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reg_static_file_id_seq")
     private Long id;
 
-    @JoinColumn(name = "student_registration_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "student_registration_id", referencedColumnName = "id")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private NewStudent newStudent;
+
+    @Basic(optional = false)
+    @Column(name = "student_registration_id")
+    private String studentId;
+
+    @Transient
     private NewStudent newStudent;
 
     @Basic(optional = false)
@@ -46,7 +59,15 @@ public class RegStaticFile {
         this.id = id;
     }
 
-    public NewStudent getNewStudent() {
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public NewStudent getNewStudent(ApplicationContext context) {
         return newStudent;
     }
 

@@ -18,12 +18,18 @@ public class RegDocument {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reg_document_id_seq")
     private Long id;
 
-    @JoinColumn(name = "student_registration_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "student_registration_id", referencedColumnName = "id")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private NewStudent newStudent;
+    @Basic(optional = false)
+    @Column(name = "student_registration_id")
+    private String studentId;
+
+    @Transient
     private NewStudent newStudent;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "reg_static_file_id")
     private RegStaticFile staticFile;
 
     @Basic(optional = false)
@@ -45,6 +51,14 @@ public class RegDocument {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public NewStudent getNewStudent() {

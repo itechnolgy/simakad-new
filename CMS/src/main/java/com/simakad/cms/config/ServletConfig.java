@@ -18,7 +18,7 @@ public class ServletConfig implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.scan("com.simakad.cms");
         context.scan("com.simakad.service");
-
+        sc.addListener(new SessionManagement());
         sc.addListener(new ContextLoaderListener(context));
 
         ServletRegistration.Dynamic registration = sc.addServlet("dispatcher", new DispatcherServlet(context));

@@ -30,7 +30,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
     UserProfileService userProfileService;
 
     @Autowired
-    RegistrationPaymentService registrationPaymentService;
+    RegPaymentService regPaymentService;
 
     @Autowired
     EmailService emailService;
@@ -52,7 +52,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
             UserProfile studentRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(studentRegistrationRequest));
             NewStudent newStudent = createNewStudent(studentRegistrationRequest.getDegreeId());
             Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId(), studentRegistrationProfile.getEmail());
-            registrationPaymentService.createRegistrationPaymentData(newStudent);
+            regPaymentService.createRegistrationPaymentData(newStudent);
             emailService.sendMessage(EmailType.REGISTRATION, studentRegistrationProfile.getEmail(), login);
             return newStudent;
         }
