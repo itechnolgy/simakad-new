@@ -31,6 +31,7 @@ import java.util.*;
  * Created by HighDream on 10/16/2016.
  */
 @Controller
+@SessionAttributes("userSession")
 @RequestMapping("/pmb/upload")
 public class UploadFileController {
 //    @Autowired
@@ -49,18 +50,15 @@ public class UploadFileController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String upload(Model model,  Authentication auth) {
-        MyUserDetails user =(MyUserDetails) auth.getPrincipal();
-
-
-
         model.addAttribute("title", "Upload File");
         model.addAttribute("view", "newStudent/upload");
+        model.addAttribute("userSession", getUserSession(auth));
         return "layout/default";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String doUpload(@RequestParam("file") MultipartFile file, Model model,@Valid RegUploadFileRequest regUploadFileRequest, Authentication auth) {
-        MyUserDetails user =(MyUserDetails) auth.getPrincipal();
+        MyUserDetails user = getUserSession(auth);
         try {
             RegStaticFile regStaticFile = registrationStaticFileService.save(globalVariable.getUploadBaseUrlNewStudent(), file.getInputStream(), fileTypeConverter(regUploadFileRequest.getDocument()), user.getUsername(), file.getContentType());
             if(regUploadFileRequest.getType().equals("pym")) {
@@ -74,6 +72,7 @@ public class UploadFileController {
 
         model.addAttribute("title", "Upload File");
         model.addAttribute("view", "newStudent/upload");
+        model.addAttribute("userSession", user);
         return "layout/default";
     }
 
@@ -176,5 +175,9 @@ public class UploadFileController {
                 return RegStaticFileType.IJAZAH;
         }
         return null;
+    }
+
+    private MyUserDetails getUserSession(Authentication auth) {
+        return (MyUserDetails) auth.getPrincipal();
     }
 }

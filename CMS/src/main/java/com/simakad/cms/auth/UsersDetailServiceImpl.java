@@ -4,8 +4,10 @@ package com.simakad.cms.auth;
 //import com.simakad.dao.repo.UserDao;
 
 import com.simakad.cms.model.MyUserDetails;
+import com.simakad.dao.entity.UserProfile;
 import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.UserDao;
+import com.simakad.dao.repo.UserProfileDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,10 +28,15 @@ public class UsersDetailServiceImpl implements UserDetailsService {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    UserProfileDao userProfileDao;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users user = userDao.findOne(username);
-        if(user==null) {throw new UsernameNotFoundException("No such user: " + username);}
+        if( user == null) {
+            throw new UsernameNotFoundException("No such user: " + username);
+        }
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority(user.getRoles().toString()));
         return buildUserForAuth(user, authorities);
@@ -37,6 +44,7 @@ public class UsersDetailServiceImpl implements UserDetailsService {
 
     private MyUserDetails buildUserForAuth(Users users, List<GrantedAuthority> authorities) {
 //        return new User(users.getUsername(), users.getPassoword(), authorities);
-        return new MyUserDetails(users, authorities);
+        UserProfile userProfile = userProfileDao.findOne(users.getUserProfileId());
+        return new MyUserDetails(users, userProfile, authorities);
     }
 }
