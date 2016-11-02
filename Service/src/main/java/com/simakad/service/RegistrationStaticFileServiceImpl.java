@@ -46,7 +46,7 @@ public class RegistrationStaticFileServiceImpl implements RegistrationStaticFile
 
     private RegStaticFile saveToDb (File savedFile, String studentId, RegStaticFileType regStaticFileType, boolean isPayment) {
         RegStaticFile regStaticFile = new RegStaticFile();
-        regStaticFile.setName(savedFile.getName());
+        regStaticFile.setName(savedFile.getPath());
         regStaticFile.setType(regStaticFileType);
         regStaticFile.setStudentId(studentId);
 

@@ -24,12 +24,15 @@ public class StorageUtil {
     RegStaticFileDao regStaticFileDao;
 
     public File createStaticFile(File baseUrl, InputStream inputStream, boolean isPayment, String extension) throws Exception{
+        File randomFolder = createRandomSubDirectory();
+        String fileName = generateFileName(extension);
+
         byte[] buffer = new byte[inputStream.available()];
         inputStream.read(buffer);
 
         File dstFile = null;
         if(isPayment) {
-            dstFile = new File(baseUrl, createRandomSubDirectory().getPath());
+            dstFile = new File(baseUrl, randomFolder.getPath());
         }
 
         if (!dstFile.exists()) {
@@ -37,11 +40,11 @@ public class StorageUtil {
 //                LOG.warn("createRandomSubDirectory mkdirs result failed for subDirectory:[{}]", fileDirComplete);
             }
         }
-        dstFile = new File(dstFile, generateFileName(extension));
+        dstFile = new File(dstFile, fileName);
         OutputStream outputStream = new FileOutputStream(dstFile);
         outputStream.write(buffer);
 
-        return dstFile;
+        return new File(randomFolder, fileName);
     }
 
 
