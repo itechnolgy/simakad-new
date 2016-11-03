@@ -109,15 +109,15 @@ var NewStudentPage = function(){
     };
 
     var paymentType = {
-        registration: "Registration",
-        bp3: "BP3",
+        BIAYA_PENDAFTARAN : "Registration",
+        BIAYA_UANG_MASUK : "BP3",
         smt1: "Semester 1"
     };
 
     var documentType = {
-        toefl: "TOEFL",
-        ijazah: "Ijazah",
-        rapor: "Rapor"
+        TOEFL : "TOEFL",
+        IJAZAH : "Ijazah",
+        RAPOR : "Rapor"
     };
 
     var handleAjaxUpload = function(type) {
@@ -148,12 +148,12 @@ var NewStudentPage = function(){
                     if(type == 'pym') {
                         documentSelect.append(
                             $("<option></option>")
-                                .attr({value: "registration"})
+                                .attr({value: "BIAYA_PENDAFTARAN"})
                                 .html("Registration")
                         );
                         documentSelect.append(
                             $("<option></option>")
-                                .attr({value: "bp3"})
+                                .attr({value: "BIAYA_UANG_MASUK"})
                                 .html("BP3")
                         );
                         documentSelect.append(
@@ -164,17 +164,17 @@ var NewStudentPage = function(){
                     } else if (type == 'doc') {
                         documentSelect.append(
                             $("<option></option>")
-                                .attr({value: "toefl"})
+                                .attr({value: "TOEFL"})
                                 .html("TOEFL")
                         );
                         documentSelect.append(
                             $("<option></option>")
-                                .attr({value: "ijazah"})
+                                .attr({value: "IJAZAH"})
                                 .html("Ijazah")
                         );
                         documentSelect.append(
                             $("<option></option>")
-                                .attr({value: "rapor"})
+                                .attr({value: "RAPOR"})
                                 .html("Rapor")
                         );
                     } else {

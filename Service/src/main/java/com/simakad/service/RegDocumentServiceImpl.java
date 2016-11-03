@@ -24,7 +24,8 @@ public class RegDocumentServiceImpl implements RegDocumentService {
     @Override
     public RegDocument createDocumentData(RegStaticFile regStaticFile) {
         RegDocument document = new RegDocument();
-        document.setStudentId(regStaticFile.getName());
+        document.setStudentId(regStaticFile.getStudentId());
+        document.setStaticFile(regStaticFile);
         document.setType(regStaticFile.getType());
         document = regDocumentDao.save(document);
         return document;

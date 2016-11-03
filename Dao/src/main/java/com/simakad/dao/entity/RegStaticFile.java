@@ -5,6 +5,7 @@ import com.simakad.dao.repo.NewStudentDao;
 import org.springframework.context.ApplicationContext;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by SRIN on 10/20/2016.
@@ -50,6 +51,14 @@ public class RegStaticFile {
     @Basic(optional = false)
     @Column(name = "reason")
     private String reason;
+
+    @Column(name = "creation_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
+
+    @Column(name = "last_update_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
 
     public Long getId() {
         return id;
@@ -105,5 +114,21 @@ public class RegStaticFile {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 }

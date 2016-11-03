@@ -22,6 +22,7 @@ import java.util.Objects;
  * Created by HighDream on 9/25/2016.
  */
 @Component
+@Transactional
 public class StudentRegistrationServiceImpl implements StudentRegistrationService {
     private final String registrationIdSeq = "seq_student_registration";
     private final String prefixRegistration = "PMB";
@@ -31,6 +32,9 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 
     @Autowired
     RegPaymentService regPaymentService;
+
+    @Autowired
+    RegExamService regExamService;
 
     @Autowired
     EmailService emailService;
@@ -52,12 +56,17 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
             UserProfile studentRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(studentRegistrationRequest));
             NewStudent newStudent = createNewStudent(studentRegistrationRequest.getDegreeId());
             Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId(), studentRegistrationProfile.getEmail());
-            regPaymentService.createRegistrationPaymentData(newStudent);
+            regExamService.putDefaultExamResult(newStudent.getId());
             emailService.sendMessage(EmailType.REGISTRATION, studentRegistrationProfile.getEmail(), login);
             return newStudent;
         }
         return null;
 
+    }
+
+    @Override
+    public NewStudent findNewStudent(String id) {
+        return newStudentDao.findOne(id);
     }
 
     private boolean isRegistered(StudentRegistrationRequest studentRegistrationRequest){

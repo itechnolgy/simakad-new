@@ -9,6 +9,7 @@ import com.simakad.dao.repo.RegPaymentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,10 +34,13 @@ public class RegPaymentServiceImpl implements RegPaymentService {
 //    }
 
     @Override
-    public RegPayment createRegistrationPaymentData(NewStudent student) {
+    public RegPayment createRegistrationPaymentData(RegStaticFile regStaticFile, NewStudent student) {
         RegPayment payment = new RegPayment();
         payment.setStudentId(student.getId());
-        payment.setType(RegStaticFileType.BIAYA_PENDAFTARAN);
+        payment.setStaticFile(regStaticFile);
+        payment.setType(regStaticFile.getType());
+        payment.setCreationTime(new Date());
+        payment.setLastUpdateTime(new Date());
         payment = regPaymentDao.save(payment);
         return payment;
     }
@@ -48,10 +52,11 @@ public class RegPaymentServiceImpl implements RegPaymentService {
         if(Objects.isNull(regPayment)) {
             NewStudent newStudent = new NewStudent();
             newStudent.setId(regStaticFile.getStudentId());
-            regPayment = createRegistrationPaymentData(newStudent);
+            regPayment = createRegistrationPaymentData(regStaticFile, newStudent);
         } else {
             regPayment.setStatus(VerificationType.PENDING);
             regPayment.setStaticFile(regStaticFile);
+            regPayment.setLastUpdateTime(new Date());
             regPayment = regPaymentDao.save(regPayment);
         }
 

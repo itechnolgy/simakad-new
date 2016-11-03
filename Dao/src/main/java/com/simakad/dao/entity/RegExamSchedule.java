@@ -3,6 +3,7 @@ package com.simakad.dao.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by vikraa on 10/21/16.
@@ -10,46 +11,55 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="reg_exam_schedule")
 public class RegExamSchedule implements Serializable{
-    @EmbeddedId
-    protected RegExamSchedulePK regExamSchedulePK;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id")
+    @SequenceGenerator(name = "reg_exam_schedule_id_seq", sequenceName = "reg_exam_schedule_id_seq", initialValue = 1000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reg_exam_schedule_id_seq")
+    private Long id;
+
+    @Basic(optional = false)
+    @Column(name = "exam_name")
+    private String name;
+
+    @Basic(optional = false)
+    @Column(name = "exam_strata_id")
+    private String degreeId;
 
     @Basic(optional = false)
     @Column(name = "exam_date")
-    private Timestamp examDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
-    @Basic(optional = false)
-    @Column(name = "exam_year")
-    private String examYear;
-
-    public RegExamSchedule() {
+    public Long getId() {
+        return id;
     }
 
-    public RegExamSchedule(RegExamSchedulePK regExamSchedulePK, Timestamp examDate) {
-        this.regExamSchedulePK = regExamSchedulePK;
-        this.examDate = examDate;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public RegExamSchedulePK getRegExamSchedulePK() {
-        return regExamSchedulePK;
+    public String getName() {
+        return name;
     }
 
-    public void setRegExamSchedulePK(RegExamSchedulePK regExamSchedulePK) {
-        this.regExamSchedulePK = regExamSchedulePK;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Timestamp getExamDate() {
-        return examDate;
+    public String getDegreeId() {
+        return degreeId;
     }
 
-    public void setExamDate(Timestamp examDate) {
-        this.examDate = examDate;
+    public void setDegreeId(String degreeId) {
+        this.degreeId = degreeId;
     }
 
-    public String getExamYear() {
-        return examYear;
+    public Date getDate() {
+        return date;
     }
 
-    public void setExamYear(String examYear) {
-        this.examYear = examYear;
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

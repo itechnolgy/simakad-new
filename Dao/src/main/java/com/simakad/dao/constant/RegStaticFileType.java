@@ -7,5 +7,6 @@ public enum RegStaticFileType {
     BIAYA_PENDAFTARAN,
     BIAYA_UANG_MASUK,
     TOEFL,
-    IJAZAH;
+    IJAZAH,
+    RAPOR;
 }

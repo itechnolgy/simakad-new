@@ -4,6 +4,7 @@ import com.simakad.dao.constant.RegStaticFileType;
 import com.simakad.dao.constant.VerificationType;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by SRIN on 10/22/2016.
@@ -50,6 +51,14 @@ public class RegPayment {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private RegStaticFileType type;
+
+    @Column(name = "creation_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
+
+    @Column(name = "last_update_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
 
     public Long getId() {
         return id;
@@ -113,5 +122,21 @@ public class RegPayment {
 
     public void setType(RegStaticFileType type) {
         this.type = type;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 }

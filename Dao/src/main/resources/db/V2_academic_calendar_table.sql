@@ -108,3 +108,45 @@ CREATE SEQUENCE reg_document_id_seq
 
 alter table users
   add column email text;
+
+
+alter table reg_static_file
+add column creation_time timestamp without time zone DEFAULT now(),
+add column last_update_time timestamp without time zone DEFAULT now();
+
+alter table reg_document
+add column creation_time timestamp without time zone DEFAULT now(),
+add column last_update_time timestamp without time zone DEFAULT now();
+
+alter table reg_payment
+add column creation_time timestamp without time zone DEFAULT now(),
+add column last_update_time timestamp without time zone DEFAULT now();
+
+
+CREATE TABLE reg_exam_schedule
+(
+  id bigint,
+  exam_name text NOT NULL,
+  exam_strata_id text NOT NULL,
+  exam_date timestamp without time zone NOT NULL,
+  CONSTRAINT pk_reg_exam_schedule PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+
+CREATE SEQUENCE reg_exam_schedule_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 100;
+
+create table reg_exam_result (
+	student_registration_id text,
+	status text,
+	creation_time timestamp without time zone DEFAULT now(),
+	last_update_time timestamp without time zone DEFAULT now(),
+	CONSTRAINT pk_reg_exam_result PRIMARY KEY (student_registration_id)
+  );

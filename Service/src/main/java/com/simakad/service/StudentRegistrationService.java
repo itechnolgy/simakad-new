@@ -9,4 +9,7 @@ import com.simakad.dao.entity.StudentRegistration;
  */
 public interface StudentRegistrationService {
     NewStudent register(StudentRegistrationRequest studentRegistrationRequest);
+
+    NewStudent findNewStudent(String id);
+
 }

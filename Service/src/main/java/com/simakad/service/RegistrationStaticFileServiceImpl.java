@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Date;
 
 /**
  * Created by SRIN on 10/22/2016.
@@ -49,6 +50,8 @@ public class RegistrationStaticFileServiceImpl implements RegistrationStaticFile
         regStaticFile.setName(savedFile.getPath());
         regStaticFile.setType(regStaticFileType);
         regStaticFile.setStudentId(studentId);
+        regStaticFile.setCreationTime(new Date());
+        regStaticFile.setLastUpdateTime(new Date());
 
         regStaticFile = regStaticFileDao.save(regStaticFile);
         return regStaticFile;

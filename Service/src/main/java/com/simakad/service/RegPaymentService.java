@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface RegPaymentService {
     // Business Logic
-    RegPayment createRegistrationPaymentData(NewStudent newStudent);
+    RegPayment createRegistrationPaymentData(RegStaticFile regStaticFile, NewStudent newStudent);
     RegPayment updateRegistrationPaymentData(RegStaticFile regStaticFile);
 
     // CRUD to Database

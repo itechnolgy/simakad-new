@@ -165,14 +165,16 @@ public class UploadFileController {
 
     private RegStaticFileType fileTypeConverter(String val) {
         switch (val) {
-            case "registration" :
+            case "BIAYA_PENDAFTARAN" :
                 return RegStaticFileType.BIAYA_PENDAFTARAN;
-            case "bp3" :
+            case "BIAYA_UANG_MASUK" :
                 return RegStaticFileType.BIAYA_UANG_MASUK;
-            case "toefl" :
+            case "TOEFL" :
                 return RegStaticFileType.TOEFL;
-            case "ijazah" :
+            case "IJAZAH" :
                 return RegStaticFileType.IJAZAH;
+            case "RAPOR" :
+                return RegStaticFileType.RAPOR;
         }
         return null;
     }
