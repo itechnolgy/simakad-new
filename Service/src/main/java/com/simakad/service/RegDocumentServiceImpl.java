@@ -10,6 +10,7 @@ import com.simakad.dao.repo.RegDocumentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -43,6 +44,12 @@ public class RegDocumentServiceImpl implements RegDocumentService {
             document = regDocumentDao.save(document);
         }
 
+        return document;
+    }
+
+    @Override
+    public List<RegDocument> getDocumentByStudentId(String studentId) {
+        List<RegDocument> document = regDocumentDao.findByStudentId(studentId);
         return document;
     }
 }

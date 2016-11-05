@@ -150,3 +150,21 @@ create table reg_exam_result (
 	last_update_time timestamp without time zone DEFAULT now(),
 	CONSTRAINT pk_reg_exam_result PRIMARY KEY (student_registration_id)
   );
+
+
+create table reg_calendar (
+	id bigint,
+	param text,
+	start_date date,
+	end_date date,
+	degree_id int,
+	period text
+);
+
+
+CREATE SEQUENCE reg_calendar_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 10;

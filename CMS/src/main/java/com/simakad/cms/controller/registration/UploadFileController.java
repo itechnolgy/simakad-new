@@ -34,8 +34,6 @@ import java.util.*;
 @SessionAttributes("userSession")
 @RequestMapping("/pmb/upload")
 public class UploadFileController {
-//    @Autowired
-//    PmbUploadFileService pmbUploadFileService;
     @Autowired
     RegistrationStaticFileService registrationStaticFileService;
 
@@ -88,71 +86,48 @@ public class UploadFileController {
         MyUserDetails user =(MyUserDetails) auth.getPrincipal();
         Map<String, Object> responseObject = new HashMap<>();
         String response = "";
-
+        List<Map<String, Object>> objList = new LinkedList<>();
+        Map<String, Object> mapObj;
+        
         if(type.equals("pym")) {
             List<RegPayment> regPaymentList = regPaymentService.getPaymentByStudentId(user.getUsername());
-            List<Map<String, Object>> paymentList = new LinkedList<>();
-            Map<String, Object> paymentObj;
-
             for(RegPayment regPayment : regPaymentList) {
-                paymentObj = new HashMap<>();
-                paymentObj.put("type", regPayment.getType().toString());
-                if(Objects.isNull(regPayment.getStaticFile())) paymentObj.put("file", null);
-                else paymentObj.put("file", globalVariable.getUploadBaseUrlNewStudent() + regPayment.getStaticFile().getName());
-                paymentObj.put("uploadAt", new Date());
-                paymentObj.put("status", 2);
-                paymentObj.put("reason", null);
-
-                paymentList.add(paymentObj);
+                mapObj = new HashMap<>();
+                mapObj.put("type", regPayment.getType().toString());
+                if(Objects.isNull(regPayment.getStaticFile())) {
+                    mapObj.put("file", null);
+                    mapObj.put("uploadAt", null);
+                }
+                else {
+                    mapObj.put("file", globalVariable.getUploadBaseUrlNewStudent() + regPayment.getStaticFile().getName());
+                    mapObj.put("uploadAt", regPayment.getStaticFile().getCreationTime());
+                }
+                mapObj.put("status", regPayment.getStatus().toString());
+                mapObj.put("reason", regPayment.getReason());
+                objList.add(mapObj);
             }
-
-
-
-//            paymentObj.put("type", "registration");
-//            paymentObj.put("file", "/img.png");
-//            paymentObj.put("uploadAt", new Date());
-//            paymentObj.put("status", 2);
-//            paymentObj.put("reason", null);
-//
-//            paymentList.add(paymentObj);
-//
-//            paymentObj = new HashMap<>();
-//
-//            paymentObj.put("type", "bp3");
-//            paymentObj.put("file", null);
-//            paymentObj.put("uploadAt", null);
-//            paymentObj.put("status", null);
-//            paymentObj.put("reason", null);
-//
-//            paymentList.add(paymentObj);
-//
-//            paymentObj = new HashMap<>();
-//
-//            paymentObj.put("type", "smt1");
-//            paymentObj.put("file", null);
-//            paymentObj.put("uploadAt", null);
-//            paymentObj.put("status", null);
-//            paymentObj.put("reason", null);
-//
-//            paymentList.add(paymentObj);
-//
-//            paymentObj = new HashMap<>();
-//
-//            paymentObj.put("type", "pendaftaran");
-//            paymentObj.put("file", null);
-//            paymentObj.put("uploadAt", null);
-//            paymentObj.put("status", null);
-//            paymentObj.put("reason", null);
-//
-//            paymentList.add(paymentObj);
-
-            responseObject.put("data", paymentList);
         } else if(type.equals("doc")) {
-            responseObject.put("data", new LinkedList<>());
+            List<RegDocument> regDocumentList = regDocumentService.getDocumentByStudentId(user.getUsername());
+            for(RegDocument regDocument : regDocumentList) {
+                mapObj = new HashMap<>();
+                mapObj.put("type", regDocument.getType().toString());
+                if(Objects.isNull(regDocument.getStaticFile())) {
+                    mapObj.put("file", null);
+                    mapObj.put("uploadAt", null);
+                }
+                else {
+                    mapObj.put("file", globalVariable.getUploadBaseUrlNewStudent() + regDocument.getStaticFile().getName());
+                    mapObj.put("uploadAt", regDocument.getStaticFile().getCreationTime());
+                }
+                mapObj.put("status", regDocument.getStatus().toString());
+                mapObj.put("reason", regDocument.getReason());
+                objList.add(mapObj);
+            }
         } else {
             responseObject.put("status", "error");
         }
 
+        responseObject.put("data", objList);
         try {
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             response = ow.writeValueAsString(responseObject);

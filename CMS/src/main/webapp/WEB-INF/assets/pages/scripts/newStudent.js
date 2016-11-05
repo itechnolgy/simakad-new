@@ -194,8 +194,8 @@ var NewStudentPage = function(){
                             class: 'btn blue btn-xs'
                         }).html("<i class='fa fa-download'></i> Download");
                         var status = (uploadList[i].status == null) ? "" :
-                            (uploadList[i].status == 1) ? "Pending" :
-                                (uploadList[i].status == 2) ? "Accepted" : "Rejected";
+                            (uploadList[i].status == "PENDING") ? "Pending" :
+                                (uploadList[i].status == "ACCEPTED") ? "Accepted" : "Rejected";
 
 
                         $("#upload-table").append(
