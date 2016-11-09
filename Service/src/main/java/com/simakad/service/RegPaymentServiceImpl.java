@@ -21,18 +21,6 @@ public class RegPaymentServiceImpl implements RegPaymentService {
     @Autowired
     RegPaymentDao regPaymentDao;
 
-//    @Override
-//    public RegPayment save(RegStaticFile regStaticFile) {
-//        RegPayment regPayment = new RegPayment();
-//        regPayment.setStatus(VerificationType.PENDING);
-//        regPayment.setType(regStaticFile.getType());
-//        regPayment.setStudentId(regStaticFile.getStudentId());
-//        regPayment.setStaticFile(regStaticFile);
-//
-//        regPayment = regPaymentDao.save(regPayment);
-//        return regPayment;
-//    }
-
     @Override
     public RegPayment createRegistrationPaymentData(RegStaticFile regStaticFile, NewStudent student) {
         RegPayment payment = new RegPayment();
@@ -41,6 +29,7 @@ public class RegPaymentServiceImpl implements RegPaymentService {
         payment.setType(regStaticFile.getType());
         payment.setCreationTime(new Date());
         payment.setLastUpdateTime(new Date());
+        payment.setStatus(VerificationType.PENDING);
         payment = regPaymentDao.save(payment);
         return payment;
     }
@@ -64,7 +53,36 @@ public class RegPaymentServiceImpl implements RegPaymentService {
     }
 
     @Override
+    public RegPayment updatePaymentStatus(long paymentId, String status) {
+        RegPayment regPayment = regPaymentDao.findOne(paymentId);
+        if(Objects.isNull(regPayment)) {
+            throw new RuntimeException("Unusual behaviour this will be reported");
+        }
+        regPayment.setStatus(verificationTypeConverter(status));
+        regPayment.setLastUpdateTime(new Date());
+        regPayment = regPaymentDao.save(regPayment);
+        return regPayment;
+    }
+
+
+    @Override
     public List<RegPayment> getPaymentByStudentId(String studentId) {
         return regPaymentDao.findByStudentId(studentId);
+    }
+
+    @Override
+    public List<RegPayment> getAllPayment() {
+        return regPaymentDao.findAll();
+    }
+
+    private VerificationType verificationTypeConverter(String status) {
+        switch (status) {
+            case "ACCEPTED" :
+                return VerificationType.ACCEPT;
+            case "REJECTED" :
+                return VerificationType.REJECTED;
+            default:
+                return VerificationType.PENDING;
+        }
     }
 }

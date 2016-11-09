@@ -26,7 +26,7 @@ This is just for example !
 //@RestController
 @Controller
 public class TestController {
-    @RequestMapping(value = "/test")
+    @RequestMapping(value = "/")
     public String cetak(Model model, Authentication authentication) {
         MyUserDetails user =(MyUserDetails) authentication.getPrincipal();
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -34,15 +34,4 @@ public class TestController {
         return "layout/default";
     }
 
-    @RequestMapping(value = "forgot")
-    public String forgot(Model model) {
-        model.addAttribute("view", "auth/forgot");
-        return "layout/auth/master";
-    }
-
-//    @RequestMapping(value = "register")
-//    public String register(Model model) {
-//        model.addAttribute("view", "auth/register");
-//        return "layout/auth/master";
-//    }
 }
