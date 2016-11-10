@@ -9,8 +9,13 @@
 
 <!-- INSERT YOUR JS PAGE HERE -->
 <body th:fragment="jsPage" th:remove="tag">
-<script src="../../../assets/pages/scripts/accountant.js" type="text/javascript"
-        th:src="@{/assets/pages/scripts/accountant.js}"></script>
+<script src="../../../assets/pages/scripts/academic.js" type="text/javascript"
+        th:src="@{/assets/pages/scripts/academic.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        AcademicPage.documentValidation();
+    });
+</script>
 </body>
 
 <!-- INSERT YOUR LAYOUT HERE -->
@@ -60,7 +65,7 @@
                     <div class="portlet-body form">
                         <div class="form-horizontal">
                             <div class="form-body">
-                                <h4 class="block">Are you sure want to accept this file? </h4>
+                                <p class="text-center">Are you sure want to accept this file? </p>
                                 <input type="hidden" name="id" id="accept-id" value=""/>
                                 <input type="hidden" name="statusId" value="2"/>
                             </div>
@@ -91,7 +96,6 @@
                     <div class="portlet-body form">
                         <div class="form-horizontal">
                             <div class="form-body">
-                                <h4 class="block">Are you sure want to reject this file? </h4>
                                 <input type="hidden" name="id" id="reject-id" value=""/>
                                 <input type="hidden" name="statusId" value="3"/>
                                 <div class="form-group">

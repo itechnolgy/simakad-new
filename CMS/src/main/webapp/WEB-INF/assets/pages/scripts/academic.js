@@ -38,10 +38,27 @@ var AcademicPage = function() {
         });
     };
 
+    var handleDocumentValidation = function() {
+        $(".btn-accept").on('click', function() {
+            var acceptId = $(this).data().id;
+            $("#accept-id").val(acceptId);
+            $("#accept-modal").modal('show');
+        });
+
+        $(".btn-reject").on('click', function() {
+            var rejectId = $(this).data().id;
+            $("#reject-id").val(rejectId);
+            $("#reject-modal").modal('show');
+        });
+    };
+
     return {
         editRegistration: function() {
             initDatePicker();
             handleEditRegistration();
+        },
+        documentValidation: function() {
+            handleDocumentValidation();
         }
     };
 }();
