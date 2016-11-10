@@ -14,6 +14,9 @@ public interface RegPaymentService {
     RegPayment createRegistrationPaymentData(RegStaticFile regStaticFile, NewStudent newStudent);
     RegPayment updateRegistrationPaymentData(RegStaticFile regStaticFile);
 
+    RegPayment updatePaymentStatus(long paymentId, String status);
     // CRUD to Database
     List<RegPayment> getPaymentByStudentId(String studentId);
+    List<RegPayment> getAllPayment();
+
 }

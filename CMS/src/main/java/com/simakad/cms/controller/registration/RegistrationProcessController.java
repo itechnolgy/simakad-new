@@ -36,9 +36,10 @@ public class RegistrationProcessController {
         NewStudent newStudent = studentRegistrationService.findNewStudent(userSession.getUsername());
 
         List<RegExamScheduleResponse> regExamScheduleList = regExamService.findExamSchedule(newStudent.getDegreeId());
+        model.addAttribute("title", "Exam Schedule");
         model.addAttribute("schedules", regExamScheduleList);
         model.addAttribute("view", "newStudent/schedule");
-        return "layout/auth";
+        return "layout/default";
     }
 
 
@@ -49,10 +50,10 @@ public class RegistrationProcessController {
         NewStudent newStudent = studentRegistrationService.findNewStudent(userSession.getUsername());
 
         RegExamResult regExamResult = regExamService.findExamResult(newStudent.getId());
-
+        model.addAttribute("title", "Exam Result");
         model.addAttribute("result", regExamResult);
-        model.addAttribute("view", "newStudent/schedule");
-        return "layout/auth";
+        model.addAttribute("view", "newStudent/result");
+        return "layout/default";
     }
 
     private MyUserDetails getUserSession(Authentication auth) {

@@ -31,7 +31,6 @@
                 <h4 class="block">Upload File</h4>
                 <form id="upload-form" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
                 <div class="form-body">
-                    <span th:text="${session.userSession.email}">This is error message.</span>
                     <div th:class="|alert alert-danger|" th:if="${error} != null">
                         <button class="close" data-close="alert"></button>
                         <span th:text="${error}">This is error message.</span>

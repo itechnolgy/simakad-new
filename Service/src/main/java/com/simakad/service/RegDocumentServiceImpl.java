@@ -28,6 +28,7 @@ public class RegDocumentServiceImpl implements RegDocumentService {
         document.setStudentId(regStaticFile.getStudentId());
         document.setStaticFile(regStaticFile);
         document.setType(regStaticFile.getType());
+        document.setStatus(VerificationType.PENDING);
         document = regDocumentDao.save(document);
         return document;
     }

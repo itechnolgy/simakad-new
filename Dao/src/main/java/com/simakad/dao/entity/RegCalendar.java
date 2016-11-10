@@ -1,5 +1,8 @@
 package com.simakad.dao.entity;
 
+import com.simakad.dao.constant.RegCalendarType;
+import com.simakad.dao.constant.RegStaticFileType;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,7 +21,8 @@ public class RegCalendar {
 
     @Basic(optional = false)
     @Column(name = "param")
-    private String param;
+    @Enumerated(EnumType.STRING)
+    private RegCalendarType param;
 
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
@@ -44,11 +48,11 @@ public class RegCalendar {
         this.id = id;
     }
 
-    public String getParam() {
+    public RegCalendarType getParam() {
         return param;
     }
 
-    public void setParam(String param) {
+    public void setParam(RegCalendarType param) {
         this.param = param;
     }
 
