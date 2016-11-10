@@ -40,8 +40,13 @@ public class RegExamServiceImpl implements RegExamService {
     }
 
     @Override
-    public void addExam(String name, Date schedule, String year) {
+    public void addExam(String name, Date date, long degreeId, String year) {
+        RegExamSchedule regExamSchedule = new RegExamSchedule();
+        regExamSchedule.setDate(date);
+        regExamSchedule.setName(name);
+        regExamSchedule.setDegreeId(degreeId);
 
+        regExamScheduleDao.save(regExamSchedule);
     }
 
     @Override
@@ -55,16 +60,32 @@ public class RegExamServiceImpl implements RegExamService {
     }
 
     @Override
-    public RegExamResult updateExamResult(String studentId, RegExamResultType regExamResultType) {
+    public RegExamResult updateExamResult(String studentId, String status) {
         RegExamResult regExamResult = regExamResultDao.findOne(studentId);
         regExamResult.setLastUpdateTime(new Date());
-        regExamResult.setStatus(regExamResultType);
+        regExamResult.setStatus(pmbExamResultConverter(status));
         regExamResult = regExamResultDao.save(regExamResult);
         return regExamResult;
     }
 
     @Override
+    public List<RegExamResult> getAllExamResult() {
+        return regExamResultDao.findAll();
+    }
+
+    @Override
     public RegExamResult findExamResult(String studentId) {
         return regExamResultDao.findOne(studentId);
+    }
+
+    private RegExamResultType pmbExamResultConverter(String status) {
+        switch (status) {
+            case "LULUS" :
+                return RegExamResultType.LULUS;
+            case "GAGAL" :
+                return RegExamResultType.GAGAL;
+            default:
+                return RegExamResultType.PENDING;
+        }
     }
 }

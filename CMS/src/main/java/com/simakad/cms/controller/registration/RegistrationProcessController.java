@@ -43,7 +43,6 @@ public class RegistrationProcessController {
     }
 
 
-
     @RequestMapping(value = "/exam/result", method = RequestMethod.GET)
     public String showExamResult(Model model, Authentication auth) {
         MyUserDetails userSession = getUserSession(auth);

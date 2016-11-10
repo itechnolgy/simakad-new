@@ -24,7 +24,7 @@ public class RegExamSchedule implements Serializable{
 
     @Basic(optional = false)
     @Column(name = "exam_strata_id")
-    private String degreeId;
+    private long degreeId;
 
     @Basic(optional = false)
     @Column(name = "exam_date")
@@ -47,11 +47,11 @@ public class RegExamSchedule implements Serializable{
         this.name = name;
     }
 
-    public String getDegreeId() {
+    public long getDegreeId() {
         return degreeId;
     }
 
-    public void setDegreeId(String degreeId) {
+    public void setDegreeId(long degreeId) {
         this.degreeId = degreeId;
     }
 

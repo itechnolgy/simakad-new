@@ -78,7 +78,7 @@ public class RegPaymentServiceImpl implements RegPaymentService {
     private VerificationType verificationTypeConverter(String status) {
         switch (status) {
             case "ACCEPTED" :
-                return VerificationType.ACCEPT;
+                return VerificationType.ACCEPTED;
             case "REJECTED" :
                 return VerificationType.REJECTED;
             default:

@@ -12,11 +12,13 @@ import java.util.List;
  */
 public interface RegExamService {
     List<RegExamScheduleResponse> findExamSchedule(Long strataId);
-    void addExam(String name, Date schedule, String year);
+    void addExam(String name, Date schedule, long degreeId, String year);
 
     void putDefaultExamResult(String studentId);
 
-    RegExamResult updateExamResult(String studentId, RegExamResultType regExamResultType);
+    RegExamResult updateExamResult(String studentId, String status);
+
+    List<RegExamResult> getAllExamResult();
 
     RegExamResult findExamResult(String studentId);
 }

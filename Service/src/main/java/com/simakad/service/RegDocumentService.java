@@ -13,7 +13,9 @@ public interface RegDocumentService {
 //    RegDocument save(RegStaticFile regStaticFile);
     RegDocument createDocumentData(RegStaticFile regStaticFile);
     RegDocument updateDocumentData(RegStaticFile regStaticFile);
+    RegDocument verifyDocument(long docId, String status);
 
     List<RegDocument> getDocumentByStudentId(String studentId);
+    List<RegDocument> getAllDocument();
 }
 

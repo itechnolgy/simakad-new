@@ -10,6 +10,7 @@ import com.simakad.dao.repo.RegDocumentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,5 +53,30 @@ public class RegDocumentServiceImpl implements RegDocumentService {
     public List<RegDocument> getDocumentByStudentId(String studentId) {
         List<RegDocument> document = regDocumentDao.findByStudentId(studentId);
         return document;
+    }
+
+    @Override
+    public List<RegDocument> getAllDocument() {
+        return regDocumentDao.findAll();
+    }
+
+    @Override
+    public RegDocument verifyDocument(long docId, String status) {
+        RegDocument document = regDocumentDao.findOne(docId);
+        document.setStatus(verificationTypeConverter(status));
+        document.setLastUpdateTime(new Date());
+        document = regDocumentDao.save(document);
+        return document;
+    }
+
+    private VerificationType verificationTypeConverter(String status) {
+        switch (status) {
+            case "ACCEPTED" :
+                return VerificationType.ACCEPTED;
+            case "REJECTED" :
+                return VerificationType.REJECTED;
+            default:
+                return VerificationType.PENDING;
+        }
     }
 }

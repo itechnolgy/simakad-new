@@ -5,6 +5,6 @@ package com.simakad.dao.constant;
  */
 public enum VerificationType {
     PENDING,
-    ACCEPT,
+    ACCEPTED,
     REJECTED;
 }

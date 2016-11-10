@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class RegExamScheduleResponse {
     private String examName;
-    private String degreeId;
+    private long degreeId;
     private Date examDate;
 
     public String getExamName() {
@@ -19,11 +19,11 @@ public class RegExamScheduleResponse {
         this.examName = examName;
     }
 
-    public String getDegreeId() {
+    public long getDegreeId() {
         return degreeId;
     }
 
-    public void setDegreeId(String examStrataId) {
+    public void setDegreeId(long examStrataId) {
         this.degreeId = degreeId;
     }
 
