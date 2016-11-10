@@ -17,7 +17,7 @@
     <div class="portlet-body">
         <div class="portlet light bg-inverse">
             <div class="portlet-body form">
-                <h4 class="block">Period</h4>
+                <h4 class="block">Payment List</h4>
                 <form id="upload-form" class="form-horizontal" method="get" action="">
                     <div class="form-body">
                         <div class="form-group">
@@ -40,18 +40,33 @@
             </div>
         </div>
         <div th:if="${param.degreeId} != null">
-            <h4 class="block">Registration Calendar</h4>
+            <h4 class="block">Payment</h4>
             <table class="table">
                 <thead>
                 <tr>
                     <th>Period</th>
                     <th>Type</th>
-                    <th>Start At</th>
-                    <th>End At</th>
+                    <th>Total</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <td>2016</td>
+                    <td>Registration</td>
+                    <td>100.000</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-info" th:attr="data-id=1">Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2016</td>
+                    <td>BP3</td>
+                    <td>10.000.000</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-info" th:attr="data-id=1">Edit</button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

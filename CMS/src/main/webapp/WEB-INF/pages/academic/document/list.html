@@ -11,18 +11,13 @@
 <body th:fragment="jsPage" th:remove="tag">
 <script src="../../../assets/pages/scripts/accountant.js" type="text/javascript"
         th:src="@{/assets/pages/scripts/accountant.js}"></script>
-<script th:inline="javascript">
-    $(document).ready(function() {
-        AccountantPage.registerValidation();
-    });
-</script>
 </body>
 
 <!-- INSERT YOUR LAYOUT HERE -->
 <body th:fragment="mainLayout" th:remove="tag">
 <div class="portlet light">
     <div class="portlet-body">
-        <h4 class="block">Payment Validation</h4>
+        <h4 class="block">Document Validation</h4>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -32,7 +27,6 @@
                 <th>Type</th>
                 <th>File</th>
                 <th>Status</th>
-                <th>Amount</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -44,7 +38,6 @@
                 <td>Registrasi</td>
                 <td><a href="" class="btn btn-xs blue"><i class="fa fa-download"></i> Download</a></td>
                 <td>Pending</td>
-                <td>-</td>
                 <td>
                     <button type="button" class="btn btn-xs btn-info btn-accept" th:attr="data-id=${data}">Accept</button>
                     <button type="button" class="btn btn-xs btn-danger btn-reject" th:attr="data-id=${data}">Reject</button>
@@ -67,14 +60,9 @@
                     <div class="portlet-body form">
                         <div class="form-horizontal">
                             <div class="form-body">
+                                <h4 class="block">Are you sure want to accept this file? </h4>
                                 <input type="hidden" name="id" id="accept-id" value=""/>
                                 <input type="hidden" name="statusId" value="2"/>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Amount</label>
-                                    <div class="col-md-9">
-                                        <input type="number" class="form-control" name="amount" placeholder="Amount" min="1"/>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,6 +91,7 @@
                     <div class="portlet-body form">
                         <div class="form-horizontal">
                             <div class="form-body">
+                                <h4 class="block">Are you sure want to reject this file? </h4>
                                 <input type="hidden" name="id" id="reject-id" value=""/>
                                 <input type="hidden" name="statusId" value="3"/>
                                 <div class="form-group">
