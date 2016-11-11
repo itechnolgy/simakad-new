@@ -123,7 +123,7 @@ var NewStudentPage = function(){
     var handleAjaxUpload = function(type) {
         if(type != '') {
             $.ajax({
-                url: '/pmb/upload/' + type,
+                url: '/simakad/pmb/upload/' + type,
                 dataType: 'json',
                 method: 'GET',
                 beforeSend: function() {
