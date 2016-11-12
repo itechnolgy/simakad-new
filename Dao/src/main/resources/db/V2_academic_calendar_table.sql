@@ -127,7 +127,7 @@ CREATE TABLE reg_exam_schedule
 (
   id bigint,
   exam_name text NOT NULL,
-  exam_strata_id text NOT NULL,
+  exam_strata_id int NOT NULL,
   exam_date timestamp without time zone NOT NULL,
   CONSTRAINT pk_reg_exam_schedule PRIMARY KEY (id)
 )

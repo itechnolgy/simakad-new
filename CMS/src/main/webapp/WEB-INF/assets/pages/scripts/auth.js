@@ -184,7 +184,7 @@ var AuthPage = function() {
     var handleAjaxStudyProgram = function (studyProgram) {
         if(studyProgram != "") {
             $.ajax({
-                url: '/register/' + studyProgram,
+                url: '/simakad/register/' + studyProgram,
                 dataType: 'json',
                 method: 'GET',
                 beforeSend: function() {
