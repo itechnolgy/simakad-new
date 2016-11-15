@@ -1,27 +1,26 @@
 package com.simakad.dao.entity;
 
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by HighDream on 9/11/2016.
+ * Created by SRIN on 11/15/2016.
  */
-
 @Entity
-public class Student {
+@Table(name = "lecture")
+public class Lecture {
     @Id
-    @Basic(optional = false)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
-    @Basic(optional = false)
+    @Basic
     @Column(name = "creation_time")
-    Timestamp creationTime;
+    private Timestamp creationTime;
 
-    @Basic(optional = false)
+    @Basic
     @Column(name = "last_update_time")
-    Timestamp lastUpdateTime;
+    private Timestamp lastUpdateTime;
+
 
     public Long getId() {
         return id;
