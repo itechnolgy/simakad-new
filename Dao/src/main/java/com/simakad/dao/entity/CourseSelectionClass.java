@@ -2,6 +2,7 @@ package com.simakad.dao.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by SRIN on 11/15/2016.
@@ -15,11 +16,12 @@ public class CourseSelectionClass {
 
     @Basic
     @Column(name = "course_id")
-    private Long courseId;
+    private String courseId;
 
     @Basic
     @Column(name = "schedule")
-    private Timestamp schedule;
+    @Temporal(TemporalType.DATE)
+    private Date schedule;
 
     @Basic
     @Column(name = "quota")
@@ -27,19 +29,19 @@ public class CourseSelectionClass {
 
     @Basic
     @Column(name = "lecture_id")
-    private Long lectureId;
+    private String lectureId;
 
     @Basic
     @Column(name = "degree_id")
-    private Integer degreeId;
+    private Long degreeId;
 
-    @Basic
     @Column(name = "creation_time")
-    private Timestamp creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
 
-    @Basic
     @Column(name = "last_update_time")
-    private Timestamp lastUpdateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
 
 
     public Long getId() {
@@ -50,36 +52,28 @@ public class CourseSelectionClass {
         this.id = id;
     }
 
-    public Long getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 
-    public Long getLectureId() {
+    public String getLectureId() {
         return lectureId;
     }
 
-    public void setLectureId(Long lectureId) {
+    public void setLectureId(String lectureId) {
         this.lectureId = lectureId;
     }
 
-    public Integer getDegreeId() {
+    public Long getDegreeId() {
         return degreeId;
     }
 
-    public void setDegreeId(Integer degreeId) {
+    public void setDegreeId(Long degreeId) {
         this.degreeId = degreeId;
-    }
-
-    public Timestamp getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Timestamp schedule) {
-        this.schedule = schedule;
     }
 
     public Integer getQuota() {
@@ -90,20 +84,27 @@ public class CourseSelectionClass {
         this.quota = quota;
     }
 
-    public Timestamp getCreationTime() {
+    public Date getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Date schedule) {
+        this.schedule = schedule;
+    }
+
+    public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Timestamp creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
-
 }

@@ -13,7 +13,7 @@ public class Student {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
-    Long id;
+    String id;
 
     @Basic(optional = false)
     @Column(name = "creation_time")
@@ -23,11 +23,11 @@ public class Student {
     @Column(name = "last_update_time")
     Timestamp lastUpdateTime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 public class Lecture {
     @Id
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Basic
     @Column(name = "creation_time")
@@ -22,11 +22,11 @@ public class Lecture {
     private Timestamp lastUpdateTime;
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

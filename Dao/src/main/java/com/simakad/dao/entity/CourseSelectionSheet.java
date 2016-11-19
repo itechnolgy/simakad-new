@@ -2,6 +2,7 @@ package com.simakad.dao.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by SRIN on 11/15/2016.
@@ -15,23 +16,23 @@ public class CourseSelectionSheet {
 
     @Basic
     @Column(name = "student_id")
-    private Long studentId;
+    private String studentId;
 
     @Basic
-    @Column(name = "course_selection_class")
-    private Long courseSelectionClass;
+    @Column(name = "course_selection_class_id")
+    private Long courseSelectionClassId;
 
     @Basic
     @Column(name = "applied_semester")
     private Integer appliedSemester;
 
-    @Basic
     @Column(name = "creation_time")
-    private Timestamp creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
 
-    @Basic
     @Column(name = "last_update_time")
-    private Timestamp lastUpdateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
 
 
     public Long getId() {
@@ -42,20 +43,20 @@ public class CourseSelectionSheet {
         this.id = id;
     }
 
-    public Long getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
-    public Long getCourseSelectionClass() {
-        return courseSelectionClass;
+    public Long getCourseSelectionClassId() {
+        return courseSelectionClassId;
     }
 
-    public void setCourseSelectionClass(Long courseSelectionClass) {
-        this.courseSelectionClass = courseSelectionClass;
+    public void setCourseSelectionClassId(Long courseSelectionClass) {
+        this.courseSelectionClassId = courseSelectionClassId;
     }
 
     public Integer getAppliedSemester() {
@@ -66,20 +67,19 @@ public class CourseSelectionSheet {
         this.appliedSemester = appliedSemester;
     }
 
-    public Timestamp getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Timestamp creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
-
 }
