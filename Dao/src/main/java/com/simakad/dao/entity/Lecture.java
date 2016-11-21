@@ -13,6 +13,10 @@ public class Lecture {
     @Column(name = "id")
     private String id;
 
+    @Basic(optional = false)
+    @Column(name = "status")
+    String status;
+
     @Basic
     @Column(name = "creation_time")
     private Timestamp creationTime;
@@ -28,6 +32,14 @@ public class Lecture {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Timestamp getCreationTime() {

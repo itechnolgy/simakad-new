@@ -14,16 +14,16 @@ import javax.mail.internet.*;
 public class EmailServiceImpl implements EmailService {
     private Session session;
     private Properties props;
-    private String email = "exxecusion@gmail.com";
-    private String password = "passtykontel";
+    private String email = "sttj.simakad@gmail.com";
+    private String password = "sttjs1makad";
 
     public EmailServiceImpl () {
         props = new Properties();
-//        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.host", "localhost");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+//        props.put("mail.smtp.host", "localhost");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
+                  "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
 
