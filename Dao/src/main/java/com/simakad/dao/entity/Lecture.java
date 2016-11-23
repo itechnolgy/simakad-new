@@ -1,7 +1,7 @@
 package com.simakad.dao.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by SRIN on 11/15/2016.
@@ -15,15 +15,17 @@ public class Lecture {
 
     @Basic(optional = false)
     @Column(name = "status")
-    String status;
+    private String status;
 
     @Basic
     @Column(name = "creation_time")
-    private Timestamp creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
 
     @Basic
     @Column(name = "last_update_time")
-    private Timestamp lastUpdateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
 
 
     public String getId() {
@@ -42,19 +44,19 @@ public class Lecture {
         this.status = status;
     }
 
-    public Timestamp getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Timestamp creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 }

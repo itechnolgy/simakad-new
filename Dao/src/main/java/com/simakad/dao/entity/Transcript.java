@@ -1,8 +1,7 @@
 package com.simakad.dao.entity;
 
 import javax.persistence.*;
-import java.math.BigInteger;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by SRIN on 11/15/2016.
@@ -21,10 +20,6 @@ public class Transcript {
     @Basic
     @Column(name = "course_id")
     private Long courseId;
-
-    @Basic
-    @Column(name = "lecture_id")
-    private Long lectureId;
 
     @Basic
     @Column(name = "semester")
@@ -50,13 +45,13 @@ public class Transcript {
     @Column(name = "final_grade")
     private String finalGrade;
 
-    @Basic
     @Column(name = "creation_time")
-    private Timestamp creationTime;
+    @Temporal(TemporalType.DATE)
+    private Date creationTime;
 
-    @Basic
     @Column(name = "last_update_time")
-    private Timestamp lastUpdateTime;
+    @Temporal(TemporalType.DATE)
+    private Date lastUpdateTime;
 
 
     public Long getId() {
@@ -107,14 +102,6 @@ public class Transcript {
         this.courseId = courseId;
     }
 
-    public Long getLectureId() {
-        return lectureId;
-    }
-
-    public void setLectureId(Long lectureId) {
-        this.lectureId = lectureId;
-    }
-
     public Long getFinalExamScore() {
         return finalExamScore;
     }
@@ -139,19 +126,19 @@ public class Transcript {
         this.finalGrade = finalGrade;
     }
 
-    public Timestamp getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Timestamp creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 

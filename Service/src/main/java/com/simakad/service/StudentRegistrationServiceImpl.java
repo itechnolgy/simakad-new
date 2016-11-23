@@ -57,7 +57,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
             NewStudent newStudent = createNewStudent(studentRegistrationRequest.getDegreeId());
             Users login = userService.createUserLogin(newStudent.getId(), UserType.NEW_STUDENT, studentRegistrationProfile.getId(), studentRegistrationProfile.getEmail());
             regExamService.putDefaultExamResult(newStudent.getId());
-            emailService.sendMessage(EmailType.REGISTRATION, studentRegistrationProfile.getEmail(), login);
+            emailService.sendMessage(EmailType.REGISTRATION,  UserType.NEW_STUDENT, studentRegistrationProfile.getEmail(), login);
             return newStudent;
         }
         return null;

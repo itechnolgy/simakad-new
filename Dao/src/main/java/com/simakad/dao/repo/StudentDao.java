@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by SRIN on 9/20/2016.
  */
-public interface StudentDao extends JpaRepository<Student, Long> {
+public interface StudentDao extends JpaRepository<Student, String> {
 
 }

@@ -42,7 +42,7 @@ public class ForgotController {
             model.addAttribute("error","Email not registered");
         }
         else{
-            emailService.sendMessage(EmailType.FORGOT_PASSWORD, forgotRequest.getEmail(), users);
+            emailService.sendMessage(EmailType.FORGOT_PASSWORD, null, forgotRequest.getEmail(), users);
             forgotRequest.setEmail("");
         }
         model.addAttribute("forgot", forgotRequest);

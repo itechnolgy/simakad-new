@@ -4,7 +4,6 @@ import com.simakad.dao.repo.CourseDao;
 import org.springframework.context.ApplicationContext;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,7 +11,7 @@ import java.util.Objects;
  * Created by SRIN on 11/15/2016.
  */
 @Entity
-@Table(name = "course_selection_class", schema = "public", catalog = "simakadtest")
+@Table(name = "course_selection_class")
 public class CourseSelectionClass {
     @Transient
     CourseDao courseDao;

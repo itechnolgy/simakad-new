@@ -4,7 +4,10 @@ import com.simakad.dao.constant.EmailType;
 import com.simakad.dao.constant.UserType;
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.dto.response.TeachingScheduleResponse;
-import com.simakad.dao.entity.*;
+import com.simakad.dao.entity.CourseSelectionClass;
+import com.simakad.dao.entity.Lecture;
+import com.simakad.dao.entity.UserProfile;
+import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.LectureDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -33,10 +36,10 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
     UserProfileService userProfileService;
 
     @Autowired
-    KrsService krsService;
+    LectureDao lectureDao;
 
     @Autowired
-    LectureDao lectureDao;
+    KrsService krsService;
 
     @Autowired
     EntityManager entityManager;
@@ -54,7 +57,7 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
             UserProfile lectureRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(lectureRegistrationRequest));
             Lecture lecture = createNewLecture();
             Users login = userService.createUserLogin(lecture.getId(), UserType.LECTURE, lectureRegistrationProfile.getId(), lectureRegistrationProfile.getEmail());
-            emailService.sendMessage(EmailType.REGISTRATION, lectureRegistrationProfile.getEmail(), login);
+            emailService.sendMessage(EmailType.REGISTRATION, UserType.LECTURE, lectureRegistrationProfile.getEmail(), login);
             return lecture;
         }
         return null;

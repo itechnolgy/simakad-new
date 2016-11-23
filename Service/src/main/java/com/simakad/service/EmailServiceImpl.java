@@ -1,6 +1,7 @@
 package com.simakad.service;
 
 import com.simakad.dao.constant.EmailType;
+import com.simakad.dao.constant.UserType;
 import com.simakad.dao.entity.Users;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +20,8 @@ public class EmailServiceImpl implements EmailService {
 
     public EmailServiceImpl () {
         props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-//        props.put("mail.smtp.host", "localhost");
+//        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "localhost");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class",
                   "javax.net.ssl.SSLSocketFactory");
@@ -37,13 +38,13 @@ public class EmailServiceImpl implements EmailService {
 
 
     @Override
-    public void sendMessage(EmailType emailType, String recepient, Object messageObject) {
+    public void sendMessage(EmailType emailType, UserType userType, String recepient, Object messageObject) {
         try {
             MimeMessage msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(email));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            msg.setSubject(messageSubjectTemplate(emailType));
-            msg.setText(messageBodyTemplate(emailType, messageObject));
+            msg.setSubject(messageSubjectTemplate(emailType, userType));
+            msg.setText(messageBodyTemplate(emailType, userType, messageObject));
 
             Transport.send(msg);
         } catch (Exception e) {
@@ -52,11 +53,21 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
-    private String messageSubjectTemplate(EmailType emailType) {
+    private String messageSubjectTemplate(EmailType emailType, UserType userType) {
         String subject = "";
         switch (emailType) {
             case REGISTRATION :
-                subject = "STTJ - Username & Password Portal Mahasiswa Baru ";
+                switch (userType){
+                    case NEW_STUDENT:
+                        subject = "STTJ - Username & Password Portal Mahasiswa Baru ";
+                        break;
+                    case LECTURE:
+                        subject = "STTJ - Username & Password Portal Informasi Akademik";
+                        break;
+                    case ACADEMIC:
+                        subject = "STTJ - Username & Password Portal Informasi Akademik";
+                        break;
+                }
                 break;
             case FORGOT_PASSWORD:
                 subject = "STTJ - Reset Password ";
@@ -66,13 +77,25 @@ public class EmailServiceImpl implements EmailService {
         return subject;
     }
 
-    private String messageBodyTemplate(EmailType emailType, Object messageObject) {
+    private String messageBodyTemplate(EmailType emailType, UserType userType, Object messageObject) {
         StringBuilder builder = new StringBuilder();
         switch (emailType) {
             case REGISTRATION :
                 Users users = (Users) messageObject;
-                builder.append("Terima kasih telah melakukan pendaftaran mahasiswa baru STTJ \n");
-                builder.append("Berikut username dan password untuk melakukan login ke portal mahasiswa baru STTJ \n");
+                switch (userType){
+                    case NEW_STUDENT:
+                        builder.append("Terima kasih telah melakukan pendaftaran mahasiswa baru STTJ \n");
+                        builder.append("Berikut username dan password untuk melakukan login ke Portal Mahasiswa Baru STTJ \n");
+                        break;
+                    case LECTURE:
+                        builder.append("Terima kasih telah melakukan pendaftaran Dosen STTJ \n");
+                        builder.append("Berikut username dan password untuk melakukan login ke Portal Akademik STTJ \n");
+                        break;
+                    case ACADEMIC:
+                        builder.append("Terima kasih telah melakukan pendaftaran Staff Akademik STTJ \n");
+                        builder.append("Berikut username dan password untuk melakukan login ke Portal Akademik STTJ \n");
+                        break;
+                }
                 builder.append("Username    :   " + users.getUsername() + " \n");
                 builder.append("Password    :   " + users.getDecryptPass() + " \n");
                 break;

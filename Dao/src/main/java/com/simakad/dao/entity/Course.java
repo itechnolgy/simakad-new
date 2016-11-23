@@ -1,7 +1,7 @@
 package com.simakad.dao.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by SRIN on 11/15/2016.
@@ -19,7 +19,7 @@ public class Course {
 
     @Basic
     @Column(name = "degree_id")
-    private Integer degreeId;
+    private Long degreeId;
 
     @Basic
     @Column(name = "semester_credit_number")
@@ -29,13 +29,13 @@ public class Course {
     @Column(name = "semester")
     private Integer semester;
 
-    @Basic
     @Column(name = "creation_time")
-    private Timestamp creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationTime;
 
-    @Basic
     @Column(name = "last_update_time")
-    private Timestamp lastUpdateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
 
 
     public String getId() {
@@ -54,11 +54,11 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public Integer getDegreeId() {
+    public Long getDegreeId() {
         return degreeId;
     }
 
-    public void setDegreeId(Integer degreeId) {
+    public void setDegreeId(Long degreeId) {
         this.degreeId = degreeId;
     }
 
@@ -78,19 +78,19 @@ public class Course {
         this.semester = semester;
     }
 
-    public Timestamp getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Timestamp creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 
