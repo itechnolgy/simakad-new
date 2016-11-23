@@ -22,8 +22,8 @@ public class Transcript {
     private Long courseId;
 
     @Basic
-    @Column(name = "semester")
-    private Integer semester;
+    @Column(name = "semester_credit_number")
+    private Integer semesterCreditNumber;
 
     @Basic
     @Column(name = "assignment_score")
@@ -63,11 +63,11 @@ public class Transcript {
     }
 
     public Integer getSemester() {
-        return semester;
+        return semesterCreditNumber;
     }
 
-    public void setSemester(Integer semester) {
-        this.semester = semester;
+    public void setSemester(Integer semesterCreditNumber) {
+        this.semesterCreditNumber = semesterCreditNumber;
     }
 
     public Long getAssignmentScore() {

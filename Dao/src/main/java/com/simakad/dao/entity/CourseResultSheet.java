@@ -26,8 +26,8 @@ public class CourseResultSheet {
     private String lectureId;
 
     @Basic
-    @Column(name = "semester")
-    private Integer semester;
+    @Column(name = "applied_semester")
+    private Integer appliedSemester;
 
     @Basic
     @Column(name = "assignment_score")
@@ -94,11 +94,11 @@ public class CourseResultSheet {
     }
 
     public Integer getSemester() {
-        return semester;
+        return appliedSemester;
     }
 
-    public void setSemester(Integer semester) {
-        this.semester = semester;
+    public void setSemester(Integer appliedSemester) {
+        this.appliedSemester = appliedSemester;
     }
 
     public Long getAssignmentScore() {
