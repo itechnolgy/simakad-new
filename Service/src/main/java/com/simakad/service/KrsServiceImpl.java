@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by HighDream on 11/19/2016.
@@ -50,6 +51,12 @@ public class KrsServiceImpl implements KrsService {
 
             courseSelectionSheetDao.save(krs);
         }
+    }
+
+
+    @Override
+    public List<CourseSelectionClass> getClassByLectureId(String lectureId) {
+        return courseSelectionClassDao.findByLectureId(lectureId);
     }
 
     private boolean isQuotaAvailable(Long krsScheduleId) {

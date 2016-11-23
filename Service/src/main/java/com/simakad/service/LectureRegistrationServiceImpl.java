@@ -3,16 +3,17 @@ package com.simakad.service;
 import com.simakad.dao.constant.EmailType;
 import com.simakad.dao.constant.UserType;
 import com.simakad.dao.dto.StudentRegistrationRequest;
-import com.simakad.dao.entity.Lecture;
-import com.simakad.dao.entity.UserProfile;
-import com.simakad.dao.entity.Users;
+import com.simakad.dao.dto.response.TeachingScheduleResponse;
+import com.simakad.dao.entity.*;
 import com.simakad.dao.repo.LectureDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,7 +27,13 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
     private final String prefixRegistration = "D";
 
     @Autowired
+    ApplicationContext context;
+
+    @Autowired
     UserProfileService userProfileService;
+
+    @Autowired
+    KrsService krsService;
 
     @Autowired
     LectureDao lectureDao;
@@ -51,6 +58,21 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
             return lecture;
         }
         return null;
+    }
+
+    @Override
+    public TeachingScheduleResponse getTeachingSchedule(String lectureId) {
+        List<CourseSelectionClass> lectureSchedule = krsService.getClassByLectureId(lectureId);
+        TeachingScheduleResponse response = new TeachingScheduleResponse();
+        for(CourseSelectionClass c : lectureSchedule) {
+            TeachingScheduleResponse.Schedule schedule = new TeachingScheduleResponse.Schedule();
+            schedule.setLectureId(c.getLectureId());
+            schedule.setCourseName(c.getCourse(context).getCourseName());
+            schedule.setTeachingDate(c.getSchedule().toString());
+            response.addSchedule(schedule);
+        }
+
+        return response;
     }
 
     private boolean isRegistered(StudentRegistrationRequest lectureRegistrationRequest){

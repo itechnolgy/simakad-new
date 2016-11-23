@@ -1,6 +1,7 @@
 package com.simakad.service;
 
 import com.simakad.dao.dto.StudentRegistrationRequest;
+import com.simakad.dao.dto.response.TeachingScheduleResponse;
 import com.simakad.dao.entity.Lecture;
 
 /**
@@ -8,4 +9,6 @@ import com.simakad.dao.entity.Lecture;
  */
 public interface LectureRegistrationService {
     Lecture register(StudentRegistrationRequest lectureRegistrationRequest);
+
+    TeachingScheduleResponse getTeachingSchedule(String lectureId);
 }
