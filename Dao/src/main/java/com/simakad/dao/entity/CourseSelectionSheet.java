@@ -1,7 +1,11 @@
 package com.simakad.dao.entity;
 
+import com.simakad.dao.repo.CourseSelectionClassDao;
+import org.springframework.context.ApplicationContext;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by SRIN on 11/15/2016.
@@ -9,6 +13,9 @@ import java.util.Date;
 @Entity
 @Table(name = "course_selection_sheet")
 public class CourseSelectionSheet {
+    @Transient
+    CourseSelectionClassDao courseSelectionClassDao;
+
     @Id
     @Column(name = "id")
     private Long id;
@@ -33,6 +40,8 @@ public class CourseSelectionSheet {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateTime;
 
+    @Transient
+    private CourseSelectionClass courseSelectionClass;
 
     public Long getId() {
         return id;
@@ -80,5 +89,14 @@ public class CourseSelectionSheet {
 
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public CourseSelectionClass getCourseSelectionClass(ApplicationContext context) {
+        if(Objects.isNull(courseSelectionClassDao)) {
+            if(Objects.isNull(courseSelectionClassDao)) courseSelectionClassDao = context.getBean(CourseSelectionClassDao.class);
+            courseSelectionClass = courseSelectionClassDao.findOne(this.courseSelectionClassId);
+        }
+
+        return courseSelectionClass;
     }
 }

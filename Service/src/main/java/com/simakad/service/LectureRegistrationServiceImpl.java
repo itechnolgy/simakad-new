@@ -1,6 +1,7 @@
 package com.simakad.service;
 
 import com.simakad.dao.constant.EmailType;
+import com.simakad.dao.constant.ScoreType;
 import com.simakad.dao.constant.UserType;
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.dto.response.TeachingScheduleResponse;
@@ -42,6 +43,9 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
     KrsService krsService;
 
     @Autowired
+    StudentAcademicService studentAcademicService;
+
+    @Autowired
     EntityManager entityManager;
 
     @Autowired
@@ -49,6 +53,8 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
 
     @Autowired
     EmailService emailService;
+
+
 
     @Override
     @Transactional
@@ -76,6 +82,11 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
         }
 
         return response;
+    }
+
+    @Override
+    public void insertScore(String studentId, String courseId, ScoreType scoreType, int score) {
+        studentAcademicService.editStudentScore(studentId, courseId, scoreType, score);
     }
 
     private boolean isRegistered(StudentRegistrationRequest lectureRegistrationRequest){

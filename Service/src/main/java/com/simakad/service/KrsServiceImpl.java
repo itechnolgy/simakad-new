@@ -2,17 +2,21 @@ package com.simakad.service;
 
 import com.simakad.dao.dto.KrsFillingRequest;
 import com.simakad.dao.dto.KrsScheduleRequest;
+import com.simakad.dao.entity.CourseResultSheet;
 import com.simakad.dao.entity.CourseSelectionClass;
 import com.simakad.dao.entity.CourseSelectionSheet;
+import com.simakad.dao.repo.CourseResultSheetDao;
 import com.simakad.dao.repo.CourseSelectionClassDao;
 import com.simakad.dao.repo.CourseSelectionSheetDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,10 +25,16 @@ import java.util.List;
 @Component
 public class KrsServiceImpl implements KrsService {
     @Autowired
+    ApplicationContext context;
+
+    @Autowired
     CourseSelectionClassDao courseSelectionClassDao;
 
     @Autowired
     CourseSelectionSheetDao courseSelectionSheetDao;
+
+    @Autowired
+    CourseResultSheetDao courseResultSheetDao;
 
     @Autowired
     EntityManager entityManager;
@@ -46,6 +56,7 @@ public class KrsServiceImpl implements KrsService {
             CourseSelectionSheet krs = new CourseSelectionSheet();
             krs.setCourseSelectionClassId(krsFillingRequest.getKrsScheduleId());
             krs.setStudentId(krsFillingRequest.getStudentId());
+            krs.setAppliedSemester(krsFillingRequest.getAppliedSemester());
             krs.setCreationTime(new Date());
             krs.setLastUpdateTime(new Date());
 
@@ -53,10 +64,47 @@ public class KrsServiceImpl implements KrsService {
         }
     }
 
+    @Override
+    public void addKrsPeriod() {
+
+    }
 
     @Override
-    public List<CourseSelectionClass> getClassByLectureId(String lectureId) {
-        return courseSelectionClassDao.findByLectureId(lectureId);
+    public void startKrsPeriod() {
+        clearKrsSelection();
+
+    }
+
+    @Override
+    public void closeKrsPeriod() {
+        moveKrsToCourseResultSheet();
+    }
+
+    private void clearKrsSelection() {
+        Query query = entityManager.createNativeQuery("DELETE FROM course_selection_sheet");
+        query.executeUpdate();
+    }
+
+    private void closeResultSheetStatusPeriod() {
+
+    }
+
+    private void moveKrsToCourseResultSheet() {
+        List<CourseSelectionSheet> courseSelectionSheets = courseSelectionSheetDao.findAll();
+        HashMap<Long, CourseSelectionClass> classDetail = new HashMap<>();
+
+        for(CourseSelectionSheet choosenKrs : courseSelectionSheets) {
+            CourseResultSheet ksm = new CourseResultSheet();
+            if(classDetail.get(choosenKrs.getCourseSelectionClassId()) == null) {
+                CourseSelectionClass courseSelectionClass = choosenKrs.getCourseSelectionClass(context);
+                classDetail.put(courseSelectionClass.getId(), courseSelectionClass);
+            }
+            ksm.setCourseId(classDetail.get(choosenKrs.getCourseSelectionClassId()).getCourseId());
+            ksm.setStudentId(ksm.getStudentId());
+            ksm.setLectureId(classDetail.get(choosenKrs.getCourseSelectionClassId()).getLectureId());
+
+            courseResultSheetDao.save(ksm);
+        }
     }
 
     private boolean isQuotaAvailable(Long krsScheduleId) {
@@ -66,5 +114,10 @@ public class KrsServiceImpl implements KrsService {
         int usedQuota = (int)query.getSingleResult();
 
         return (krsClass.getQuota() > usedQuota) ? true : false;
+    }
+
+    @Override
+    public List<CourseSelectionClass> getClassByLectureId(String lectureId) {
+        return courseSelectionClassDao.findByLectureId(lectureId);
     }
 }

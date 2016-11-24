@@ -15,11 +15,11 @@ public class Transcript {
 
     @Basic
     @Column(name = "student_id")
-    private Long studentId;
+    private String studentId;
 
     @Basic
     @Column(name = "course_id")
-    private Long courseId;
+    private String courseId;
 
     @Basic
     @Column(name = "semester_credit_number")
@@ -27,19 +27,19 @@ public class Transcript {
 
     @Basic
     @Column(name = "assignment_score")
-    private Long assignmentScore;
+    private Integer assignmentScore;
 
     @Basic
     @Column(name = "mid_exam_score")
-    private Long midExamScore;
+    private Integer midExamScore;
 
     @Basic
     @Column(name = "final_exam_score")
-    private Long finalExamScore;
+    private Integer finalExamScore;
 
     @Basic
     @Column(name = "final_score")
-    private Long finalScore;
+    private Integer finalScore;
 
     @Basic
     @Column(name = "final_grade")
@@ -70,51 +70,51 @@ public class Transcript {
         this.semesterCreditNumber = semesterCreditNumber;
     }
 
-    public Long getAssignmentScore() {
+    public Integer getAssignmentScore() {
         return assignmentScore;
     }
 
-    public void setAssignmentScore(Long assignmentScore) {
+    public void setAssignmentScore(Integer assignmentScore) {
         this.assignmentScore = assignmentScore;
     }
 
-    public Long getMidExamScore() {
+    public Integer getMidExamScore() {
         return midExamScore;
     }
 
-    public void setMidExamScore(Long midExamScore) {
+    public void setMidExamScore(Integer midExamScore) {
         this.midExamScore = midExamScore;
     }
 
-    public Long getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
-    public Long getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 
-    public Long getFinalExamScore() {
+    public Integer getFinalExamScore() {
         return finalExamScore;
     }
 
-    public void setFinalExamScore(Long finalExamScore) {
+    public void setFinalExamScore(Integer finalExamScore) {
         this.finalExamScore = finalExamScore;
     }
 
-    public Long getFinalScore() {
+    public Integer getFinalScore() {
         return finalScore;
     }
 
-    public void setFinalScore(Long finalScore) {
+    public void setFinalScore(Integer finalScore) {
         this.finalScore = finalScore;
     }
 

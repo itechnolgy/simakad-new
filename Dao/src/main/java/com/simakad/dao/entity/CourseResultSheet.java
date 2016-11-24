@@ -31,19 +31,19 @@ public class CourseResultSheet {
 
     @Basic
     @Column(name = "assignment_score")
-    private Long assignmentScore;
+    private Integer assignmentScore;
 
     @Basic
     @Column(name = "mid_exam_score")
-    private Long midExamScore;
+    private Integer midExamScore;
 
     @Basic
     @Column(name = "final_exam_score")
-    private Long finalExamScore;
+    private Integer finalExamScore;
 
     @Basic
     @Column(name = "final_score")
-    private Long finalScore;
+    private Integer finalScore;
 
     @Basic
     @Column(name = "final_grade")
@@ -101,35 +101,35 @@ public class CourseResultSheet {
         this.appliedSemester = appliedSemester;
     }
 
-    public Long getAssignmentScore() {
+    public Integer getAssignmentScore() {
         return assignmentScore;
     }
 
-    public void setAssignmentScore(Long assignmentScore) {
+    public void setAssignmentScore(Integer assignmentScore) {
         this.assignmentScore = assignmentScore;
     }
 
-    public Long getMidExamScore() {
+    public Integer getMidExamScore() {
         return midExamScore;
     }
 
-    public void setMidExamScore(Long midExamScore) {
+    public void setMidExamScore(Integer midExamScore) {
         this.midExamScore = midExamScore;
     }
 
-    public Long getFinalExamScore() {
+    public Integer getFinalExamScore() {
         return finalExamScore;
     }
 
-    public void setFinalExamScore(Long finalExamScore) {
+    public void setFinalExamScore(Integer finalExamScore) {
         this.finalExamScore = finalExamScore;
     }
 
-    public Long getFinalScore() {
+    public Integer getFinalScore() {
         return finalScore;
     }
 
-    public void setFinalScore(Long finalScore) {
+    public void setFinalScore(Integer finalScore) {
         this.finalScore = finalScore;
     }
 

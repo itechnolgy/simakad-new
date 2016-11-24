@@ -15,4 +15,10 @@ public interface KrsService {
     void fillKrs(KrsFillingRequest krsFillingRequest);
 
     List<CourseSelectionClass> getClassByLectureId(String lectureId);
+
+    void addKrsPeriod();
+
+    void startKrsPeriod();
+
+    void closeKrsPeriod();
 }

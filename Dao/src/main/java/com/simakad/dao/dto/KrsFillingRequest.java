@@ -6,6 +6,7 @@ package com.simakad.dao.dto;
 public class KrsFillingRequest {
     private String studentId;
     private long krsScheduleId;
+    private int appliedSemester;
 
     public long getKrsScheduleId() {
         return krsScheduleId;
@@ -21,5 +22,13 @@ public class KrsFillingRequest {
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
+    }
+
+    public int getAppliedSemester() {
+        return appliedSemester;
+    }
+
+    public void setAppliedSemester(int appliedSemester) {
+        this.appliedSemester = appliedSemester;
     }
 }
