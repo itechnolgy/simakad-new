@@ -1,0 +1,32 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- INSERT YOUR CSS PLUGIN HERE -->
+<head th:fragment="cssPlugins" th:remove="tag">
+</head>
+
+<!-- INSERT YOUR JS PLUGIN HERE -->
+<body th:fragment="jsPlugins" th:remove="tag">
+<script src="../../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"
+        th:src="@{/assets/global/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
+</body>
+
+<!-- INSERT YOUR JS PAGE HERE -->
+<body th:fragment="jsPage" th:remove="tag">
+<script src="../../../assets/pages/scripts/academic.js" type="text/javascript"
+        th:src="@{/assets/pages/scripts/academic.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        AcademicPage.lectureValidation();
+    });
+</script>
+</body>
+
+<!-- INSERT YOUR LAYOUT HERE -->
+<body th:fragment="mainLayout" th:remove="tag">
+<div class="portlet light">
+    <div class="portlet-body">
+        <h4 class="block">Edit Lecture</h4>
+        <div th:replace="academic/lecture/_form"></div>
+    </div>
+</div>
+</body>
+</html>

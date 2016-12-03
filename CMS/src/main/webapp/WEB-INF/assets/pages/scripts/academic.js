@@ -66,6 +66,82 @@ var AcademicPage = function() {
         });
     };
 
+    var handleLectureList = function () {
+        $(".btn-delete").on('click', function() {
+            var lectureId = $(this).data().id;
+            $("#lecture-id").val(lectureId);
+            $("#delete-modal").modal('show');
+        });
+    };
+    
+    var handleLectureValidation = function() {
+        $("#lecture-form").validate({
+            errorElement: 'span',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            rules: {
+                name: {
+                    required: true
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success: function(label) {
+                label.closest('.form-group').removeClass('has-error');
+                label.remove();
+            },
+            errorPlacement: function(error, element) {
+                if(element.attr("type") == "radio") {
+                    error.insertAfter(element.closest('.radio-list'))
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    };
+
+    var handleCourseList = function () {
+        $(".btn-delete").on('click', function() {
+            var courseId = $(this).data().id;
+            $("#course-id").val(courseId);
+            $("#delete-modal").modal('show');
+        });
+    };
+
+    var handleCourseValidation = function() {
+        $("#course-form").validate({
+            errorElement: 'span',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            rules: {
+                name: {
+                    required: true
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success: function(label) {
+                label.closest('.form-group').removeClass('has-error');
+                label.remove();
+            },
+            errorPlacement: function(error, element) {
+                if(element.attr("type") == "radio") {
+                    error.insertAfter(element.closest('.radio-list'))
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    };
+
     return {
         editRegistration: function() {
             initDatePicker();
@@ -76,6 +152,18 @@ var AcademicPage = function() {
         },
         newStudentResultValidation: function() {
             handleNewStudentResultValidation();
+        },
+        lectureList: function() {
+            handleLectureList();
+        },
+        lectureValidation: function() {
+            handleLectureValidation();
+        },
+        courseList: function() {
+            handleCourseList()
+        },
+        courseValidation: function() {
+            handleCourseValidation();
         }
     };
 }();
