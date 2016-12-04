@@ -142,6 +142,14 @@ var AcademicPage = function() {
         });
     };
 
+    var handleClassKrsList = function() {
+        $(".btn-delete").on('click', function() {
+            var classId = $(this).data().id;
+            $("#class-id").val(classId);
+            $("#delete-modal").modal('show');
+        });
+    };
+
     return {
         editRegistration: function() {
             initDatePicker();
@@ -164,6 +172,9 @@ var AcademicPage = function() {
         },
         courseValidation: function() {
             handleCourseValidation();
+        },
+        classList: function() {
+            handleClassKrsList();
         }
     };
 }();
