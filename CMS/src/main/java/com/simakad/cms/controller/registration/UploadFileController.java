@@ -77,7 +77,7 @@ public class UploadFileController {
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     public String result(Model model) {
         model.addAttribute("title", "Result");
-        model.addAttribute("view", "academic/krs/list");
+        model.addAttribute("view", "newStudent/result");
         return "layout/default";
     }
 
