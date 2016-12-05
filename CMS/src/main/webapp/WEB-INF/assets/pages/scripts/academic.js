@@ -120,6 +120,12 @@ var AcademicPage = function() {
             rules: {
                 name: {
                     required: true
+                },
+                degreeId: {
+                    required: true
+                },
+                sks: {
+                    required: true
                 }
             },
             highlight: function(element) {
