@@ -156,6 +156,136 @@ var AcademicPage = function() {
         });
     };
 
+    var handleClassKrsValidation = function() {
+        $("#krs-form").validate({
+            errorElement: 'span',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            ignore: ":hidden:not(.select2me)",
+            rules: {
+                lectureId: {
+                    required: true
+                },
+                degreeId: {
+                    required: true
+                },
+                courseId: {
+                    required: true
+                },
+                scheduleDay: {
+                    required: true
+                },
+                scheduleTime: {
+                    required: true
+                },
+                quota: {
+                    required: true
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            success: function(label) {
+                label.closest('.form-group').removeClass('has-error');
+                label.remove();
+            },
+            errorPlacement: function(error, element) {
+                if(element.attr("type") == "radio") {
+                    error.insertAfter(element.closest('.radio-list'))
+                } else if (element.hasClass("select2custom")) {
+                    element.closest(".col-md-9").append(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    };
+
+    var handlePopulateLecture = function() {
+        $.ajax({
+            url: '/academic/lectures',
+            dataType: 'json',
+            method: 'GET',
+            beforeSend: function () {
+                App.blockUI({animate: true});
+            },
+            error: function () {
+                App.unblockUI();
+            },
+            success: function(data) {
+                App.unblockUI();
+                var lectureList = $("#lectureId");
+
+                lectureList.html("").append($("<option></option>", {"value": ""}));
+                $.each(data.data, function(key, value) {
+                    lectureList.append($("<option></option>", {"value": value.id}).html(value.lecture_name));
+                });
+
+                lectureList.select2({
+                    allowClear: true,
+                    placeholder: 'Select Lecture'
+                });
+            }
+        });
+    };
+
+    var handleDegreeChange = function() {
+        $("#courseId").select2({
+            allowClear: true,
+            placeholder: 'Select Course'
+        });
+
+        var degreeList = $("#degreeId");
+        handlePopulateCourse(degreeList.val(), true);
+
+        degreeList.change(function() {
+            handlePopulateCourse($(this).val(), true);
+        });
+    };
+
+    var handlePopulateCourse = function(degreeId, courseInitial) {
+        var courseList = $("#courseId");
+
+        if(courseInitial) courseList.select2("destroy");
+        courseList.html("").append($("<option></option>", {"value": ""}));
+
+        if(degreeId.length == 0) {
+            courseList.select2({
+                allowClear: true,
+                placeholder: 'Select Course'
+            });
+
+            return false;
+        }
+
+        $.ajax({
+            url: '/academic/courses/' + degreeId,
+            dataType: 'json',
+            method: 'GET',
+            beforeSend: function () {
+                App.blockUI({animate: true});
+            },
+            error: function () {
+                App.unblockUI();
+            },
+            success: function(data) {
+                App.unblockUI();
+
+                $.each(data.data, function(key, value) {
+                    courseList.append($("<option></option>", {"value": value.id}).html(value.course_name));
+                });
+
+                courseList.select2({
+                    allowClear: true,
+                    placeholder: 'Select Course'
+                });
+            }
+        });
+    };
+
     return {
         editRegistration: function() {
             initDatePicker();
@@ -181,6 +311,11 @@ var AcademicPage = function() {
         },
         classList: function() {
             handleClassKrsList();
+        },
+        classValidation: function() {
+            handlePopulateLecture();
+            handleDegreeChange();
+            handleClassKrsValidation();
         }
     };
 }();
