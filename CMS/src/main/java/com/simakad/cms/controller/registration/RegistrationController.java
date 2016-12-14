@@ -81,7 +81,7 @@ public class RegistrationController {
             model.addAttribute("view", "auth/register");
             return "layout/auth";
         }
-        model.addAttribute("student", lectureRegistration);
+        model.addAttribute("lecture", lectureRegistration);
         return "redirect:/login?success";
     }
 }

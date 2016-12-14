@@ -20,11 +20,13 @@ public class KrsController {
     @Autowired
     KrsService krsService;
 
+
     @RequestMapping(value = "/add/krs_schedule", method = RequestMethod.POST)
     public String addKrsSchedule(Model model, KrsScheduleRequest krsScheduleRequest) {
         krsService.addKrsSchedule(krsScheduleRequest);
         return "layout/default";
     }
+
 
     @RequestMapping(value = "/fill/krs", method = RequestMethod.POST)
     public String addKrsSchedule(Model model, KrsFillingRequest krsFillingRequest) {

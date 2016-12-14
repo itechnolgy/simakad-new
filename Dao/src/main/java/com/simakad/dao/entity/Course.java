@@ -19,7 +19,7 @@ public class Course {
 
     @Basic
     @Column(name = "degree_id")
-    private Long degreeId;
+    private long degreeId;
 
     @Basic
     @Column(name = "semester_credit_number")
@@ -54,11 +54,11 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public Long getDegreeId() {
+    public long getDegreeId() {
         return degreeId;
     }
 
-    public void setDegreeId(Long degreeId) {
+    public void setDegreeId(long degreeId) {
         this.degreeId = degreeId;
     }
 
