@@ -4,7 +4,7 @@
         <div class="form-group">
             <label for="lectureId" class="control-label col-md-3">Lecture</label>
             <div class="col-md-9">
-                <select class="form-control select2me" id="lectureId" name="lectureId">
+                <select class="form-control select2custom" id="lectureId" name="lectureId">
                 </select>
             </div>
         </div>
@@ -23,7 +23,8 @@
         <div class="form-group">
             <label for="courseId" class="control-label col-md-3">Course</label>
             <div class="col-md-9">
-                <select class="form-control select2me" id="courseId" name="courseId">
+                <select class="form-control select2custom" id="courseId" name="courseId">
+                    <option value=""></option>
                 </select>
             </div>
         </div>
@@ -56,9 +57,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-3">Quota</label>
+            <label for="quota" class="control-label col-md-3">Quota</label>
             <div class="col-md-9">
-                <input type="number" name="quota" class="form-control" th:min="0" />
+                <input type="number" name="quota" class="form-control" th:min="0" id="quota" />
             </div>
         </div>
     </div>
