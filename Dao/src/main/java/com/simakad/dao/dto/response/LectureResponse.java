@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class LectureResponse {
 
-    List<Lecture> lectureList = new ArrayList<>();
+    public List<Lecture> lectureList = new ArrayList<>();
 
     public void addLecture(Lecture lecture){
         lectureList.add(lecture);

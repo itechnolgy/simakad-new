@@ -40,7 +40,7 @@
                 <td th:text="${course.degreeId}">S1</td>
                 <td th:text="${course.semesterCreditNumber}">2</td>
                 <td>
-                    <a th:href="'course/edit/' + ${course.id}" class="btn btn-xs btn-info btn-accept">Edit</a>
+                    <a th:href="'academic/course/edit/' + ${course.id}" class="btn btn-xs btn-info btn-accept">Edit</a>
                     <button type="button" class="btn btn-xs btn-danger btn-delete" th:attr="data-id=${course.id}">Delete</button>
                 </td>
             </tr>
