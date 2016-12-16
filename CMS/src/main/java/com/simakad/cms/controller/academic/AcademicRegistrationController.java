@@ -56,6 +56,18 @@ public class AcademicRegistrationController {
         return "layout/default";
     }
 
+    @RequestMapping(value = "/course/edit/{courseId}" , method = RequestMethod.GET)
+    public String EditCourse(Model model, Authentication auth) {
+        model.addAttribute("userSession", getUserSession(auth));
+        return "layout/default";
+    }
+
+    @RequestMapping(value = "/course/delete/{courseId}" , method = RequestMethod.GET)
+    public String DeleteCourse(Model model, Authentication auth) {
+        model.addAttribute("userSession", getUserSession(auth));
+        return "layout/default";
+    }
+
     @RequestMapping(value = "/course/degree/{degree}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String getCourseByDegreeId(@PathVariable("degree") Integer degreeId, Model model, Authentication auth) {
