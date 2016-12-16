@@ -262,7 +262,7 @@ var AcademicPage = function() {
         }
 
         $.ajax({
-            url: '/academic/courses/' + degreeId,
+            url: '/academic/course/' + degreeId,
             dataType: 'json',
             method: 'GET',
             beforeSend: function () {

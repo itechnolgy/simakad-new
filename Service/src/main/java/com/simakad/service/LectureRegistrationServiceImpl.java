@@ -4,12 +4,15 @@ import com.simakad.dao.constant.EmailType;
 import com.simakad.dao.constant.ScoreType;
 import com.simakad.dao.constant.UserType;
 import com.simakad.dao.dto.StudentRegistrationRequest;
+import com.simakad.dao.dto.response.LectureResponse;
 import com.simakad.dao.dto.response.TeachingScheduleResponse;
 import com.simakad.dao.entity.CourseSelectionClass;
 import com.simakad.dao.entity.Lecture;
 import com.simakad.dao.entity.UserProfile;
 import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.LectureDao;
+import com.simakad.dao.repo.UserDao;
+import com.simakad.dao.repo.UserProfileDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -17,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +47,12 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
     KrsService krsService;
 
     @Autowired
+    UserDao userDao;
+
+    @Autowired
+    UserProfileDao userProfileDao;
+
+    @Autowired
     StudentAcademicService studentAcademicService;
 
     @Autowired
@@ -53,8 +63,6 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
 
     @Autowired
     EmailService emailService;
-
-
 
     @Override
     @Transactional
@@ -67,6 +75,20 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
             return lecture;
         }
         return null;
+    }
+
+    @Override
+    public LectureResponse getLectureList() {
+        List<Users> listUsers = userDao.findByRoles(UserType.LECTURE);
+        LectureResponse response = new LectureResponse();
+        for(Users user : listUsers){
+            LectureResponse.Lecture lecture = new LectureResponse.Lecture();
+            UserProfile userProfile = userProfileDao.findByEmail(user.getEmail());
+            lecture.setEmail(userProfile.getEmail());
+            lecture.setName(userProfile.getName());
+            response.addLecture(lecture);
+        }
+        return response;
     }
 
     @Override
@@ -108,9 +130,12 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
     }
 
     private Lecture createNewLecture(){
+        Date date = new Date();
         Lecture lecture = new Lecture();
         lecture.setId(createLectureId());
         lecture.setStatus("PENDING");
+        lecture.setCreationTime(date);
+        lecture.setLastUpdateTime(date);
         lecture = lectureDao.save(lecture);
         return lecture;
 

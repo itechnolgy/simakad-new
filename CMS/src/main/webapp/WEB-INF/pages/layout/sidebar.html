@@ -4,52 +4,56 @@
     <!-- BEGIN SIDEBAR MENU -->
     <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
         <!--/* New Student Menu */-->
-        <li class="nav-item start">
-            <a href="" class="nav-link nav-toggle">
-                <span class="title">Profile</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="" th:href="@{'/pmb/upload'}" class="nav-link nav-toggle">
-                <span class="title">Upload File</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="" th:href="@{'/pmb/payment'}" class="nav-link nav-toggle">
-                <span class="title">Payment</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="" th:href="@{'/pmb/exam/schedule'}" class="nav-link nav-toggle">
-                <span class="title">Exam Schedule</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">
-                <span class="title">Exam Results</span>
-            </a>
-        </li>
-        <!--<li class="nav-item">-->
-            <!--<a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">-->
-                <!--<span class="title">Period</span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item">-->
-            <!--<a href="" th:href="@{'/academic/course/list'}" class="nav-link nav-toggle">-->
-                <!--<span class="title">Course</span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item">-->
-            <!--<a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">-->
-                <!--<span class="title">Lecture</span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item">-->
-            <!--<a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">-->
-                <!--<span class="title">KRS</span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <!--/* End Student Menu */-->
+        <th:block th:if="${userSession.role}=='ROLE_NEW_STUDENT'">
+            <li class="nav-item start">
+                <a href="" class="nav-link nav-toggle">
+                    <span class="title">Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/pmb/upload'}" class="nav-link nav-toggle">
+                    <span class="title">Upload File</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/pmb/payment'}" class="nav-link nav-toggle">
+                    <span class="title">Payment</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/pmb/exam/schedule'}" class="nav-link nav-toggle">
+                    <span class="title">Exam Schedule</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">
+                    <span class="title">Exam Results</span>
+                </a>
+            </li>
+        </th:block>
+        <th:block th:if="${userSession.role}=='ROLE_ACADEMIC'">
+            <li class="nav-item">
+                <a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">
+                    <span class="title">Period</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/academic/course/list'}" class="nav-link nav-toggle">
+                    <span class="title">Course</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/academic/lecture/list'}" class="nav-link nav-toggle">
+                    <span class="title">Lecture</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">
+                    <span class="title">KRS</span>
+                </a>
+            </li>
+        </th:block>
+
     </ul>
     <!-- END SIDEBAR MENU -->
 </div>

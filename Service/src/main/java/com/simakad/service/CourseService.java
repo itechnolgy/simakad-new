@@ -12,4 +12,6 @@ public interface CourseService {
     Course addCourse(CourseRequest courseRequest);
 
     List<Course> getCourseList();
+    List<Course> getCourseListByDegree(long degreeId);
+    List<Course> getCourseListBySemester(Integer semester);
 }

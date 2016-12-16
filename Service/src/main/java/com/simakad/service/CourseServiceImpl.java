@@ -35,6 +35,16 @@ public class CourseServiceImpl implements CourseService {
         return listCourse;
     }
 
+    @Override
+    public List<Course> getCourseListByDegree(long degreeId) {
+        return courseDao.findByDegreeId(degreeId);
+    }
+
+    @Override
+    public List<Course> getCourseListBySemester(Integer semester) {
+        return courseDao.findBySemester(semester);
+    }
+
     private Course createNewCourse(CourseRequest courseRequest){
         Course course = new Course();
         course.setId(courseRequest.getCourseId());
