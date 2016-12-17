@@ -1,8 +1,9 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 
 import com.simakad.dao.repo.NewStudentDao;
 import com.simakad.dao.repo.StudentDao;
+import com.simakad.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

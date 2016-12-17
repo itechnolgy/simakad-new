@@ -1,8 +1,9 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.dto.CourseRequest;
 import com.simakad.dao.entity.Course;
 import com.simakad.dao.repo.CourseDao;
+import com.simakad.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,12 +1,10 @@
-package com.simakad.service;
+package com.simakad.service.registration.impl;
 
-import com.simakad.dao.constant.RegStaticFileType;
 import com.simakad.dao.constant.VerificationType;
-import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.RegDocument;
-import com.simakad.dao.entity.RegPayment;
 import com.simakad.dao.entity.RegStaticFile;
 import com.simakad.dao.repo.RegDocumentDao;
+import com.simakad.service.registration.RegDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

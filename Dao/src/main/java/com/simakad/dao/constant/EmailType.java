@@ -5,5 +5,6 @@ package com.simakad.dao.constant;
  */
 public enum EmailType {
     REGISTRATION,
+    ACCEPTED_STUDENT,
     FORGOT_PASSWORD;
 }

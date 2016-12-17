@@ -3,7 +3,7 @@ package com.simakad.cms.controller.finance;
 import com.simakad.cms.model.MyUserDetails;
 import com.simakad.dao.entity.RegPayment;
 import com.simakad.dao.repo.NewStudentDao;
-import com.simakad.service.RegPaymentService;
+import com.simakad.service.registration.RegPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**

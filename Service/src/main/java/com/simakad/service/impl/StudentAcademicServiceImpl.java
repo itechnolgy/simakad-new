@@ -1,10 +1,11 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.constant.ScoreType;
 import com.simakad.dao.entity.CourseResultSheet;
 import com.simakad.dao.entity.Transcript;
 import com.simakad.dao.repo.CourseResultSheetDao;
 import com.simakad.dao.repo.TranscriptDao;
+import com.simakad.service.StudentAcademicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

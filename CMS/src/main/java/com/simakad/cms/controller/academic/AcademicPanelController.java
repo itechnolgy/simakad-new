@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 @Controller
 @RequestMapping("/academic/calendar")
-public class AcademicCalendarController {
+public class AcademicPanelController {
 
     @Autowired
     PeriodService periodService;

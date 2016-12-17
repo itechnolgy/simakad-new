@@ -1,4 +1,4 @@
-package com.simakad.service;
+package com.simakad.service.registration.impl;
 
 import com.simakad.dao.constant.RegExamResultType;
 import com.simakad.dao.dto.RegExamScheduleResponse;
@@ -6,6 +6,7 @@ import com.simakad.dao.entity.RegExamResult;
 import com.simakad.dao.entity.RegExamSchedule;
 import com.simakad.dao.repo.RegExamResultDao;
 import com.simakad.dao.repo.RegExamScheduleDao;
+import com.simakad.service.registration.RegExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

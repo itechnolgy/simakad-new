@@ -3,16 +3,15 @@ package com.simakad.cms.controller.registration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.simakad.cms.config.GlobalVariable;
-import com.simakad.cms.controller.ForgotController;
 import com.simakad.cms.model.MyUserDetails;
 import com.simakad.dao.constant.RegStaticFileType;
 import com.simakad.dao.dto.RegUploadFileRequest;
 import com.simakad.dao.entity.RegDocument;
 import com.simakad.dao.entity.RegPayment;
 import com.simakad.dao.entity.RegStaticFile;
-import com.simakad.service.RegDocumentService;
-import com.simakad.service.RegPaymentService;
-import com.simakad.service.RegistrationStaticFileService;
+import com.simakad.service.registration.RegDocumentService;
+import com.simakad.service.registration.RegPaymentService;
+import com.simakad.service.registration.RegistrationStaticFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -22,9 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.*;
 
 /**

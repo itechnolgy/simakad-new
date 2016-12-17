@@ -2,9 +2,8 @@ package com.simakad.cms.controller.academic;
 
 import com.simakad.dao.entity.RegDocument;
 import com.simakad.dao.entity.RegExamResult;
-import com.simakad.dao.entity.RegExamSchedule;
-import com.simakad.service.RegDocumentService;
-import com.simakad.service.RegExamService;
+import com.simakad.service.registration.RegDocumentService;
+import com.simakad.service.registration.RegExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

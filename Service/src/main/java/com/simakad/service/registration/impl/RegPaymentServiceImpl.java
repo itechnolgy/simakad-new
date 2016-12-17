@@ -1,4 +1,4 @@
-package com.simakad.service;
+package com.simakad.service.registration.impl;
 
 import com.simakad.dao.constant.RegStaticFileType;
 import com.simakad.dao.constant.VerificationType;
@@ -6,6 +6,7 @@ import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.RegPayment;
 import com.simakad.dao.entity.RegStaticFile;
 import com.simakad.dao.repo.RegPaymentDao;
+import com.simakad.service.registration.RegPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -68,6 +69,11 @@ public class RegPaymentServiceImpl implements RegPaymentService {
     @Override
     public List<RegPayment> getPaymentByStudentId(String studentId) {
         return regPaymentDao.findByStudentId(studentId);
+    }
+
+    @Override
+    public RegPayment getPaymentByStudentIdAndType(String studentId, RegStaticFileType regStaticFileType) {
+        return regPaymentDao.findByStudentIdAndType(studentId, RegStaticFileType.BIAYA_UANG_MASUK);
     }
 
     @Override

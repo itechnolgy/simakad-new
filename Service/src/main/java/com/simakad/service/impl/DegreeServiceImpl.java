@@ -1,5 +1,6 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
+import com.simakad.service.DegreeService;
 import org.springframework.stereotype.Component;
 
 /**

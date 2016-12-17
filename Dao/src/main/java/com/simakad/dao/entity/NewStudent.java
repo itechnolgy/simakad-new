@@ -21,6 +21,10 @@ public class NewStudent {
     @Column(name = "degree_id")
     Long degreeId;
 
+    @Basic(optional = false)
+    @Column(name = "student_id")
+    String studentId;
+
     public String getId() {
         return id;
     }
@@ -43,5 +47,13 @@ public class NewStudent {
 
     public void setDegreeId(Long degreeId) {
         this.degreeId = degreeId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }

@@ -23,7 +23,7 @@ import java.util.List;
 @Controller
 @SessionAttributes("userSession")
 @RequestMapping(value = "/academic")
-public class AcademicRegistrationController {
+public class AcademicTaskController {
 
     @Autowired(required = true)
     CourseService courseService;

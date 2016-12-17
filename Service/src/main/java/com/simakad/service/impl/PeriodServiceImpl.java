@@ -1,7 +1,8 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.entity.Period;
 import com.simakad.dao.repo.PeriodDao;
+import com.simakad.service.PeriodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,15 +1,19 @@
-package com.simakad.service;
+package com.simakad.service.registration.impl;
 
 import com.simakad.dao.constant.EmailType;
 import com.simakad.dao.constant.StudentStatusType;
 import com.simakad.dao.constant.UserType;
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.NewStudent;
-import com.simakad.dao.entity.Student;
 import com.simakad.dao.entity.UserProfile;
 import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.NewStudentDao;
-import com.simakad.dao.repo.UserProfileDao;
+import com.simakad.service.EmailService;
+import com.simakad.service.UserProfileService;
+import com.simakad.service.UserService;
+import com.simakad.service.registration.RegExamService;
+import com.simakad.service.registration.RegPaymentService;
+import com.simakad.service.registration.StudentRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

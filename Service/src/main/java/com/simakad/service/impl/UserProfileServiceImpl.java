@@ -1,7 +1,8 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.entity.UserProfile;
 import com.simakad.dao.repo.UserProfileDao;
+import com.simakad.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

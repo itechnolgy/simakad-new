@@ -1,8 +1,11 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.constant.UserType;
+import com.simakad.dao.entity.UserProfile;
 import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.UserDao;
+import com.simakad.dao.repo.UserProfileDao;
+import com.simakad.service.UserService;
 import com.simakad.service.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -15,9 +18,12 @@ import java.util.Random;
  * Created by SRIN on 10/10/2016.
  */
 @Component
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    UserProfileDao userProfileDao;
 
     @Override
     public Users createUserLogin(String username, UserType userType, Long userProfileId, String email) {
@@ -48,14 +54,6 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
-//    private Users isUsersExist(String email) {
-//        Users user = userDao.findByEmail(email);
-//        if(Objects.isNull(user))
-//            return false;
-//        else
-//            return true;
-//    }
-
     private String generatePassword() {
         String random = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder password = new StringBuilder();
@@ -65,5 +63,11 @@ public class UserServiceImpl implements UserService{
             password.append(random.charAt(idx));
         }
         return password.toString();
+    }
+
+    @Override
+    public UserProfile getUserProfile(String username) {
+        Users users = userDao.findOne(username);
+        return userProfileDao.findOne(users.getUserProfileId());
     }
 }

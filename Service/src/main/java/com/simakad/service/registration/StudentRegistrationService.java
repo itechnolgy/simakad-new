@@ -1,4 +1,4 @@
-package com.simakad.service;
+package com.simakad.service.registration;
 
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.NewStudent;

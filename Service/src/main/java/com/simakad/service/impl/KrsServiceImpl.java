@@ -1,4 +1,4 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.dto.KrsFillingRequest;
 import com.simakad.dao.dto.KrsScheduleRequest;
@@ -8,6 +8,7 @@ import com.simakad.dao.entity.CourseSelectionSheet;
 import com.simakad.dao.repo.CourseResultSheetDao;
 import com.simakad.dao.repo.CourseSelectionClassDao;
 import com.simakad.dao.repo.CourseSelectionSheetDao;
+import com.simakad.service.KrsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

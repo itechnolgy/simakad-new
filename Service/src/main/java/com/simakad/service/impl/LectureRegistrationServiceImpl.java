@@ -1,4 +1,4 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.constant.EmailType;
 import com.simakad.dao.constant.ScoreType;
@@ -13,6 +13,7 @@ import com.simakad.dao.entity.Users;
 import com.simakad.dao.repo.LectureDao;
 import com.simakad.dao.repo.UserDao;
 import com.simakad.dao.repo.UserProfileDao;
+import com.simakad.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

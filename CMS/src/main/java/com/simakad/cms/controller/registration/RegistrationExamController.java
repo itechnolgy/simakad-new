@@ -4,8 +4,8 @@ import com.simakad.cms.model.MyUserDetails;
 import com.simakad.dao.dto.RegExamScheduleResponse;
 import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.RegExamResult;
-import com.simakad.service.RegExamService;
-import com.simakad.service.StudentRegistrationService;
+import com.simakad.service.registration.RegExamService;
+import com.simakad.service.registration.StudentRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 @SessionAttributes("userSession")
 @RequestMapping("/pmb")
-public class RegistrationProcessController {
+public class RegistrationExamController {
 
     @Autowired
     StudentRegistrationService studentRegistrationService;

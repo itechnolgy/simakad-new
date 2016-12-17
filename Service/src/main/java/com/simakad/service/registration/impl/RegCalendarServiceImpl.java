@@ -1,9 +1,9 @@
-package com.simakad.service;
+package com.simakad.service.registration.impl;
 
-import com.simakad.dao.constant.DegreeEnum;
 import com.simakad.dao.constant.RegCalendarType;
 import com.simakad.dao.entity.RegCalendar;
 import com.simakad.dao.repo.RegCalendarDao;
+import com.simakad.service.registration.RegCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

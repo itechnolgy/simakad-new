@@ -1,5 +1,6 @@
-package com.simakad.service;
+package com.simakad.service.registration;
 
+import com.simakad.dao.constant.RegStaticFileType;
 import com.simakad.dao.entity.NewStudent;
 import com.simakad.dao.entity.RegPayment;
 import com.simakad.dao.entity.RegStaticFile;
@@ -15,7 +16,9 @@ public interface RegPaymentService {
     RegPayment updateRegistrationPaymentData(RegStaticFile regStaticFile);
 
     RegPayment updatePaymentStatus(long paymentId, String status);
+
     // CRUD to Database
+    RegPayment getPaymentByStudentIdAndType(String studentId, RegStaticFileType regStaticFileType);
     List<RegPayment> getPaymentByStudentId(String studentId);
     List<RegPayment> getAllPayment();
 

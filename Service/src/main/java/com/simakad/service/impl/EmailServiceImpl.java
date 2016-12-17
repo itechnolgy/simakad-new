@@ -1,8 +1,9 @@
-package com.simakad.service;
+package com.simakad.service.impl;
 
 import com.simakad.dao.constant.EmailType;
 import com.simakad.dao.constant.UserType;
 import com.simakad.dao.entity.Users;
+import com.simakad.service.EmailService;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
@@ -59,7 +60,7 @@ public class EmailServiceImpl implements EmailService {
             case REGISTRATION :
                 switch (userType){
                     case NEW_STUDENT:
-                        subject = "STTJ - Username & Password Portal Mahasiswa Baru ";
+                        subject = "STTJ - Username & Password Portal Penerimaan Mahasiswa Baru ";
                         break;
                     case LECTURE:
                         subject = "STTJ - Username & Password Portal Informasi Akademik";
@@ -72,6 +73,8 @@ public class EmailServiceImpl implements EmailService {
             case FORGOT_PASSWORD:
                 subject = "STTJ - Reset Password ";
                 break;
+            case ACCEPTED_STUDENT:
+                subject = "STTJ - Username & Password Mahasiswa";
         }
 
         return subject;
@@ -79,9 +82,9 @@ public class EmailServiceImpl implements EmailService {
 
     private String messageBodyTemplate(EmailType emailType, UserType userType, Object messageObject) {
         StringBuilder builder = new StringBuilder();
+        Users users = (Users) messageObject;
         switch (emailType) {
             case REGISTRATION :
-                Users users = (Users) messageObject;
                 switch (userType){
                     case NEW_STUDENT:
                         builder.append("Terima kasih telah melakukan pendaftaran mahasiswa baru STTJ \n");
@@ -106,6 +109,11 @@ public class EmailServiceImpl implements EmailService {
                 builder.append("Username    :   " + usersForgot.getUsername() + " \n");
                 builder.append("Password    :   " + usersForgot.getDecryptPass() + " \n");
                 break;
+            case ACCEPTED_STUDENT:
+                builder.append("Kami ucapakan selamat datang kepada saudara/saudari sebagai bagian dari mahasiswa Sekolah Teologi Jakarta" + " \n");
+                builder.append("Berikut username dan password untuk melakukan login ke Portal Mahasiswa STTJ \n");
+                builder.append("Username    :   " + users.getUsername() + " \n");
+                builder.append("Password    :   " + users.getDecryptPass() + " \n");
         }
 
         return builder.toString();
