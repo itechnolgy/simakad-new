@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" th:href="@{'/pmb/payment'}" class="nav-link nav-toggle">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
                     <span class="title">Payment</span>
                 </a>
             </li>
@@ -33,8 +33,13 @@
         </th:block>
         <th:block th:if="${userSession.role}=='ROLE_ACADEMIC'">
             <li class="nav-item">
-                <a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
                     <span class="title">Period</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">New Student</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -48,11 +53,51 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" th:href="@{'/pmb/exam/result'}" class="nav-link nav-toggle">
+                <a href="" th:href="@{'/academic/krs/list'}" class="nav-link nav-toggle">
                     <span class="title">KRS</span>
                 </a>
             </li>
         </th:block>
+        <th:block th:if="${userSession.role}=='ROLE_LECTURE'">
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">List Class</span>
+                </a>
+            </li>
+        </th:block>
+        <th:block th:if="${userSession.role}=='ROLE_STUDENT'">
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">Kartu Studi Mahasiswa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">Transkip Nilai</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">KRS</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
+                    <span class="title">Payment</span>
+                </a>
+            </li>
+        </th:block>
+
 
     </ul>
     <!-- END SIDEBAR MENU -->

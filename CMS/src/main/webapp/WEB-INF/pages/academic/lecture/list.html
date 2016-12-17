@@ -26,15 +26,16 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>ID</th>
+                <!--<th th:text="${lecture.id}>ID</th>-->
                 <th>Name</th>
+                <th>Email</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Cornelius Alvin Prilly</td>
+            <tr th:each="lecture : ${lectureList.lectureList}">
+                <td th:text="${lecture.name}">1</td>
+                <td th:text="${lecture.email}">Cornelius Alvin Prilly</td>
                 <td>
                     <a th:href="@{/1}" class="btn btn-xs btn-info btn-accept">Edit</a>
                     <button type="button" class="btn btn-xs btn-danger btn-delete" th:attr="data-id=1">Delete</button>
