@@ -13,3 +13,7 @@
     background-color: #FFFFFF !important;
     cursor: text !important;
 }
+
+.btn-action {
+    margin-bottom: 10px;
+}
