@@ -10,8 +10,10 @@ import java.util.List;
  */
 public interface CourseService {
     Course addCourse(CourseRequest courseRequest);
-
+    Course getCourseByCourseId(String courseId);
     List<Course> getCourseList();
     List<Course> getCourseListByDegree(long degreeId);
     List<Course> getCourseListBySemester(Integer semester);
+    Course editCourse(CourseRequest courseRequest);
+    Course deleteCourse(String courseId);
 }

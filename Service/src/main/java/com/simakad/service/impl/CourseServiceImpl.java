@@ -37,6 +37,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public Course getCourseByCourseId(String courseId) {
+        Course course = courseDao.findById(courseId);
+        return course;
+    }
+
+    @Override
     public List<Course> getCourseListByDegree(long degreeId) {
         return courseDao.findByDegreeId(degreeId);
     }
@@ -44,6 +50,17 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> getCourseListBySemester(Integer semester) {
         return courseDao.findBySemester(semester);
+    }
+
+    @Override
+    public Course editCourse(CourseRequest courseRequest) {
+        return null;
+    }
+
+    @Override
+    public Course deleteCourse(String courseId) {
+        courseDao.delete(courseId);
+        return null;
     }
 
     private Course createNewCourse(CourseRequest courseRequest){

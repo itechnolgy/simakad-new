@@ -41,6 +41,16 @@
                 <a href="" th:href="@{'/home'}" class="nav-link nav-toggle">
                     <span class="title">New Student</span>
                 </a>
+                <div class="collapse navbar-collapse" id="collapse">
+                    <ul id="categories-menu" class="nav nav-pills nav-stacked">
+                        <li><a href="" th:href="@{'/academic/pmb/payment/verification'}">New Student List</a></li>
+                        <!--Todo move into finance menu-->
+                        <li><a href="" th:href="@{'/finance/pmb/payment/verification'}">Payment Verification</a></li>
+
+                        <li><a href="" th:href="@{'/academic/pmb/document/verification'}">Document Verification</a></li>
+                        <li><a href="" th:href="@{'/academic/pmb/examresult/verification'}">Exam Result Verification</a></li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
                 <a href="" th:href="@{'/academic/course/list'}" class="nav-link nav-toggle">

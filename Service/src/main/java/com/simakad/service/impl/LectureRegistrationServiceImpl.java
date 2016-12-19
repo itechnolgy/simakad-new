@@ -3,6 +3,7 @@ package com.simakad.service.impl;
 import com.simakad.dao.constant.EmailType;
 import com.simakad.dao.constant.ScoreType;
 import com.simakad.dao.constant.UserType;
+import com.simakad.dao.dto.LectureRequest;
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.dto.response.LectureResponse;
 import com.simakad.dao.dto.response.TeachingScheduleResponse;
@@ -66,8 +67,7 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
     EmailService emailService;
 
     @Override
-    @Transactional
-    public Lecture register(StudentRegistrationRequest lectureRegistrationRequest){
+    public Lecture register(LectureRequest lectureRegistrationRequest){
         if(!isRegistered(lectureRegistrationRequest)){
             UserProfile lectureRegistrationProfile = userProfileService.createUserProfile(convertToUserProfile(lectureRegistrationRequest));
             Lecture lecture = createNewLecture();
@@ -112,21 +112,16 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
         studentAcademicService.editStudentScore(studentId, courseId, scoreType, score);
     }
 
-    private boolean isRegistered(StudentRegistrationRequest lectureRegistrationRequest){
-        UserProfile profile = userProfileService.isUserProfileExist(lectureRegistrationRequest.getEmail(), lectureRegistrationRequest.getIdentityCardNumber());
+    private boolean isRegistered(LectureRequest lectureRegistrationRequest){
+        UserProfile profile = userProfileService.isUserProfileExist(lectureRegistrationRequest.getEmail());
         if(Objects.isNull(profile)) return false;
         else return true;
     }
 
-    private UserProfile convertToUserProfile(StudentRegistrationRequest request){
+    private UserProfile convertToUserProfile(LectureRequest request){
         UserProfile profile = new UserProfile();
         profile.setName(request.getName());
-        profile.setAddress(request.getAddress());
         profile.setEmail(request.getEmail());
-        profile.setAddress(request.getAddress());
-        profile.setGender(request.getGender());
-        profile.setIdentityCardNumber(request.getIdentityCardNumber());
-        profile.setIdentityCardNumberType(request.getIdentityCardNumberType());
         return profile;
     }
 
@@ -134,7 +129,7 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
         Date date = new Date();
         Lecture lecture = new Lecture();
         lecture.setId(createLectureId());
-        lecture.setStatus("PENDING");
+        lecture.setStatus("ACTIVE");
         lecture.setCreationTime(date);
         lecture.setLastUpdateTime(date);
         lecture = lectureDao.save(lecture);

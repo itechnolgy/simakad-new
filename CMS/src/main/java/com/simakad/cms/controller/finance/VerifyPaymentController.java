@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @SessionAttributes("userSession")
-@RequestMapping(value = "/finance/")
+@RequestMapping(value = "/finance")
 public class VerifyPaymentController {
     @Autowired
     RegPaymentService regPaymentService;
@@ -28,9 +28,12 @@ public class VerifyPaymentController {
     NewStudentDao newStudentDao;
 
     @RequestMapping(value = "/pmb/payment/verification", method = RequestMethod.GET)
-    public String verifyPmbPayment(Model model) {
+    public String verifyPmbPayment(Model model, Authentication auth) {
         List<RegPayment> regPaymentList = regPaymentService.getAllPayment();
+        model.addAttribute("title", "New Student Payment Verification");
+        model.addAttribute("view", "/academic/payment/list");
         model.addAttribute("payments", regPaymentList);
+        model.addAttribute("userSession", getUserSession(auth));
         return "layout/default";
     }
 

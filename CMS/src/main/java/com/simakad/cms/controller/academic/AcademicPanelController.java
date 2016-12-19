@@ -32,13 +32,7 @@ public class AcademicPanelController {
         return "layout/default";
     }
 
-    @RequestMapping(value = "/period", method = RequestMethod.GET)
-    public String period(Model model) {
-        model.addAttribute("view", "academic/period/form");
-        return "layout/default";
-    }
-
-    @RequestMapping(value = "/period", method = RequestMethod.POST)
+    @RequestMapping(value = "/period/add", method = RequestMethod.POST)
     public String postPeriod(@Valid PeriodRequest periodRequest, Model model) {
         if(!isPeriodExist(periodRequest.getYear())) {
             periodService.savePeriod(periodRequest.getYear(), periodRequest.getStartDate(), periodRequest.getEndDate());

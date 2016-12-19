@@ -8,5 +8,6 @@ import com.simakad.dao.entity.UserProfile;
 public interface UserProfileService {
     public UserProfile createUserProfile(UserProfile userProfile);
     public UserProfile isUserProfileExist(String email, String identityNumber);
+    public UserProfile isUserProfileExist(String email);
 
 }

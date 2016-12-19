@@ -33,4 +33,9 @@ public class UserProfileServiceImpl implements UserProfileService {
         return userProfile;
     }
 
+    @Override
+    public UserProfile isUserProfileExist(String email) {
+        UserProfile userProfile = userProfileDao.findByEmail(email);
+        return userProfile;
+    }
 }

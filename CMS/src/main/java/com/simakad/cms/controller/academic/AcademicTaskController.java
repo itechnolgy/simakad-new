@@ -2,6 +2,7 @@ package com.simakad.cms.controller.academic;
 
 import com.simakad.cms.model.MyUserDetails;
 import com.simakad.dao.dto.CourseRequest;
+import com.simakad.dao.dto.LectureRequest;
 import com.simakad.dao.dto.response.LectureResponse;
 import com.simakad.dao.entity.Course;
 import com.simakad.dao.entity.Lecture;
@@ -41,9 +42,25 @@ public class AcademicTaskController {
         return "layout/default";
     }
 
+    @RequestMapping(value = "/lecture/add" , method = RequestMethod.GET)
+    public String showAddTeacher(Model model, Authentication auth) {
+        LectureRequest lectureRequest = new LectureRequest();
+        model.addAttribute("title", "Add New Lecture");
+        model.addAttribute("view", "academic/lecture/new");
+        model.addAttribute("userSession", getUserSession(auth));
+        model.addAttribute("lecture", lectureRequest);
+        return "layout/default";
+    }
+
     @RequestMapping(value = "/lecture/add" , method = RequestMethod.POST)
-    public String addTeacher(Model model) {
-        return "";
+    public String addTeacher(@Valid LectureRequest lectureRequest, Model model, Authentication auth) {
+        lectureService.register(lectureRequest);
+        model.addAttribute("title", "Add New Lecture");
+        model.addAttribute("view", "academic/lecture/new");
+        model.addAttribute("userSession", getUserSession(auth));
+        LectureRequest newLectureRequest = new LectureRequest();
+        model.addAttribute("lecture", newLectureRequest);
+        return "layout/default";
     }
 
     @RequestMapping(value = "/course/list" , method = RequestMethod.GET)
@@ -56,24 +73,12 @@ public class AcademicTaskController {
         return "layout/default";
     }
 
-    @RequestMapping(value = "/course/edit/{courseId}" , method = RequestMethod.GET)
-    public String EditCourse(Model model, Authentication auth) {
-        model.addAttribute("userSession", getUserSession(auth));
-        return "layout/default";
-    }
-
-    @RequestMapping(value = "/course/delete/{courseId}" , method = RequestMethod.GET)
-    public String DeleteCourse(Model model, Authentication auth) {
-        model.addAttribute("userSession", getUserSession(auth));
-        return "layout/default";
-    }
-
     @RequestMapping(value = "/course/degree/{degree}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String getCourseByDegreeId(@PathVariable("degree") Integer degreeId, Model model, Authentication auth) {
         List<Course> courseList = courseService.getCourseListByDegree(degreeId);
-        model.addAttribute("title", "List Courses Degree");
-        model.addAttribute("view", "academic/course/list");
+        model.addAttribute("title", "Course List");
+        model.addAttribute("view", "academic/course/edit");
         model.addAttribute("userSession", getUserSession(auth));
         model.addAttribute("courseList", courseList);
         return "layout/default";
@@ -83,7 +88,7 @@ public class AcademicTaskController {
     public @ResponseBody
     String getCourseBySemester(@PathVariable("semester") Integer semester, Model model, Authentication auth) {
         List<Course> courseList = courseService.getCourseListBySemester(semester);
-        model.addAttribute("title", "List Courses Degree");
+        model.addAttribute("title", "Course List");
         model.addAttribute("view", "academic/course/list");
         model.addAttribute("userSession", getUserSession(auth));
         model.addAttribute("courseList", courseList);
@@ -93,7 +98,7 @@ public class AcademicTaskController {
     @RequestMapping(value = "/course/add" , method = RequestMethod.GET)
     public String showAddCourse(Model model, Authentication auth) {
         CourseRequest courseRequest = new CourseRequest();
-        model.addAttribute("title", "List Courses");
+        model.addAttribute("title", "Add New Course");
         model.addAttribute("view", "academic/course/new");
         model.addAttribute("userSession", getUserSession(auth));
         model.addAttribute("course", courseRequest);
@@ -104,11 +109,41 @@ public class AcademicTaskController {
     @RequestMapping(value = "/course/add" , method = RequestMethod.POST)
     public String addCourse(@Valid CourseRequest courseRequest, Model model, Authentication auth) {
         courseService.addCourse(courseRequest);
-        model.addAttribute("title", "Add Course");
+        model.addAttribute("title", "Add New Course");
         model.addAttribute("view", "academic/course/new");
         model.addAttribute("userSession", getUserSession(auth));
         CourseRequest newCourseRequest = new CourseRequest();
         model.addAttribute("course", newCourseRequest);
+        return "layout/default";
+    }
+
+    @RequestMapping(value = "/course/edit/{courseId}" , method = RequestMethod.GET)
+    public String showEditCourse(@PathVariable("courseId") String courseId, Model model, Authentication auth) {
+        Course course = courseService.getCourseByCourseId(courseId);
+        model.addAttribute("title", "Edit Course");
+        model.addAttribute("view", "academic/course/edit");
+        model.addAttribute("userSession", getUserSession(auth));
+        model.addAttribute("course", course);
+        return "layout/default";
+    }
+
+    @RequestMapping(value = "/course/edit" , method = RequestMethod.POST)
+    public String EditCourse(@Valid CourseRequest courseRequest, Model model, Authentication auth) {
+        courseService.editCourse(courseRequest);
+        model.addAttribute("title", "Course List");
+        model.addAttribute("view", "academic/course/list");
+        model.addAttribute("userSession", getUserSession(auth));
+        return "layout/default";
+    }
+
+    @RequestMapping(value = "/course/delete/{courseId}" , method = RequestMethod.POST)
+    public String DeleteCourse(@PathVariable("courseId") String courseId, Model model, Authentication auth) {
+        courseService.deleteCourse(courseId);
+        List<Course> courseList = courseService.getCourseList();
+        model.addAttribute("title", "List Courses");
+        model.addAttribute("view", "academic/course/list");
+        model.addAttribute("userSession", getUserSession(auth));
+        model.addAttribute("courseList", courseList);
         return "layout/default";
     }
 

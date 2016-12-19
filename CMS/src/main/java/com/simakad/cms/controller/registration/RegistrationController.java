@@ -2,6 +2,7 @@ package com.simakad.cms.controller.registration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.simakad.dao.dto.LectureRequest;
 import com.simakad.dao.dto.StudentRegistrationRequest;
 import com.simakad.dao.entity.Lecture;
 import com.simakad.dao.entity.NewStudent;
@@ -69,18 +70,5 @@ public class RegistrationController {
         }
 
         return response;
-    }
-
-    @RequestMapping(value = "/lecture", method = RequestMethod.POST)
-    public String doLectureRegistration(@Valid StudentRegistrationRequest lectureRegistrationRequest, Model model){
-        Lecture lectureRegistration = lectureRegistrationService.register(lectureRegistrationRequest);
-        if(Objects.isNull(lectureRegistration)){
-            model.addAttribute("error", "This identity or email has been registered!");
-            model.addAttribute("registration", lectureRegistrationRequest);
-            model.addAttribute("view", "auth/register");
-            return "layout/auth";
-        }
-        model.addAttribute("lecture", lectureRegistration);
-        return "redirect:/login?success";
     }
 }

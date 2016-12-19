@@ -1,10 +1,16 @@
-<form class="form form-horizontal" method="post" action="" id="lecture-form" xmlns:th="http://www.thymeleaf.org">
+<form class="form form-horizontal" method="post" action="" th:action="@{'/academic/lecture/add'}" th:object="${lecture}" id="lecture-form" xmlns:th="http://www.thymeleaf.org">
     <div class="form-body">
         <input type="hidden" name="id" value="" />
         <div class="form-group">
             <label class="control-label col-md-3">Lecture Name</label>
             <div class="col-md-9">
-                <input type="text" class="form-control" name="name" placeholder="Lecture Name" />
+                <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Email</label>
+            <div class="col-md-9">
+                <input type="number" class="form-control" th:field="*{email}" id="email" placeholder="Email" />
             </div>
         </div>
     </div>

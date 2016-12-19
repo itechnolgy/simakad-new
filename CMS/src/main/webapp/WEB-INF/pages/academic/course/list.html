@@ -24,7 +24,7 @@
     <div class="portlet-body">
         <h4 class="block">Course List</h4>
         <div class="block btn-action">
-            <a th:href="@{/}" class="btn btn-primary">Create New</a>
+            <a th:href="'add'" class="btn btn-primary">Create New</a>
         </div>
         <table class="table table-bordered">
             <thead>
@@ -43,8 +43,8 @@
                 <td th:text="${course.degreeId}">S1</td>
                 <td th:text="${course.semesterCreditNumber}">2</td>
                 <td>
-                    <a th:href="'academic/course/edit/' + ${course.id}" class="btn btn-xs btn-info btn-accept">Edit</a>
-                    <button type="button" class="btn btn-xs btn-danger btn-delete" th:attr="data-id=${course.id}">Delete</button>
+                    <a th:href="'edit/' + ${course.id}" class="btn btn-xs btn-info btn-accept">Edit</a>
+                    <button type="button" class="btn btn-xs btn-danger btn-delete" th:attr="data-id='delete/'+${course.id}">Delete</button>
                 </td>
             </tr>
             </tbody>

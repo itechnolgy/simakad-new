@@ -9,6 +9,7 @@ import java.util.List;
  * Created by SRIN on 11/15/2016.
  */
 public interface CourseDao extends JpaRepository<Course, String> {
+    Course findById (String id);
     List<Course> findByDegreeId(long degreeId);
     List<Course> findBySemester(Integer semester);
 }
