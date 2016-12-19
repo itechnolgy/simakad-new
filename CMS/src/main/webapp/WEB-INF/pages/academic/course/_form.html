@@ -1,10 +1,10 @@
-<form class="form form-horizontal" method="post" action="" id="course-form" th:action="@{'/academic/course/add'}" th:object="${course}" xmlns:th="http://www.thymeleaf.org">
+<form class="form form-horizontal" method="post" action="" id="course-form" th:object="${course}" xmlns:th="http://www.thymeleaf.org"
+      th:action="${course.id != null} ? @{'/academic/course/edit/' + ${course.id}} : @{'/academic/course/add'}">
     <div class="form-body">
-        <input type="hidden" name="id" value="" />
         <div class="form-group">
             <label class="control-label col-md-3">Course ID</label>
             <div class="col-md-9">
-                <input type="text" class="form-control" id="courseId" th:field="*{courseId}" placeholder="Course Id" />
+                <input type="text" class="form-control" id="courseId" th:field="*{id}" placeholder="Course Id" />
             </div>
         </div>
         <div class="form-group">
@@ -18,7 +18,7 @@
             <div class="col-md-9">
                 <select class="form-control" name="degreeId" id="degreeId">
                     <option value="">- Please Select -</option>
-                    <option value="1">S1</option>
+                    <option value="1" th:selected="*{degreeId} == 1">S1</option>
                     <option value="2">S2</option>
                     <option value="3">S3</option>
                     <option value="4">S1 Matriculation</option>
@@ -40,7 +40,7 @@
     </div>
     <div class="form-actions">
         <div class="col-md-offset-3 col-md-9">
-            <a th:href="@{''}" class="btn btn-default">
+            <a th:href="@{/academic/course/list}" class="btn btn-default">
                 <i class="icon-arrow-left"></i> Back
             </a>
             <button type="submit" class="btn btn-primary">

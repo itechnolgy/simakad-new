@@ -5,18 +5,18 @@ package com.simakad.dao.dto;
  */
 public class CourseRequest {
 
-    private String courseId;
+    private String id;
     private String courseName;
     private long degreeId;
     private Integer semesterCreditNumber;
     private Integer semester;
 
-    public String getCourseId() {
-        return courseId;
+    public String getId() {
+        return id;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCourseName() {

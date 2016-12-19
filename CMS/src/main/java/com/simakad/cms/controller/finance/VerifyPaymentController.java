@@ -31,7 +31,7 @@ public class VerifyPaymentController {
     public String verifyPmbPayment(Model model, Authentication auth) {
         List<RegPayment> regPaymentList = regPaymentService.getAllPayment();
         model.addAttribute("title", "New Student Payment Verification");
-        model.addAttribute("view", "/academic/payment/list");
+        model.addAttribute("view", "/finance/register/list");
         model.addAttribute("payments", regPaymentList);
         model.addAttribute("userSession", getUserSession(auth));
         return "layout/default";

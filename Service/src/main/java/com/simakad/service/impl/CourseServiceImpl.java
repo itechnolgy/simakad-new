@@ -65,7 +65,7 @@ public class CourseServiceImpl implements CourseService {
 
     private Course createNewCourse(CourseRequest courseRequest){
         Course course = new Course();
-        course.setId(courseRequest.getCourseId());
+        course.setId(courseRequest.getId());
         course.setCourseName(courseRequest.getCourseName());
         course.setDegreeId(courseRequest.getDegreeId());
         course.setSemester(courseRequest.getSemester());

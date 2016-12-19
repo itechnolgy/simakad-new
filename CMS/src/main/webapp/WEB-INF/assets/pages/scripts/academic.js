@@ -107,7 +107,9 @@ var AcademicPage = function() {
     var handleCourseList = function () {
         $(".btn-delete").on('click', function() {
             var courseId = $(this).data().id;
-            $("#course-id").val(courseId);
+            var linkTo = '/simakad/academic/course/delete/' + courseId;
+
+            $("#form-delete").attr('action', linkTo);
             $("#delete-modal").modal('show');
         });
     };

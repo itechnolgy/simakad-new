@@ -27,8 +27,8 @@
             <thead>
             <tr>
                 <th>Code</th>
-                <th>Name</th>
-                <th>Strata</th>
+                <!--<th>Name</th>-->
+                <!--<th>Strata</th>-->
                 <th>Type</th>
                 <th>File</th>
                 <th>Status</th>
@@ -37,13 +37,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>PMB-100001</td>
-                <td>Cornelius Alvin Prilly</td>
-                <td>Strata 1 (S1)</td>
-                <td>Registrasi</td>
-                <td><a href="" class="btn btn-xs blue"><i class="fa fa-download"></i> Download</a></td>
-                <td>Pending</td>
+            <tr th:each="payment : ${payments}">
+                <td th:text="${payment.studentId}">PMB-100001</td>
+                <!--<td th:text="${regPaymentList.}>Cornelius Alvin Prilly</td>-->
+                <!--<td th:text="${regPaymentList.id}>Strata 1 (S1)</td>-->
+                <td th:text="${payment.type}">Registrasi</td>
+                <td th:text="${payment.staticFile.name}"><a href="" class="btn btn-xs blue"><i class="fa fa-download"></i> Download</a></td>
+                <td th:text="${payment.status}">Pending</td>
                 <td>-</td>
                 <td>
                     <button type="button" class="btn btn-xs btn-info btn-accept" th:attr="data-id=${data}">Accept</button>

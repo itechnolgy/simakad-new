@@ -127,24 +127,16 @@ public class AcademicTaskController {
         return "layout/default";
     }
 
-    @RequestMapping(value = "/course/edit" , method = RequestMethod.POST)
-    public String EditCourse(@Valid CourseRequest courseRequest, Model model, Authentication auth) {
+    @RequestMapping(value = "/course/edit/{courseId}" , method = RequestMethod.POST)
+    public String EditCourse(@Valid CourseRequest courseRequest, Authentication auth, @PathVariable("courseId") String courseId) {
         courseService.editCourse(courseRequest);
-        model.addAttribute("title", "Course List");
-        model.addAttribute("view", "academic/course/list");
-        model.addAttribute("userSession", getUserSession(auth));
-        return "layout/default";
+        return "redirect:/academic/course/list";
     }
 
     @RequestMapping(value = "/course/delete/{courseId}" , method = RequestMethod.POST)
-    public String DeleteCourse(@PathVariable("courseId") String courseId, Model model, Authentication auth) {
+    public String DeleteCourse(@PathVariable("courseId") String courseId, Authentication auth) {
         courseService.deleteCourse(courseId);
-        List<Course> courseList = courseService.getCourseList();
-        model.addAttribute("title", "List Courses");
-        model.addAttribute("view", "academic/course/list");
-        model.addAttribute("userSession", getUserSession(auth));
-        model.addAttribute("courseList", courseList);
-        return "layout/default";
+        return "redirect:/academic/course/list";
     }
 
     private MyUserDetails getUserSession(Authentication auth) {
