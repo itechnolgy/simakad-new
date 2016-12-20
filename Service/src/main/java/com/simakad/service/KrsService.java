@@ -10,7 +10,7 @@ import java.util.List;
  * Created by HighDream on 11/19/2016.
  */
 public interface KrsService {
-    void addKrsSchedule(KrsScheduleRequest krsScheduleRequest);
+    void addKrsSchedule(KrsScheduleRequest krsScheduleRequest, Long id);
 
     void fillKrs(KrsFillingRequest krsFillingRequest);
 
@@ -21,4 +21,6 @@ public interface KrsService {
     void startKrsPeriod();
 
     void closeKrsPeriod();
+
+    CourseSelectionClass getKrsSchedule(Long krsClassId);
 }

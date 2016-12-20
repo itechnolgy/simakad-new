@@ -32,7 +32,8 @@ public class RegStaticFile {
     @Column(name = "student_registration_id")
     private String studentId;
 
-    @Transient
+    @JoinColumn(name = "student_registration_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private NewStudent newStudent;
 
     @Basic(optional = false)
@@ -76,7 +77,7 @@ public class RegStaticFile {
         this.studentId = studentId;
     }
 
-    public NewStudent getNewStudent(ApplicationContext context) {
+    public NewStudent getNewStudent() {
         return newStudent;
     }
 

@@ -41,8 +41,11 @@ public class KrsServiceImpl implements KrsService {
     EntityManager entityManager;
 
     @Override
-    public void addKrsSchedule(KrsScheduleRequest krsScheduleRequest) {
-        CourseSelectionClass krsSchedule = new CourseSelectionClass();
+    public void addKrsSchedule(KrsScheduleRequest krsScheduleRequest, Long id) {
+        CourseSelectionClass krsSchedule;
+        if(id != null) krsSchedule = courseSelectionClassDao.findOne(id);
+        else krsSchedule = new CourseSelectionClass();
+
         krsSchedule.setCourseId(krsSchedule.getCourseId());
         krsSchedule.setDegreeId(krsSchedule.getDegreeId());
         krsSchedule.setLectureId(krsSchedule.getLectureId());
@@ -120,5 +123,10 @@ public class KrsServiceImpl implements KrsService {
     @Override
     public List<CourseSelectionClass> getClassByLectureId(String lectureId) {
         return courseSelectionClassDao.findByLectureId(lectureId);
+    }
+
+    @Override
+    public CourseSelectionClass getKrsSchedule(Long krsClassId) {
+        return courseSelectionClassDao.findOne(krsClassId);
     }
 }

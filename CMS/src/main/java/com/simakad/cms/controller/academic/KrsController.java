@@ -29,9 +29,24 @@ public class KrsController {
         return "layout/default";
     }
 
-    @RequestMapping(value = "/add/krs_schedule", method = RequestMethod.POST)
-    public String addKrsSchedule(Model model, KrsScheduleRequest krsScheduleRequest) {
-        krsService.addKrsSchedule(krsScheduleRequest);
+    @RequestMapping(value = "/add/krs_schedule/{id}", method = RequestMethod.GET)
+    public String addKrsSchedule(Model model, @PathVariable(value = "id") Long id) {
+        if(id == null) {
+            model.addAttribute("view", "academic/krs/new");
+        }
+        else {
+            model.addAttribute("view", "academic/krs/edit");
+            model.addAttribute("krsClass", krsService.getKrsSchedule(id));
+        }
+        model.addAttribute("title", "KRS Lecture");
+
+        return "layout/default";
+    }
+
+    @RequestMapping(value = "/add/krs_schedule/{id}", method = RequestMethod.POST)
+    public String doAddKrsSchedule(Model model, KrsScheduleRequest krsScheduleRequest, @PathVariable(value = "id") Long id) {
+        boolean isUpdate = ((id == null) ? false : true);
+        krsService.addKrsSchedule(krsScheduleRequest, id);
         return "layout/default";
     }
 
