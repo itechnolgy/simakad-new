@@ -2,6 +2,7 @@ package com.simakad.service.registration.impl;
 
 import com.simakad.dao.constant.RegStaticFileType;
 import com.simakad.dao.entity.RegStaticFile;
+import com.simakad.dao.repo.NewStudentDao;
 import com.simakad.dao.repo.RegStaticFileDao;
 import com.simakad.service.registration.RegistrationStaticFileService;
 import com.simakad.service.util.StorageUtil;
@@ -22,6 +23,9 @@ public class RegistrationStaticFileServiceImpl implements RegistrationStaticFile
 
     @Autowired
     RegStaticFileDao regStaticFileDao;
+
+    @Autowired
+    NewStudentDao newStudentDao;
 
 
     @Override
@@ -50,7 +54,7 @@ public class RegistrationStaticFileServiceImpl implements RegistrationStaticFile
         RegStaticFile regStaticFile = new RegStaticFile();
         regStaticFile.setName(savedFile.getPath());
         regStaticFile.setType(regStaticFileType);
-        regStaticFile.setStudentId(studentId);
+        regStaticFile.setNewStudent(newStudentDao.findOne(studentId));
         regStaticFile.setCreationTime(new Date());
         regStaticFile.setLastUpdateTime(new Date());
 

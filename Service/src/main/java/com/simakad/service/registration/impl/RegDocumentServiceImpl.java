@@ -24,7 +24,7 @@ public class RegDocumentServiceImpl implements RegDocumentService {
     @Override
     public RegDocument createDocumentData(RegStaticFile regStaticFile) {
         RegDocument document = new RegDocument();
-        document.setStudentId(regStaticFile.getStudentId());
+        document.setStudentId(regStaticFile.getNewStudent().getId());
         document.setStaticFile(regStaticFile);
         document.setType(regStaticFile.getType());
         document.setStatus(VerificationType.PENDING);
@@ -35,7 +35,7 @@ public class RegDocumentServiceImpl implements RegDocumentService {
     @Override
     public RegDocument updateDocumentData(RegStaticFile regStaticFile) {
 
-        RegDocument document = regDocumentDao.findByStudentIdAndType(regStaticFile.getStudentId(), regStaticFile.getType());
+        RegDocument document = regDocumentDao.findByStudentIdAndType(regStaticFile.getNewStudent().getId(), regStaticFile.getType());
         if(Objects.isNull(document)) {
             createDocumentData(regStaticFile);
         } else {

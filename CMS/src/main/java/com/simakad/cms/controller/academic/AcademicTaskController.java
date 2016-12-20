@@ -55,12 +55,7 @@ public class AcademicTaskController {
     @RequestMapping(value = "/lecture/add" , method = RequestMethod.POST)
     public String addTeacher(@Valid LectureRequest lectureRequest, Model model, Authentication auth) {
         lectureService.register(lectureRequest);
-        model.addAttribute("title", "Add New Lecture");
-        model.addAttribute("view", "academic/lecture/new");
-        model.addAttribute("userSession", getUserSession(auth));
-        LectureRequest newLectureRequest = new LectureRequest();
-        model.addAttribute("lecture", newLectureRequest);
-        return "layout/default";
+        return "redirect:/academic/lecture/list";
     }
 
     @RequestMapping(value = "/course/list" , method = RequestMethod.GET)

@@ -28,11 +28,11 @@ public class RegStaticFile {
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private NewStudent newStudent;
 
-    @Basic(optional = false)
-    @Column(name = "student_registration_id")
-    private String studentId;
+//    @Basic(optional = false)
+//    @Column(name = "student_registration_id")
+//    private String studentId;
 
-    @JoinColumn(name = "student_registration_id", referencedColumnName = "id")
+    @JoinColumn(name = "student_registration_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private NewStudent newStudent;
 
@@ -69,13 +69,13 @@ public class RegStaticFile {
         this.id = id;
     }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
+//    public String getStudentId() {
+//        return studentId;
+//    }
+//
+//    public void setStudentId(String studentId) {
+//        this.studentId = studentId;
+//    }
 
     public NewStudent getNewStudent() {
         return newStudent;

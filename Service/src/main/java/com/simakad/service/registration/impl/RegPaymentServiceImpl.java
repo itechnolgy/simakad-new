@@ -38,10 +38,10 @@ public class RegPaymentServiceImpl implements RegPaymentService {
     @Override
     public RegPayment updateRegistrationPaymentData(RegStaticFile regStaticFile) {
 
-        RegPayment regPayment = regPaymentDao.findByStudentIdAndType(regStaticFile.getStudentId(), regStaticFile.getType());
+        RegPayment regPayment = regPaymentDao.findByStudentIdAndType(regStaticFile.getNewStudent().getId(), regStaticFile.getType());
         if(Objects.isNull(regPayment)) {
             NewStudent newStudent = new NewStudent();
-            newStudent.setId(regStaticFile.getStudentId());
+            newStudent.setId(regStaticFile.getNewStudent().getId());
             regPayment = createRegistrationPaymentData(regStaticFile, newStudent);
         } else {
             regPayment.setStatus(VerificationType.PENDING);
