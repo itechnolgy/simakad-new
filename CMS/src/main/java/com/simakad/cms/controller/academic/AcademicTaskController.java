@@ -53,9 +53,19 @@ public class AcademicTaskController {
     }
 
     @RequestMapping(value = "/lecture/add" , method = RequestMethod.POST)
-    public String addTeacher(@Valid LectureRequest lectureRequest, Model model, Authentication auth) {
+    public String addTeacher(@Valid LectureRequest lectureRequest) {
         lectureService.register(lectureRequest);
         return "redirect:/academic/lecture/list";
+    }
+
+    @RequestMapping(value = "/lecture/edit/{lectureUsername}" , method = RequestMethod.GET)
+    public String showEditLecture(@PathVariable("lectureUsername") String lectureUsername, Model model, Authentication auth) {
+        Course course = courseService.getCourseByCourseId(lectureUsername);
+        model.addAttribute("title", "Edit Course");
+        model.addAttribute("view", "academic/lecture/edit");
+        model.addAttribute("userSession", getUserSession(auth));
+        model.addAttribute("course", course);
+        return "layout/default";
     }
 
     @RequestMapping(value = "/course/list" , method = RequestMethod.GET)

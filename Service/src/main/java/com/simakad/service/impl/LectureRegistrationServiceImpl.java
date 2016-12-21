@@ -85,6 +85,7 @@ public class LectureRegistrationServiceImpl implements LectureRegistrationServic
         for(Users user : listUsers){
             LectureResponse.Lecture lecture = new LectureResponse.Lecture();
             UserProfile userProfile = userProfileDao.findByEmail(user.getEmail());
+            lecture.setUsername(user.getUsername());
             lecture.setEmail(userProfile.getEmail());
             lecture.setName(userProfile.getName());
             response.addLecture(lecture);

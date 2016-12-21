@@ -15,8 +15,17 @@ public class LectureResponse {
     }
 
     public static class Lecture{
+        private String username;
         private String name;
         private String email;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
 
         public String getName() {
             return name;

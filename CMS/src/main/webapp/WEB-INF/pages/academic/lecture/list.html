@@ -29,7 +29,7 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <!--<th th:text="${lecture.id}>ID</th>-->
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Action</th>
@@ -37,10 +37,11 @@
             </thead>
             <tbody>
             <tr th:each="lecture : ${lectureList.lectureList}">
+                <td  th:text="${lecture.username}">D10212</td>
                 <td th:text="${lecture.name}">1</td>
                 <td th:text="${lecture.email}">Cornelius Alvin Prilly</td>
                 <td>
-                    <a th:href="'edit/' + ${lecture.id}" class="btn btn-xs btn-info btn-accept">Edit</a>
+                    <a th:href="'edit/' + ${lecture.username}" class="btn btn-xs btn-info btn-accept">Edit</a>
                     <button type="button" class="btn btn-xs btn-danger btn-delete" th:attr="data-id=1">Delete</button>
                 </td>
             </tr>
