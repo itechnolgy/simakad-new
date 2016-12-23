@@ -37,7 +37,7 @@
             </thead>
             <tbody>
             <tr th:each="lecture : ${lectureList.lectureList}">
-                <td  th:text="${lecture.username}">D10212</td>
+                <td th:text="${lecture.username}">D10212</td>
                 <td th:text="${lecture.name}">1</td>
                 <td th:text="${lecture.email}">Cornelius Alvin Prilly</td>
                 <td>
@@ -53,20 +53,13 @@
 <div class="modal fade" id="delete-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="">
+            <form method="post" action="" id="form-delete">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Delete Confirmation</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="portlet-body form">
-                        <div class="form-horizontal">
-                            <div class="form-body">
-                                <p class="text-center">Are you sure want to delete this lecture? </p>
-                                <input type="hidden" name="id" id="lecture-id" value=""/>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-center">Are you sure want to delete this lecture? </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>

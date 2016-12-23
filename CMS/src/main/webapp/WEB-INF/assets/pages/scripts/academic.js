@@ -69,7 +69,9 @@ var AcademicPage = function() {
     var handleLectureList = function () {
         $(".btn-delete").on('click', function() {
             var lectureId = $(this).data().id;
-            $("#lecture-id").val(lectureId);
+            var linkTo = '/simakad/academic/lecture/delete/' + lectureId;
+
+            $("#form-delete").attr('action', linkTo);
             $("#delete-modal").modal('show');
         });
     };
@@ -153,7 +155,9 @@ var AcademicPage = function() {
     var handleClassKrsList = function() {
         $(".btn-delete").on('click', function() {
             var classId = $(this).data().id;
-            $("#class-id").val(classId);
+            var linkTo = '/simakad/academic/krs/delete/' + classId;
+
+            $("#form-delete").attr('action', linkTo);
             $("#delete-modal").modal('show');
         });
     };
