@@ -107,7 +107,7 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     $(document).ready(function() {
-        Utility.ajaxSetupHeader("test", "corneltest");
+        Utility.ajaxSetupHeader("Cookie", [[${#httpServletRequest.getHeader('Cookie')}]]);
     });
     /*]]>*/
 </script>

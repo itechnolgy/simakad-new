@@ -1,0 +1,59 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<!-- INSERT YOUR CSS PLUGIN HERE -->
+<head th:fragment="cssPlugins" th:remove="tag">
+</head>
+
+<!-- INSERT YOUR JS PLUGIN HERE -->
+<body th:fragment="jsPlugins" th:remove="tag">
+</body>
+
+<!-- INSERT YOUR JS PAGE HERE -->
+<body th:fragment="jsPage" th:remove="tag">
+</body>
+
+<!-- INSERT YOUR LAYOUT HERE -->
+<body th:fragment="mainLayout" th:remove="tag">
+<div class="portlet light">
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-12 margin-top-20">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th width="20%">Day</th>
+                        <th width="20%">Time</th>
+                        <th width="20%">Lecture</th>
+                        <th width="20%">Course</th>
+                        <th width="20%">SKS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td>10:00 - 12:00</td>
+                        <td>Thomas Alva Edison</td>
+                        <td>ABC</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>10:00 - 12:00</td>
+                        <td>Wolfgang Mozart</td>
+                        <td>DEF</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>10:00 - 12:00</td>
+                        <td>Alexander Graham Bell</td>
+                        <td>GHI</td>
+                        <td>2</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

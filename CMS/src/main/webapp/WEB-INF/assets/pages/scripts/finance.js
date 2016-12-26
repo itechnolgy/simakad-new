@@ -1,4 +1,4 @@
-var AccountantPage = function() {
+var FinancePage = function() {
 
     var handleRegistrationValidation = function() {
         $(".btn-accept").on('click', function() {

@@ -9,11 +9,11 @@
 
 <!-- INSERT YOUR JS PAGE HERE -->
 <body th:fragment="jsPage" th:remove="tag">
-<script src="../../../assets/pages/scripts/accountant.js" type="text/javascript"
-        th:src="@{/assets/pages/scripts/accountant.js}"></script>
+<script src="../../../assets/pages/scripts/finance.js" type="text/javascript"
+        th:src="@{/assets/pages/scripts/finance.js}"></script>
 <script th:inline="javascript">
     $(document).ready(function() {
-        AccountantPage.registerValidation();
+        FinancePage.registerValidation();
     });
 </script>
 </body>
